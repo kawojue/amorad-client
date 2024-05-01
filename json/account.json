@@ -1,0 +1,12 @@
+[
+    {
+        "value": "organization",
+        "title": "As an Organization",
+        "desc": "Intended solely for your personal practice and skill development."
+    },
+    {
+        "value": "practitioner",
+        "title": "Use as a Practitioner",
+        "desc": "Solely for use within your professional practice to enhance your services."
+    }
+]

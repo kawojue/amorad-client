@@ -1,0 +1,104 @@
+'use client'
+import React from 'react';
+import { Form, Formik } from 'formik';
+import CustomInput from '@/components/FormElements/CustomInput';
+import { practitionerAddressSchema } from '@/utils/schema';
+import Button from '@/components/ui/buttons/Button';
+import CustomSelect from '@/components/FormElements/CustomSelect';
+
+const Address = ({ onPrev }) => {
+
+    return (
+        <>
+
+            <div onClick={() => onPrev()} className="flex items-center text-sm text-textColor text-xs tracking-tighter cursor-pointer">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={3}
+                    stroke="currentColor"
+                    className="w-3 h-3 mr-2"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                Back to previous step
+            </div>
+
+            <div className="pb-8 mt-8">
+
+                <div className="text-left m-auto">
+
+                    <h2 className="text-xl text-dark font-bold tracking-tighter mt-7">
+                    Additional Information
+                    </h2>
+
+                    <p className='text-xs pt-1 text-textColor'>Proceed with the remaining info to continue.</p>
+
+                </div>
+
+                <div className="main w-full mt-5">
+
+                    <Formik
+                        initialValues={{
+                            profession: '',
+                            address: '',
+                            city: '',
+                            state: '',
+                            zip_code: '',
+                            country: '',
+                        }}
+                        validationSchema={practitionerAddressSchema}
+                        onSubmit={async (values, actions) => {
+                            onNextStep()
+                        }}
+                    >
+
+                        {(props) => (
+
+                            <Form autoComplete='off'>
+
+                                <CustomSelect label="Medical Profession" name="profession">
+                                    <option value="" disabled> Select Profession </option>
+                                    <option value="doctor"> Doctor </option>
+                                    <option value="radiologist"> Radiologist </option>
+                                </CustomSelect>
+
+                                <CustomInput label="Address" name="address" type="text" placeholder="What’s your address?" />
+
+                                <div className="grid grid-cols-2 gap-5">
+
+                                    <CustomInput label="City" name="city" type="text" placeholder="Ikeja" />
+
+                                    <CustomInput label="State" name="state" type="text" placeholder="Lagos" />
+
+                                </div>
+
+                                <CustomInput label="Zip Code" name="zip_code" type="text" placeholder="110011" />
+
+                                <CustomInput label="Country" name="country" type="text" placeholder="Nigeria" />
+
+
+                                <Button
+                                    type="submit"
+                                    color="btn-primary"
+                                    className="mt-8 w-full py-3.5"
+                                >
+                                    Create an Account
+                                </Button>
+
+                            </Form>
+
+                        )}
+
+                    </Formik>
+
+                </div>
+
+            </div>
+
+        </>
+    );
+};
+
+export default Address;

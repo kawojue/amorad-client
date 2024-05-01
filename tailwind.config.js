@@ -7,12 +7,25 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      transitionProperty: {
+        'max-height': 'max-height',
       },
+      colors: {
+        "primary": "#186784",
+        "success": "#014847",
+        "danger": "#EE5D50",
+        "dark": "#1D2329",
+        "secondary": "#F6FDFF",
+        'blue': '#002836',
+        'textColor': "#586283"
+      },
+      fontSize: {
+        xs: '13px',
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-debug-screens'),
+    require('@tailwindcss/forms'),
+  ],
 };
