@@ -1,8 +1,9 @@
 import BarChart from '@/components/charts/BarChart'
 import Overview from '@/components/dashboard/organization/Overview'
+import ExportIcon from '@/components/icons/ExportIcon'
 import Button from '@/components/ui/buttons/Button'
 import { barChartDataDailyTraffic, barChartOptionsDailyTraffic } from '@/utils/charts'
-import { ArrowUpRightIcon } from '@heroicons/react/24/solid'
+import { ArrowUpRightIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
 const page = () => {
@@ -18,10 +19,12 @@ const page = () => {
 
         <div className="flex items-center justify-end gap-x-3">
           <Button className='text-dark btn-secondary'>
+            <ExportIcon className='h-5 w-5' />
             <span>Export CSV</span>
           </Button>
 
           <Button className='text-white btn-success'>
+            <PlusCircleIcon className='h-5 w-5' />
             <span>Add Record</span>
           </Button>
         </div>
