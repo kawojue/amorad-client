@@ -17,7 +17,9 @@ module.exports = {
         "dark": "#1D2329",
         "secondary": "#F6FDFF",
         'blue': '#002836',
-        'textColor': "#586283"
+        'textColor': "#586283",
+        'gray_color': "#E4E7EC",
+        'green': "#27AE60"
       },
       fontSize: {
         xs: '13px',
@@ -27,5 +29,6 @@ module.exports = {
   plugins: [
     require('tailwindcss-debug-screens'),
     require('@tailwindcss/forms'),
+    require('tailwind-scrollbar')
   ],
 };

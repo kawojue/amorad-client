@@ -45,8 +45,8 @@ body {
         @apply border text-dark border-[#D0D5DD] hover:ring-offset-2 hover:ring-2
     }
 
-    .btn-blue {
-        @apply bg-blue text-white hover:ring-offset-2 hover:ring-2
+    .btn-secondary {
+        @apply bg-secondary text-white hover:ring-offset-2 hover:ring-2
     }
 
     .btn-success {
