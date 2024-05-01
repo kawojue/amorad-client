@@ -3,7 +3,7 @@ import Overview from '@/components/dashboard/organization/Overview'
 import ExportIcon from '@/components/icons/ExportIcon'
 import Button from '@/components/ui/buttons/Button'
 import { barChartDataDailyTraffic, barChartOptionsDailyTraffic } from '@/utils/charts'
-import { ArrowUpRightIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import { ArrowUpRightIcon, ExclamationCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
 const page = () => {
@@ -37,7 +37,10 @@ const page = () => {
       {/* CHART AREA */}
       <div className="flex items-center justify-between my-6">
 
-        <p className="text-base font-medium">Records</p>
+        <div className="flex items-center gap-x-2">
+          <p className="text-base font-medium">Records</p>
+          <ExclamationCircleIcon className='w-5 h-5' />
+        </div>
 
         <div className="flex items-center gap-x-3">
 
