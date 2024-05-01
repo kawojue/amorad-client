@@ -2,7 +2,7 @@ import BarChart from '@/components/charts/BarChart'
 import Overview from '@/components/dashboard/organization/Overview'
 import ExportIcon from '@/components/icons/ExportIcon'
 import Button from '@/components/ui/buttons/Button'
-import { barChartDataDailyTraffic, barChartOptionsDailyTraffic } from '@/utils/charts'
+import { RecordsData, RecordsOptions } from '@/utils/charts'
 import { ArrowUpRightIcon, ExclamationCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
@@ -60,8 +60,8 @@ const page = () => {
 
       <div className="h-[350px] w-full pb-0">
         <BarChart
-          chartData={barChartDataDailyTraffic}
-          chartOptions={barChartOptionsDailyTraffic}
+          chartData={RecordsData}
+          chartOptions={RecordsOptions}
         />
       </div>
 

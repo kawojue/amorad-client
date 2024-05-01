@@ -1,11 +1,11 @@
-export const barChartDataDailyTraffic = [
+export const RecordsData = [
   {
-    name: "Daily Traffic",
+    name: "Records",
     data: [50, 180, 70, 120, 90, 50, 200],
   },
 ];
 
-export const barChartOptionsDailyTraffic = {
+export const RecordsOptions = {
   chart: {
     toolbar: {
       show: false,

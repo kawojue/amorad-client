@@ -61,7 +61,7 @@ const ProfileDropdown = () => {
 
                         <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={Avatar} width={32} height={32} alt="Profile Image" />
 
-                        <div className="flex-1 tracking-tighter hidden sm:block">
+                        <div className="flex-1 tracking-tight">
                             <div className='text-dark text-xs font-semibold'>Dominic Praise</div>
                             <p className='text-textColor text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                         </div>
