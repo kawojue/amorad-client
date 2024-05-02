@@ -22,7 +22,7 @@ const SideBar = ({ open, setOpen }) => {
 
     const links = [
         {
-            href: '/organization/dashboard/reporting',
+            href: '/organization/dashboard/reports',
             icon: <ReportIcon className='w-5 h-5' color='#FFF' />,
             activeIcon: <ReportIcon className='w-5 h-5' color='#000' />,
             text: 'Reporting'
@@ -116,6 +116,7 @@ const SideBar = ({ open, setOpen }) => {
                                         href={link.href}
                                         icon={link.icon}
                                         text={link.text}
+                                        activeIcon={link.activeIcon}
                                         isActive={pathname.startsWith(link.href)}
                                         onClick={handleLinkClick}
                                     />

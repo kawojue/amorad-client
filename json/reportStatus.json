@@ -1,0 +1,9 @@
+[
+    { "title": "All", "count": 2332 },
+    { "title": "New", "count": 5 },
+    { "title": "Assigned", "count": 15 },
+    { "title": "Unassigned", "count": 7 },
+    { "title": "Open", "count": 3 },
+    { "title": "Closed", "count": 8 },
+    { "title": "Archived", "count": 199 }
+]
