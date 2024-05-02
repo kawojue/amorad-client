@@ -23,7 +23,7 @@ module.exports = {
         'border_color': '#F6FAFF'
       },
       fontSize: {
-        xs: '13px',
+        xs: '12.5px',
       }
     },
   },

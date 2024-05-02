@@ -1,13 +1,13 @@
 'use client'
 import SearchIcon from '@/components/icons/SearchIcon'
 import Button from '@/components/ui/buttons/Button'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 import DatePickerComponent from '../../DatePicker'
+import SortByDropdown from '../../SortByDropdown'
 
 const ReportSearch = () => {
 
-    const [type, setType] = useState('advance')
+    const [type, setType] = useState('basic')
 
     return (
         <>
@@ -23,13 +23,7 @@ const ReportSearch = () => {
 
                     <div className="border border-border_color flex items-center w-64 sm:w-auto rounded-xl gap-x-1 justify-center">
 
-                        <div className="flex items-center gap-x-2 py-2 text-textColor cursor-pointer px-3">
-
-                            <p className="text-xs tracking-tight">Sort By</p>
-
-                            <ChevronDownIcon className='h-3 w-3' />
-
-                        </div>
+                        <SortByDropdown />
 
                         <div onClick={() => setType('advance')} className="flex items-center gap-x-2 text-xs py-2 text-white bg-primary cursor-pointer px-3 rounded-r-xl">
                             <SearchIcon className='w-4 h-4' />
@@ -41,7 +35,7 @@ const ReportSearch = () => {
                 </div>
 
             ) : (
-                <div className="flex flex-col gap-y-5">
+                <div className="flex flex-col gap-y-6 md:gap-y-3">
 
                     <div className="sm:flex sm:items-center rounded-lg mt-3">
 
@@ -67,11 +61,11 @@ const ReportSearch = () => {
                         <div class="sm:flex rounded-lg w-full md:w-auto text-textColor">
 
                             <div className="text-[12px] tracking-tight flex items-center  border border-border_color first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative">
-                                <DatePickerComponent />
+                                <DatePickerComponent title="Start Date" />
                             </div>
 
                             <div className="text-[12px]  tracking-tight flex items-center border border-border_color first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative">
-                                <DatePickerComponent />
+                                <DatePickerComponent title="End Date" />
                             </div>
 
                             <select className="py-2.5 text-[12px]  tracking-tight px-3 w-full md:w-[130px] border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" >

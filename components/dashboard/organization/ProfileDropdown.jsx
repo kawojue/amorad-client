@@ -30,7 +30,6 @@ const ProfileDropdown = () => {
         };
     }, []);
 
-
     return (
         <div ref={profileMenu} className="relative inline-flex">
 
