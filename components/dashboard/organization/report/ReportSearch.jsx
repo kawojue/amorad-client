@@ -1,31 +1,59 @@
 'use client'
 import SearchIcon from '@/components/icons/SearchIcon'
-import Button from '@/components/ui/buttons/Button'
-import React, { useState } from 'react'
-import DatePickerComponent from '../../DatePicker'
+import React, { useEffect, useState } from 'react'
 import SortByDropdown from '../../SortByDropdown'
+import AdvanceSearch from './AdvanceSearch'
 
-const ReportSearch = () => {
+const ReportSearch = ({ onSubmit, setSearch, initialFormData }) => {
 
     const [type, setType] = useState('basic')
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSortChange = (value) => {
+        setSearch((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            sortBy: value,
+        }));
+    };
+
+    const handleSearchChange = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+    };
+
+    useEffect(() => {
+        const typingTimeout = setTimeout(() => {
+            setSearch((prevSearchCriteria) => ({
+                ...prevSearchCriteria,
+                search: searchQuery,
+            }));
+        }, 500);
+        return () => clearTimeout(typingTimeout);
+    }, [searchQuery]);
+
+    const handleTypeChange = () => {
+        setType('advance')
+        setSearch(initialFormData)
+        setSearchQuery('')
+    }
 
     return (
-        <>
+        <div className='mb-5'>
 
             {type === 'basic' ? (
 
                 <div className="flex sm:items-center flex-col sm:flex-row gap-x-5 gap-y-3 ">
 
                     <div className="relative flex-grow sm:flex-1">
-                        <input type="search" className="form-control border-border_color py-2 pl-10" placeholder='Search' />
+                        <input type="search" className="form-control border-border_color py-2 pl-10" placeholder='Search' value={searchQuery} onChange={handleSearchChange}/>
                         <div className="absolute top-[13px] left-3"> <SearchIcon className='w-4 h-4' color='#586283' /> </div>
                     </div>
 
                     <div className="border border-border_color flex items-center w-64 sm:w-auto rounded-xl gap-x-1 justify-center">
 
-                        <SortByDropdown />
+                        <SortByDropdown onSortChange={handleSortChange} />
 
-                        <div onClick={() => setType('advance')} className="flex items-center gap-x-2 text-xs py-2 text-white bg-primary cursor-pointer px-3 rounded-r-xl">
+                        <div onClick={handleTypeChange} className="flex items-center gap-x-2 text-xs py-2 text-white bg-primary cursor-pointer px-3 rounded-r-xl">
                             <SearchIcon className='w-4 h-4' />
                             Advanced Search
                         </div>
@@ -35,67 +63,12 @@ const ReportSearch = () => {
                 </div>
 
             ) : (
-                <div className="flex flex-col gap-y-6 md:gap-y-3">
 
-                    <div className="sm:flex sm:items-center rounded-lg mt-3">
+                <AdvanceSearch setSearch={setSearch} initialFormData={initialFormData} setType={setType} onSubmit={onSubmit} />
 
-                        <div className="relative">
-                            <input type="text" className="py-2.5 pl-10 text-[12px]  tracking-tight px-3 block flex-shrink w-full sm:min-w-[250px] lg:min-w-[400px] border-border_color  first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10" placeholder='Search by Patient Name, MRN or Accession' />
-                            <div className="absolute  top-[15px] left-3 z-20"> <SearchIcon className='w-4 h-4' color='#586283' /></div>
-                        </div>
-
-                        <input type="text" className="py-2.5 text-[12px]  tracking-tight px-3 block w-full border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" placeholder='Specialist' />
-
-                        <input type="text" className="py-2.5 text-[12px]  tracking-tight px-3 block w-full border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" placeholder='Facility' />
-
-                        <input type="text" className="py-2.5 text-[12px]  tracking-tight px-3 block w-full border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" placeholder='Description' />
-
-                        <button onClick={() => setType('basic')} className="py-2.5 px-4 inline-flex items-center min-w-fit w-full border border-border_color text-xs text-white bg-primary -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg gap-x-2">
-                            <SearchIcon className='w-4 h-4' />
-                            Basic Search
-                        </button>
-                    </div>
-
-                    <div className="flex md:items-center flex-col md:flex-row justify-between gap-y-3">
-
-                        <div class="sm:flex rounded-lg w-full md:w-auto text-textColor">
-
-                            <div className="text-[12px] tracking-tight flex items-center  border border-border_color first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative">
-                                <DatePickerComponent title="Start Date" />
-                            </div>
-
-                            <div className="text-[12px]  tracking-tight flex items-center border border-border_color first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative">
-                                <DatePickerComponent title="End Date" />
-                            </div>
-
-                            <select className="py-2.5 text-[12px]  tracking-tight px-3 w-full md:w-[130px] border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" >
-                                <option value="" disabled selected>Select Modality</option>
-                            </select>
-
-                            <select className="py-2.5 text-[12px]  tracking-tight px-3 w-full md:w-[130px] border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10" >
-                                <option value="" disabled selected>Select Priority</option>
-                            </select>
-
-                        </div>
-
-                        <div className="flex items-center gap-x-3 justify-end">
-
-                            <Button className='btn-primary text-[10px] font-medium'>
-                                Search
-                            </Button>
-
-                            <Button className='btn-outline text-[10px] text-primary font-medium'>
-                                Clear
-                            </Button>
-
-                        </div>
-
-                    </div>
-
-                </div>
             )}
 
-        </>
+        </div>
     )
 }
 

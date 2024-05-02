@@ -3,14 +3,23 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerComponent = ({ title }) => {
+const DatePickerComponent = ({ onSelectDate, title }) => {
 
+    const [date, setDate] = useState(null);
+
+    const handleDateChange = (date) => {
+        setDate(date);
+        const formattedDate = date ? date.toISOString().split('T')[0] : null;
+        onSelectDate(formattedDate);
+    };
 
     return (
         <div className="relative cursor-pointer text-textColor w-full">
             <DatePicker
                 placeholderText={title || 'Select Dates'}
                 className="text-textColor border-0 outline-0 cursor-pointer text-[12px] pl-10 w-full sm:w-[150px]"
+                selected={date}
+                onChange={handleDateChange}
             />
             <div className="absolute top-2.5 left-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 18 18" fill="none">
