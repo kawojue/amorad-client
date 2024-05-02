@@ -16,6 +16,7 @@ const page = () => {
             </div>
 
             <ReportSearch />
+            
 
         </>
     )

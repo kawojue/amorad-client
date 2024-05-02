@@ -42,7 +42,7 @@ body {
     }
 
     .btn-outline {
-        @apply border text-dark border-[#D0D5DD] hover:ring-offset-2 hover:ring-2
+        @apply border text-dark border-border_color hover:ring-offset-2 hover:ring-2
     }
 
     .btn-secondary {

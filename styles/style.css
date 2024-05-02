@@ -51,3 +51,11 @@
       background-position: right 0.2rem center !important;
       background-repeat: no-repeat;
     }  
+
+    .react-datepicker__input-container{
+      width: 100% !important;
+    }
+
+    .react-datepicker-wrapper{
+      width: 100% !important;
+    }

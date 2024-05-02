@@ -19,7 +19,8 @@ module.exports = {
         'blue': '#002836',
         'textColor': "#586283",
         'gray_color': "#E4E7EC",
-        'green': "#27AE60"
+        'green': "#27AE60",
+        'border_color': '#F6FAFF'
       },
       fontSize: {
         xs: '13px',
