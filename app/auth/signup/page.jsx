@@ -60,7 +60,7 @@ const SignUpPage = () => {
                                             <Button
                                                 onClick={handleContinueClick}
                                                 color="btn-primary"
-                                                className="py-2.5 min-w-72 m-auto mt-6"
+                                                className="py-3 min-w-72 m-auto mt-6"
                                             >
                                                 Continue
                                             </Button>

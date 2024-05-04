@@ -15,7 +15,7 @@ const Overview = () => {
                         <ReportIcon className='w-4 h-4' color='#1D2329' />
                     </div>
 
-                    <h2 className="text-textColor">Dicoms</h2>
+                    <h2 className="text-textColor">Total Patients</h2>
                 </div>
 
                 <h2 className='text-2xl font-medium pb-1'>330,340.00</h2>
@@ -30,7 +30,7 @@ const Overview = () => {
                         <FacilityIcon className='w-4 h-4' color='#1D2329' />
                     </div>
 
-                    <h2 className="text-textColor">Patients</h2>
+                    <h2 className="text-textColor">Total Facilities</h2>
                 </div>
 
                 <h2 className='text-2xl font-medium pb-1'>8,000</h2>
@@ -45,7 +45,7 @@ const Overview = () => {
                         <PeopleIcon className='w-4 h-4' color='#1D2329' />
                     </div>
 
-                    <h2 className="text-textColor">Patient Studies</h2>
+                    <h2 className="text-textColor">Patient Study</h2>
                 </div>
 
                 <h2 className='text-2xl font-medium pb-1'>23,000</h2>

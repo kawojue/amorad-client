@@ -1,0 +1,113 @@
+[
+    {
+      "name": "John Doe",
+      "id": "JD001",
+      "gender": "Male",
+      "email": "john.doe@example.com",
+      "phone": "+1234567890",
+      "city": "New York",
+      "country": "USA",
+      "reg_date": "2023-01-15",
+      "status": "active"
+    },
+    {
+      "name": "Jane Smith",
+      "id": "JS002",
+      "gender": "Female",
+      "email": "jane.smith@example.com",
+      "phone": "+1987654321",
+      "city": "Los Angeles",
+      "country": "USA",
+      "reg_date": "2023-03-20",
+      "status": "active"
+    },
+    {
+      "name": "Alex Johnson",
+      "id": "AJ003",
+      "gender": "Male",
+      "email": "alex.johnson@example.com",
+      "phone": "+4455667788",
+      "city": "London",
+      "country": "UK",
+      "reg_date": "2022-11-10",
+      "status": "active"
+    },
+    {
+      "name": "Emily Brown",
+      "id": "EB004",
+      "gender": "Female",
+      "email": "emily.brown@example.com",
+      "phone": "+1122334455",
+      "city": "Sydney",
+      "country": "Australia",
+      "reg_date": "2023-05-05",
+      "status": "active"
+    },
+    {
+      "name": "Michael Wilson",
+      "id": "MW005",
+      "gender": "Male",
+      "email": "michael.wilson@example.com",
+      "phone": "+3344556677",
+      "city": "Toronto",
+      "country": "Canada",
+      "reg_date": "2023-07-12",
+      "status": "active"
+    },
+    {
+      "name": "Sophia Garcia",
+      "id": "SG006",
+      "gender": "Female",
+      "email": "sophia.garcia@example.com",
+      "phone": "+5566778899",
+      "city": "Madrid",
+      "country": "Spain",
+      "reg_date": "2023-09-18",
+      "status": "suspended"
+    },
+    {
+      "name": "William Martinez",
+      "id": "WM007",
+      "gender": "Male",
+      "email": "william.martinez@example.com",
+      "phone": "+9900112233",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "reg_date": "2023-02-28",
+      "status": "active"
+    },
+    {
+      "name": "Olivia Lopez",
+      "id": "OL008",
+      "gender": "Female",
+      "email": "olivia.lopez@example.com",
+      "phone": "+7788990011",
+      "city": "Berlin",
+      "country": "Germany",
+      "reg_date": "2023-06-10",
+      "status": "suspended"
+    },
+    {
+      "name": "James Lee",
+      "id": "JL009",
+      "gender": "Male",
+      "email": "james.lee@example.com",
+      "phone": "+6677889900",
+      "city": "Seoul",
+      "country": "South Korea",
+      "reg_date": "2023-10-30",
+      "status": "active"
+    },
+    {
+      "name": "Ava Kim",
+      "id": "AK010",
+      "gender": "Female",
+      "email": "ava.kim@example.com",
+      "phone": "+1122334455",
+      "city": "Tokyo",
+      "country": "Japan",
+      "reg_date": "2023-08-15",
+      "status": "suspended"
+    }
+  ]
+  

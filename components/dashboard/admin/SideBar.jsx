@@ -6,15 +6,11 @@ import Link from 'next/link';
 import SidebarLink from '../SidebarLink';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import DashboardIcon from '@/components/icons/DashboardIcon';
-import ReportIcon from '@/components/icons/ReportIcon';
-import UploadIcon from '@/components/icons/UploadIcon';
-import InsightIcon from '@/components/icons/InsightIcon';
-import BillingIcon from '@/components/icons/BillingIcon';
 import FacilityIcon from '@/components/icons/FacilityIcon';
-import ConfigurationIcon from '@/components/icons/ConfigurationIcon';
 import SettingsIcon from '@/components/icons/SettingsIcon';
-import SupportIcon from '@/components/icons/SupportIcon';
 import LogoutIcon from '@/components/icons/LogoutIcon';
+import PeopleIcon from '@/components/icons/PeopleIcon';
+import UserCircleIcon from '@/components/icons/UserCircleIcon';
 
 const SideBar = ({ open, setOpen }) => {
 
@@ -22,41 +18,23 @@ const SideBar = ({ open, setOpen }) => {
 
     const links = [
         {
-            href: '/organization/dashboard/reports',
-            icon: <ReportIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <ReportIcon className='w-5 h-5' color='#000' />,
-            text: 'Reporting'
+            href: '/admin/dashboard/doctors',
+            icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <UserCircleIcon className='w-5 h-5' color='#000' />,
+            text: 'Doctors'
         },
 
         {
-            href: '/organization/dashboard/upload', text: 'Upload',
-            icon: <UploadIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <UploadIcon className='w-5 h-5' color='#186784' />
+            href: '/admin/dashboard/radiologists', text: 'Radiologists',
+            icon: <PeopleIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <PeopleIcon className='w-5 h-5' color='#186784' />
         },
 
         {
-            href: '/organization/dashboard/insights', text: 'Insights',
-            icon: <InsightIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <InsightIcon className='w-5 h-5' color='#186784' />
-        },
-
-        {
-            href: '/organization/dashboard/billings', text: 'Billings',
-            icon: <BillingIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <BillingIcon className='w-5 h-5' color='#186784' />
-        },
-
-        {
-            href: '/organization/dashboard/facility', text: 'Facility',
+            href: '/admin/dashboard/facilities', text: 'Facilities',
             icon: <FacilityIcon className='w-5 h-5' color='#FFF' />,
             activeIcon: <FacilityIcon className='w-5 h-5' color='#186784' />
-        },
-
-        {
-            href: '/organization/dashboard/configurations', text: 'Configurations',
-            icon: <ConfigurationIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <ConfigurationIcon className='w-5 h-5' color='#186784' />
-        },
+        }
     ];
 
     const handleLinkClick = () => {
@@ -101,11 +79,11 @@ const SideBar = ({ open, setOpen }) => {
 
                             <li className="w-full mb-2.5">
                                 <SidebarLink
-                                    href='/organization/dashboard'
+                                    href='/admin/dashboard'
                                     icon={<DashboardIcon className='w-5 h-5' color='#FFF' />}
                                     activeIcon={<DashboardIcon className='w-5 h-5' color='#186784' />}
                                     text='Dashboard'
-                                    isActive={pathname === '/organization/dashboard'}
+                                    isActive={pathname === '/admin/dashboard'}
                                     onClick={handleLinkClick}
                                 />
                             </li>
@@ -134,22 +112,11 @@ const SideBar = ({ open, setOpen }) => {
 
                             <li className="w-full mb-2.5">
                                 <SidebarLink
-                                    href='/organization/dashboard/settings'
+                                    href='/admin/dashboard/settings'
                                     icon={<SettingsIcon className='w-5 h-5' color='#FFF' />}
                                     activeIcon={<SettingsIcon className='w-5 h-5' color='#186784' />}
                                     text='Settings'
-                                    isActive={pathname === '/organization/dashboard/settings'}
-                                    onClick={handleLinkClick}
-                                />
-                            </li>
-
-                            <li className="w-full mb-2.5">
-                                <SidebarLink
-                                    href='/organization/dashboard/support'
-                                    icon={<SupportIcon className='w-5 h-5' color='#FFF' />}
-                                    activeIcon={<SupportIcon className='w-5 h-5' color='#186784' />}
-                                    text='Support'
-                                    isActive={pathname === '/organization/dashboard/support'}
+                                    isActive={pathname === '/admin/dashboard/settings'}
                                     onClick={handleLinkClick}
                                 />
                             </li>
@@ -160,7 +127,7 @@ const SideBar = ({ open, setOpen }) => {
 
                 </div>
 
-                <div className="flex items-center gap-x-3 px-4 pt-12">
+                <div className="flex items-center gap-x-3 px-4 pt-12 absolute bottom-10">
 
                     <div className="h-10 w-10 rounded-full font-semibold p-3 text-xs bg-white flex items-center justify-center">
                         DP

@@ -36,7 +36,7 @@ const SortByDropdown = ({ onSortChange }) => {
                 <ChevronDownIcon className="h-3 w-3" />
             </div>
 
-            <div className={`bg-white absolute shadow-soft-xl top-12 z-50 p-3 rounded-xl font-semibold w-60 whitespace-nowrap duration-300 ${open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+            <div className={`bg-white absolute shadow-soft-xl top-12 z-50 p-3 -left-16 rounded-xl font-semibold w-60 whitespace-nowrap duration-300 ${open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
 
                 {/* Dropdown options */}
                 <div className="px-4 py-2 mb-3 text-center bg-primary rounded-t-xl text-white font-medium text-xs">Sort By</div>

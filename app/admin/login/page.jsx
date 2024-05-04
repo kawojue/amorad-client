@@ -12,7 +12,7 @@ const page = () => {
     return (
         <>
 
-            <AuthHeader label='Get Started' link='signup' />
+            <AuthHeader label='Get Started' link='#' />
 
             <div className="relative flex flex-col w-full max-w-full px-6 mx-auto lg:mx-12 py-10">
 
@@ -56,15 +56,12 @@ const page = () => {
                                             <label htmlFor="remember" className="text-xs text-textColor ml-2 font-medium tracking-tight">Keep me logged In</label>
                                         </div>
 
-
-                                        <Link href='forgot-password' className='text-textColor text-xs'>Forget password?</Link>
-
                                     </div>
 
                                     <Button
                                         type="submit"
                                         color="btn-primary"
-                                        className="mt-8 py-3 w-full"
+                                        className="mt-8 py-3.5 w-full"
                                     >
                                         Sign In
                                     </Button>

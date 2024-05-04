@@ -12,7 +12,7 @@ const AuthHeader = ({ label, link }) => {
         <Image src={Logo} width={28} height={28} />
 
         <Link href={link}>
-            <Button className="btn-primary py-1"> { label } </Button>
+            <Button className="btn-primary py-2.5"> { label } </Button>
         </Link>
 
     </div>
