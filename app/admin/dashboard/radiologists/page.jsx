@@ -1,6 +1,6 @@
 'use client'
 import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
-import DoctorTable from '@/components/dashboard/admin/doctor/DoctorTable'
+import RadiologistTable from '@/components/dashboard/admin/radiologists/RadiologistTable';
 import React, { useState } from 'react'
 
 const page = () => {
@@ -20,13 +20,13 @@ const page = () => {
 
             <div className="flex items-center justify-between flex-wrap gap-y-5 mb-5">
 
-                <h2 class="text-sm font-bold text-dark capitalize">Doctors</h2>
+                <h2 class="text-sm font-bold text-dark capitalize">Radiologists</h2>
 
                 <DashboardFilter filter={filter} setFilter={setFilter} />
 
             </div>
 
-            <DoctorTable />
+            <RadiologistTable />
 
         </>
     )

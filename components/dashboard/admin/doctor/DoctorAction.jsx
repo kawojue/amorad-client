@@ -6,14 +6,14 @@ import ClockIcon from "@/components/icons/ClockIcon";
 
 const DoctorAction = ({ open, index, setOpen }) => {
 
-    const reportMenu = useRef(null);
+    const doctorMenu = useRef(null);
 
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
     useEffect(() => {
         function updateMenuPosition() {
-            if (reportMenu.current) {
-                const rect = reportMenu.current.getBoundingClientRect();
+            if (doctorMenu.current) {
+                const rect = doctorMenu.current.getBoundingClientRect();
                 const belowSpace = window.innerHeight - rect.bottom;
                 const aboveSpace = rect.top;
 
@@ -42,7 +42,7 @@ const DoctorAction = ({ open, index, setOpen }) => {
     }, [open]);
 
     const handleClickOutside = (event) => {
-        if (reportMenu.current && !reportMenu.current.contains(event.target)) {
+        if (doctorMenu.current && !doctorMenu.current.contains(event.target)) {
             setOpen(false);
         }
     };
@@ -58,7 +58,7 @@ const DoctorAction = ({ open, index, setOpen }) => {
     return (
         <>
             {open === index && (
-                <div ref={reportMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap top-8 min-w-full duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+                <div ref={doctorMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap top-8 min-w-full duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
                     <div className="space-y-1">
 
                         <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">

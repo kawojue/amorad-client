@@ -4,16 +4,16 @@ import EditIcon from "@/components/icons/EditIcon";
 import TrashIcon from "@/components/icons/TrashIcon";
 import ClockIcon from "@/components/icons/ClockIcon";
 
-const FacilityAction = ({ open, index, setOpen }) => {
+const RadiologistAction = ({ open, index, setOpen }) => {
 
-    const facilityMenu = useRef(null);
+    const RadiologistMenu = useRef(null);
 
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
     useEffect(() => {
         function updateMenuPosition() {
-            if (facilityMenu.current) {
-                const rect = facilityMenu.current.getBoundingClientRect();
+            if (RadiologistMenu.current) {
+                const rect = RadiologistMenu.current.getBoundingClientRect();
                 const belowSpace = window.innerHeight - rect.bottom;
                 const aboveSpace = rect.top;
 
@@ -42,7 +42,7 @@ const FacilityAction = ({ open, index, setOpen }) => {
     }, [open]);
 
     const handleClickOutside = (event) => {
-        if (facilityMenu.current && !facilityMenu.current.contains(event.target)) {
+        if (RadiologistMenu.current && !RadiologistMenu.current.contains(event.target)) {
             setOpen(false);
         }
     };
@@ -58,7 +58,7 @@ const FacilityAction = ({ open, index, setOpen }) => {
     return (
         <>
             {open === index && (
-                <div ref={facilityMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap top-8 min-w-full duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+                <div ref={RadiologistMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap top-8 min-w-full duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
                     <div className="space-y-1">
 
                         <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
@@ -88,4 +88,4 @@ const FacilityAction = ({ open, index, setOpen }) => {
     );
 };
 
-export default FacilityAction;
+export default RadiologistAction;
