@@ -1,15 +1,15 @@
 'use client'
 import SearchIcon from '@/components/icons/SearchIcon'
 import React, { useEffect, useState } from 'react'
-import SortByDropdown from '../../SortByDropdown'
-import FilterByDropdown from '../../FilterByDropdown'
+import SortByDropdown from '../SortByDropdown'
+import FilterByDropdown from '../FilterByDropdown'
 
-const FacilitySearch = ({ setSearch, filter }) => {
+const DashboardFilter = ({ setFilter, filter }) => {
 
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSortChange = (value) => {
-        setSearch((prevSearchCriteria) => ({
+        setFilter((prevSearchCriteria) => ({
             ...prevSearchCriteria,
             sortBy: value,
         }));
@@ -22,7 +22,7 @@ const FacilitySearch = ({ setSearch, filter }) => {
 
     useEffect(() => {
         const typingTimeout = setTimeout(() => {
-            setSearch((prevSearchCriteria) => ({
+            setFilter((prevSearchCriteria) => ({
                 ...prevSearchCriteria,
                 search: searchQuery,
             }));
@@ -32,8 +32,6 @@ const FacilitySearch = ({ setSearch, filter }) => {
 
 
     return (
-        <div className='mb-5'>
-
             <div className="flex sm:items-center justify-end flex-wrap gap-x-5 gap-y-3">
 
                 <div className="relative flex-grow sm:flex-1">
@@ -45,14 +43,12 @@ const FacilitySearch = ({ setSearch, filter }) => {
 
                     <SortByDropdown onSortChange={handleSortChange} />
 
-                    <FilterByDropdown filter={filter} setStatus={setSearch} />
+                    <FilterByDropdown filter={filter} setFilter={setFilter} />
 
                 </div>
 
             </div>
-
-        </div>
     )
 }
 
-export default FacilitySearch
+export default DashboardFilter

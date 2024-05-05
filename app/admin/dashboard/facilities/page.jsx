@@ -1,5 +1,5 @@
 'use client'
-import FacilitySearch from '@/components/dashboard/admin/facility/FacilitySearch'
+import FacilitySearch from '@/components/dashboard/admin/DashboardFilter'
 import FacilityTable from '@/components/dashboard/admin/facility/FacilityTable'
 import HealthIcon from '@/components/icons/HealthIcon'
 import Profileicon from '@/components/icons/Profileicon'
@@ -13,10 +13,11 @@ const page = () => {
         sortBy: '',
         search: '',
         status: 'all',
-        date: ''
+        startDate: '',
+        endDate: '',
     };
 
-    const [search, setSearch] = useState(initialFormData);
+    const [filter, setFilter] = useState(initialFormData);
 
     const datas = [
         { name: 'Doctors', value: 'doctor', icon: <HealthIcon className='w-4 h-4' /> },
@@ -61,7 +62,9 @@ const page = () => {
 
             </div>
 
-            <FacilitySearch filter={search} data={activeTab} setSearch={setSearch} />
+            <div className="mb-5">
+                <FacilitySearch filter={filter} data={activeTab} setFilter={setFilter} />
+            </div>
 
             <FacilityTable />
 

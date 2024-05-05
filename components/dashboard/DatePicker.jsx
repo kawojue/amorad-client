@@ -17,7 +17,7 @@ const DatePickerComponent = ({ onSelectDate, title }) => {
         <div className="relative cursor-pointer text-textColor w-full">
             <DatePicker
                 placeholderText={title || 'Select Dates'}
-                className="text-textColor border-0 outline-0 cursor-pointer text-[12px] pl-10 w-full sm:w-[150px]"
+                className="text-textColor border-0 outline-0 cursor-pointer text-[12px] z-[200] pl-9 w-full sm:w-[125px]"
                 selected={date}
                 onChange={handleDateChange}
             />

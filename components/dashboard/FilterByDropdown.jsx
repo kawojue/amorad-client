@@ -1,7 +1,8 @@
 import { FunnelIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useRef, useState } from 'react'
+import DatePickerComponent from './DatePicker';
 
-const FilterByDropdown = ({ setStatus, filter }) => {
+const FilterByDropdown = ({ setFilter, filter }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -25,9 +26,25 @@ const FilterByDropdown = ({ setStatus, filter }) => {
     }, []);
 
     const handleSortOptionClick = (data) => {
-        setStatus((prevSearchCriteria) => ({
+        setFilter((prevSearchCriteria) => ({
             ...prevSearchCriteria,
             status: data,
+        }));
+    };
+
+    // HANDLE START DATE
+    const handleDateSelect = (selectedDate) => {
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            startDate: selectedDate,
+        }));
+    };
+
+    // HANDLE END DATE
+    const handleEndDateSelect = (selectedDate) => {
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            endDate: selectedDate,
         }));
     };
 
@@ -68,6 +85,19 @@ const FilterByDropdown = ({ setStatus, filter }) => {
 
                 <div className="flex items-center gap-x-4">
                     <span className="text-xs text-textColor">Date Range:</span>
+
+                    <ul className="text-[12px] font-medium text-center text-gray-500 rounded-lg flex border border-border_color capitalize">
+
+                        <span className='inline-block border-r w-32 border-border_color rounded-s-lg cursor-pointer'>
+                            <DatePickerComponent onSelectDate={handleDateSelect} title='Start Date' />
+                        </span>
+
+                        <span className='inline-block border-s-0 w-32 border-border_color cursor-pointer  rounded-e-lg'>
+                            <DatePickerComponent onSelectDate={handleEndDateSelect} title='End Date' />
+                        </span>
+
+                    </ul>
+
                 </div>
 
             </div>

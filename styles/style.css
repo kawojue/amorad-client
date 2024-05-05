@@ -59,3 +59,8 @@
     .react-datepicker-wrapper{
       width: 100% !important;
     }
+
+    .react-datepicker-popper{
+      left: -50px !important;
+      z-index: 500 !important;
+    }
