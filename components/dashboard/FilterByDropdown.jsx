@@ -57,7 +57,7 @@ const FilterByDropdown = ({ setFilter, filter }) => {
                 <FunnelIcon className='w-4 h-4' />
             </div>
 
-            <div className={`bg-white absolute shadow-soft-xl top-12 z-50 p-3 right-0 rounded-xl w-fit whitespace-nowrap duration-300 ${open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+            <div className={`bg-white absolute shadow-soft-xl top-12 z-50 p-3 right-0 rounded-xl whitespace-nowrap duration-300 ${open ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
 
                 <div className="px-4 py-2 mb-3 text-center bg-primary rounded-t-xl text-white font-medium text-xs">Filter By</div>
 
@@ -88,11 +88,11 @@ const FilterByDropdown = ({ setFilter, filter }) => {
 
                     <ul className="text-[12px] font-medium text-center text-gray-500 rounded-lg flex border border-border_color capitalize">
 
-                        <span className='inline-block border-r w-32 border-border_color rounded-s-lg cursor-pointer'>
+                        <span className='inline-block border-r w-full sm:w-32 border-border_color rounded-s-lg cursor-pointer'>
                             <DatePickerComponent onSelectDate={handleDateSelect} title='Start Date' />
                         </span>
 
-                        <span className='inline-block border-s-0 w-32 border-border_color cursor-pointer  rounded-e-lg'>
+                        <span className='inline-block border-s-0 w-full sm:w-32 border-border_color cursor-pointer  rounded-e-lg'>
                             <DatePickerComponent onSelectDate={handleEndDateSelect} title='End Date' />
                         </span>
 
