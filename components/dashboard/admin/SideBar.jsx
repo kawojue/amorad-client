@@ -20,7 +20,7 @@ const SideBar = ({ open, setOpen }) => {
         {
             href: '/admin/dashboard/doctors',
             icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <UserCircleIcon className='w-5 h-5' color='#000' />,
+            activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
             text: 'Doctors'
         },
 
