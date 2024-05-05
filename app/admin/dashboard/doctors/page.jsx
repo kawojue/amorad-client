@@ -26,7 +26,11 @@ const page = () => {
 
             </div>
 
+            <div className="bg-white px-2 py-3 rounded-lg">
+
             <DoctorTable />
+
+            </div>
 
         </>
     )

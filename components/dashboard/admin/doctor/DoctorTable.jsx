@@ -43,7 +43,7 @@ const DoctorTable = () => {
                         <div className="p-1.5 min-w-full inline-block align-middle">
                             <table className="min-w-full divide-y divide-border_color">
 
-                                <thead className="bg-secondary rounded-t-xl text-dark">
+                                <thead className="rounded-t-xl text-dark">
 
                                     <tr>
 

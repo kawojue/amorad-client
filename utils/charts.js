@@ -27,7 +27,7 @@ export const RecordsOptions = {
   },
   xaxis: {
     categories: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
-    show: false,
+    show: true,
     labels: {
       show: true,
       style: {
@@ -37,10 +37,10 @@ export const RecordsOptions = {
       },
     },
     axisBorder: {
-      show: true,
+      show: false,
     },
     axisTicks: {
-      show: true,
+      show: false,
     },
   },
   yaxis: {
@@ -78,8 +78,8 @@ export const RecordsOptions = {
   },
   plotOptions: {
     bar: {
-      borderRadius: 5,
-      columnWidth: "30px",
+      borderRadius: 3,
+      columnWidth: "20px",
     },
   },
 };

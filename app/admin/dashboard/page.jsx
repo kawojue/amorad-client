@@ -18,9 +18,9 @@ const page = () => {
         </div>
 
         <Button className='text-dark btn-secondary'>
-            <ExportIcon className='h-4 w-4' />
-            <span>Export CSV</span>
-          </Button>
+          <ExportIcon className='h-4 w-4' />
+          <span>Export CSV</span>
+        </Button>
 
       </div>
 
@@ -37,7 +37,7 @@ const page = () => {
 
         <div className="flex items-center gap-x-3">
 
-          <select name="" id="" className="form-control pr-6 text-black py-1.5 cursor-pointer rounded-full">
+          <select name="" id="" className="form-control bg-transparent pr-6 text-black py-1.5 cursor-pointer rounded-full">
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
           </select>
@@ -51,11 +51,15 @@ const page = () => {
 
       </div>
 
-      <div className="h-[350px] w-full pb-0">
-        <BarChart
-          chartData={RecordsData}
-          chartOptions={RecordsOptions}
-        />
+      <div className="w-full relative flex h-full min-w-0 flex-col break-words rounded-lg border-0 border-solid bg-white p-1">
+
+        <div className="h-[400px] w-full pb-0">
+          <BarChart
+            chartData={RecordsData}
+            chartOptions={RecordsOptions}
+          />
+        </div>
+        
       </div>
 
     </>

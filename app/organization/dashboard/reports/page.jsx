@@ -65,7 +65,10 @@ const page = () => {
                 </div>
             </div>
 
-            <ReportTable selectedStatus={activeTab} />
+
+            <div className="bg-white px-2 py-3 rounded-lg">
+                <ReportTable selectedStatus={activeTab} />
+            </div>
 
         </>
     )

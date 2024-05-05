@@ -61,7 +61,9 @@ const page = () => {
 
             <FacilitySearch data={activeTab} setSearch={setSearch} />
 
-            <FacilityTable />
+            <div className="bg-white px-2 py-3 rounded-lg">
+                <FacilityTable />
+            </div>
 
         </>
     )

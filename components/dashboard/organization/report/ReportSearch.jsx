@@ -49,7 +49,7 @@ const ReportSearch = ({ onSubmit, setSearch, initialFormData }) => {
                         <div className="absolute top-[13px] left-3"> <SearchIcon className='w-4 h-4' color='#586283' /> </div>
                     </div>
 
-                    <div className="border border-border_color flex items-center rounded-xl gap-x-1 justify-center">
+                    <div className="bg-white border border-border_color flex items-center rounded-xl gap-x-1 justify-center">
 
                         <SortByDropdown onSortChange={handleSortChange} />
 

@@ -7,7 +7,7 @@ const Overview = () => {
     return (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-5 mt-6">
 
-            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 border border-[#E4E7EC]  rounded-xl bg-clip-border">
+            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 bg-white rounded-xl bg-clip-border">
 
                 <div className="flex items-center gap-x-3">
 
@@ -22,7 +22,7 @@ const Overview = () => {
 
             </div>
 
-            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 border border-[#E4E7EC]  rounded-xl bg-clip-border">
+            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 bg-white rounded-xl bg-clip-border">
 
                 <div className="flex items-center gap-x-3">
 
@@ -37,7 +37,7 @@ const Overview = () => {
 
             </div>
 
-            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 border border-[#E4E7EC]  rounded-xl bg-clip-border">
+            <div className="space-y-4 relative flex flex-col w-full tracking-tight p-6 bg-white rounded-xl bg-clip-border">
 
                 <div className="flex items-center gap-x-3">
 
