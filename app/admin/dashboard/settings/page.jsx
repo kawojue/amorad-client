@@ -4,11 +4,11 @@ const page = () => {
   return (
     <>
 
-      <div className="flex flex-wrap lg:flex-row -mx-4">
+      <div className="flex flex-wrap lg:flex-row -mx-4 mt-5">
 
         {/* FIRST LAWOUT */}
 
-        <div className="w-full lg:w-1/3 xl:w-[25%] mb-5 px-5">
+        <div className="w-full lg:w-[20%] mb-5 px-5">
 
             <h2 className='text-sm font-semibold mb-4'>Settings</h2>
 
@@ -28,7 +28,12 @@ const page = () => {
 
         {/* SECOND LAYOUT */}
 
-        <div className="w-full lg:w-2/3 xl:w-[75%] px-4 bg-white rounded-s-2xl">
+        <div className="w-full lg:w-[80%] p-5 bg-white rounded-s-2xl">
+
+        <div className="flex flex-col tracking-tight">
+          <h2 class="text-sm font-bold text-dark capitalize">Dashboard</h2>
+          <p className="text-xs text-textColor">Showing data over the last 30 days</p>
+        </div>
 
         </div>
 
