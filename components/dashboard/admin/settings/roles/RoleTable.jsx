@@ -1,19 +1,20 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
-import staffs from '@/json/staff'
+import roles from '@/json/roles'
 import { EachElement } from "@/utils/Each";
+import RoleImage from '@/public/images/role.png'
+import Image from "next/image";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
 
     switch (status) {
-        case "active":
+        case "specialist":
             textColor = "text-[#35C332]";
             bgColor = "bg-[#F4FFF3]";
             break;
-        case "suspended":
-            textColor = "text-danger";
-            bgColor = "bg-[#FEEAEA]";
+        case "admin":
+            textColor = "text-[#1671D9]";
+            bgColor = "bg-[#E3EFFC]";
             break;
     }
 
@@ -21,17 +22,6 @@ const getStatusStyles = (status) => {
 };
 
 const RoleTable = () => {
-
-    // ACTIONS
-    const [open, setOpen] = useState(null);
-
-    const toggleDropdown = (index) => {
-        if (open == index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
-    };
 
     return (
         <>
@@ -96,7 +86,7 @@ const RoleTable = () => {
 
                                 <tbody className="divide-y divide-border_color ">
 
-                                    <EachElement of={staffs} render={(staff, index) => (
+                                    <EachElement of={roles} render={(item, index) => (
 
                                         <>
 
@@ -108,15 +98,14 @@ const RoleTable = () => {
 
                                                         <div className="flex items-center gap-x-2">
 
-                                                            <div className="h-10 w-10 rounded-full bg-[#ECF6FA] flex items-center justify-center">
-                                                            </div>
+                                                                <Image src={RoleImage} width={44} height={44} className=" object-cover h-12 w-12 rounded-full" />
 
                                                             <div className="grow">
                                                                 <span className="block text-sm font-medium text-dark">
-                                                                    {staff.name}
+                                                                    {item.name}
                                                                 </span>
                                                                 <span className="block -mt-1 text-[11px] font-light text-textColor">
-                                                                    {staff.email}
+                                                                    {item.email}
                                                                 </span>
 
                                                             </div>
@@ -129,7 +118,7 @@ const RoleTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.reg_date}
+                                                            {item.joined_datetime}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -137,18 +126,18 @@ const RoleTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
-                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(staff.status).bgColor
-                                                                } ${getStatusStyles(staff.status).textColor
+                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(item.role).bgColor
+                                                                } ${getStatusStyles(item.role).textColor
                                                                 }`}
                                                         >
-                                                            {staff.status}
+                                                            {item.role}
                                                         </span>
                                                     </div>
                                                 </td>
 
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
+                                                    <div className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
                                                             Expand
                                                         </span>

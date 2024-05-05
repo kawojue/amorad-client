@@ -1,0 +1,21 @@
+[
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "joined_datetime": "2024-04-01T08:00:00",
+      "role": "admin"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "joined_datetime": "2024-04-15T10:30:00",
+      "role": "specialist"
+    },
+    {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "joined_datetime": "2024-05-01T15:45:00",
+      "role": "admin"
+    }
+  ]
+  
