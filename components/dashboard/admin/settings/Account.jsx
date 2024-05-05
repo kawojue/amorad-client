@@ -3,6 +3,7 @@ import Button from '@/components/ui/buttons/Button'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import ProfileImage from '../../ProfileImage'
+import { profileSchema } from '@/utils/schema'
 
 const Account = () => {
     return (
@@ -22,6 +23,7 @@ const Account = () => {
                             name: '',
                             email: '',
                         }}
+                        validationSchema={profileSchema}
                         onSubmit={async (values, actions) => {
                         }}
                     >
@@ -30,7 +32,7 @@ const Account = () => {
 
                             <Form autoComplete='off'>
 
-                                <CustomInput label="Full name" name="name" type="text" placeholder="eEzemmuo Technologie" />
+                                <CustomInput label="Full name" name="name" type="text" placeholder="Ezemmuo Technologie" />
 
                                 <CustomInput label="Email address" name="email" type="email" placeholder="example@gmail.com" />
 

@@ -4,7 +4,7 @@ import RoleTable from './RoleTable'
 
 const Role = () => {
     return (
-        <>
+        <div className='w-full md:w-[80%]'>
 
             <div className="flex sm:items-center flex-col sm:flex-row justify-between flex-wrap gap-y-5">
 
@@ -21,11 +21,11 @@ const Role = () => {
 
             </div>
 
-            <div className="w-full sm:w-[80%] mt-10">
+            <div className="mt-10">
                 <RoleTable />
             </div>
 
-        </>
+        </div>
     )
 }
 

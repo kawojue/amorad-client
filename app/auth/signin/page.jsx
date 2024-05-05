@@ -33,8 +33,8 @@ const page = () => {
 
                         <Formik
                             initialValues={{
-                                password: '',
-                                confirmPassword: ''
+                                email: '',
+                                password: ''
                             }}
                             validationSchema={LoginSchema}
                             onSubmit={async (values, actions) => {

@@ -94,11 +94,11 @@ const RoleTable = () => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
 
-                                                    <div className="">
+                                                    <div className="pr-6 md:pr-0">
 
                                                         <div className="flex items-center gap-x-2">
 
-                                                                <Image src={RoleImage} width={44} height={44} className=" object-cover h-12 w-12 rounded-full" />
+                                                                <Image src={RoleImage} width={44} height={44} className=" object-cover h-10 w-10 rounded-full" />
 
                                                             <div className="grow">
                                                                 <span className="block text-sm font-medium text-dark">

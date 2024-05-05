@@ -2,6 +2,7 @@
 
 import Account from '@/components/dashboard/admin/settings/Account';
 import Role from '@/components/dashboard/admin/settings/roles/Role';
+import Security from '@/components/dashboard/admin/settings/security/Security';
 import { EachElement } from '@/utils/Each';
 import React, { useState } from 'react'
 
@@ -52,7 +53,7 @@ const page = () => {
           {activeTab === 'roles' && <Role /> }
 
           {/* Security */}
-          {activeTab === 'security' && 'Security'}
+          {activeTab === 'security' && <Security /> }
 
           {/* Preferences */}
           {activeTab === 'preferences' && 'Preferences'}

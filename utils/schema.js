@@ -53,3 +53,9 @@ export const ResetPasswordSchema = Yup.object({
     .required('Confirm password is required')
     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 });
+
+
+export const profileSchema = Yup.object({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Email address is invalid').required('Email address is required'),
+});

@@ -5,7 +5,6 @@ import AuthHeader from '@/components/auth/AuthHeader';
 import Button from '@/components/ui/buttons/Button';
 import { LoginSchema } from '@/utils/schema';
 import { Form, Formik } from 'formik';
-import Link from 'next/link';
 import React from 'react'
 
 const page = () => {
@@ -33,8 +32,8 @@ const page = () => {
 
                         <Formik
                             initialValues={{
-                                password: '',
-                                confirmPassword: ''
+                                email: '',
+                                password: ''
                             }}
                             validationSchema={LoginSchema}
                             onSubmit={async (values, actions) => {
