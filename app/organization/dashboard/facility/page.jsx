@@ -34,9 +34,9 @@ const page = () => {
 
                 <h2 class="text-sm font-bold text-dark capitalize">Staff</h2>
 
-                <div className="bg-primary text-white max-w-max py-1.5 px-2 rounded-full mb-5">
+                <div className="text-white max-w-max bg-primary py-2.5 rounded-2xl sm:py-1.5 px-2 sm:rounded-full mb-5">
 
-                    <div className="flex items-center flex-wrap gap-x-1">
+                    <div className="flex items-center flex-wrap gap-x-1 gap-y-2">
 
                         {datas.map((data) => (
                             <div
