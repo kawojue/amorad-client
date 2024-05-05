@@ -1,6 +1,25 @@
-import React from 'react'
+'use client'
+
+import Account from '@/components/dashboard/admin/settings/Account';
+import Role from '@/components/dashboard/admin/settings/roles/Role';
+import { EachElement } from '@/utils/Each';
+import React, { useState } from 'react'
 
 const page = () => {
+
+  const datas = [
+    { name: 'Account', value: 'account' },
+    { name: 'Roles', value: 'roles' },
+    { name: 'Sign In & Security', value: 'security' },
+    { name: 'Preferences', value: 'preferences' },
+  ];
+
+  const [activeTab, setActiveTab] = useState(datas[0].value);
+
+  const handleTabClick = (status) => {
+    setActiveTab(status);
+  };
+
   return (
     <>
 
@@ -10,19 +29,15 @@ const page = () => {
 
         <div className="w-full lg:w-[20%] mb-5 px-5">
 
-            <h2 className='text-sm font-semibold mb-4'>Settings</h2>
+          <h2 className='text-sm font-semibold mb-4'>Settings</h2>
 
-            <ul className='space-y-3 font-medium'>
+          <ul className='space-y-1 font-medium'>
 
-              <li className='text-xs text-textColor cursor-pointer'>Account</li>
+            <EachElement of={datas} render={(item, index) => (
+              <li onClick={() => handleTabClick(item.value)} className={`text-xs ${activeTab === item.value ? 'text-[#186784] font-semibold' : 'text-textColor'} cursor-pointer py-1`}> {item.name} </li>
+            )} />
 
-              <li className='text-xs text-textColor cursor-pointer'>Roles</li>
-
-              <li className='text-xs text-textColor cursor-pointer'>Sign In & Security</li>
-
-              <li className='text-xs text-textColor cursor-pointer'>Preferences</li>
-
-            </ul>
+          </ul>
 
         </div>
 
@@ -30,10 +45,17 @@ const page = () => {
 
         <div className="w-full lg:w-[80%] p-5 bg-white rounded-s-2xl">
 
-        <div className="flex flex-col tracking-tight">
-          <h2 class="text-sm font-bold text-dark capitalize">Dashboard</h2>
-          <p className="text-xs text-textColor">Showing data over the last 30 days</p>
-        </div>
+          {/* Account */}
+          {activeTab === 'account' && <Account /> }
+
+          {/* Roles */}
+          {activeTab === 'roles' && <Role /> }
+
+          {/* Security */}
+          {activeTab === 'security' && 'Security'}
+
+          {/* Preferences */}
+          {activeTab === 'preferences' && 'Preferences'}
 
         </div>
 
