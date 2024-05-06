@@ -16,7 +16,7 @@ const Account = () => {
 
             <div className="flex flex-wrap lg:flex-nowrap gap-5 mt-5">
 
-                <div className="bg-white shadow-soft-xl w-full p-5 rounded-xl">
+                <div className="bg-white shadow-2xl w-full px-5 py-8 2xl:py-10 2xl:px-8 rounded-xl">
 
                     <Formik
                         initialValues={{
@@ -52,7 +52,7 @@ const Account = () => {
 
                 </div>
 
-                <div className="bg-white shadow-soft-xl w-full p-5 rounded-xl flex items-center justify-center">
+                <div className="bg-white shadow-2xl w-full px-5 py-8 2xl:py-10 2xl:px-8 rounded-xl flex items-center justify-center">
 
                     <ProfileImage />
 

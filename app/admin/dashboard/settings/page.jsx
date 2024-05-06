@@ -1,6 +1,7 @@
 'use client'
 
 import Account from '@/components/dashboard/admin/settings/Account';
+import Preferences from '@/components/dashboard/admin/settings/preferences/Preferences';
 import Role from '@/components/dashboard/admin/settings/roles/Role';
 import Security from '@/components/dashboard/admin/settings/security/Security';
 import { EachElement } from '@/utils/Each';
@@ -56,7 +57,7 @@ const page = () => {
           {activeTab === 'security' && <Security /> }
 
           {/* Preferences */}
-          {activeTab === 'preferences' && 'Preferences'}
+          {activeTab === 'preferences' && <Preferences /> }
 
         </div>
 

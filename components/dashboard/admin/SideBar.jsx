@@ -133,10 +133,10 @@ const SideBar = ({ open, setOpen }) => {
                         DP
                     </div>
 
-                    <div className="flex-1">
+                    <Link href='/admin/dashboard/settings' className="flex-1">
                         <div className='text-white text-xs font-medium'>Dominic Praise</div>
                         <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
-                    </div>
+                    </Link>
 
                     <div className="cursor-pointer">
                         <LogoutIcon className='w-6 h-6' color='#FFF' />

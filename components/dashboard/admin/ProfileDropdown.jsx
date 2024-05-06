@@ -71,7 +71,7 @@ const ProfileDropdown = () => {
 
                 <div className="px-4 space-y-3">
 
-                    <Link href="dashboard/settings" class="block w-full cursor-pointer text-textColor hover:text-dark">
+                    <Link href="/admin/dashboard/settings" class="block w-full cursor-pointer text-textColor hover:text-dark">
                         Account Settings
                     </Link>
 
