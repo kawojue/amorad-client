@@ -8,7 +8,7 @@ const page = () => {
     const initialFormData = {
         sortBy: '',
         search: '',
-        status: 'all',
+        status: 'active',
         startDate: '',
         endDate: '',
     };

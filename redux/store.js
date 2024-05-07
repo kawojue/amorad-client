@@ -1,14 +1,15 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import adminAuthSlice from './features/slices/adminAuthSlice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import adminAuthSlice from './features/slices/adminAuthSlice';
+import analyticsSlice from './features/slices/admin/analyticsSlice';
 
-export const store = () => {
+const rootReducer = combineReducers({
+    admin: combineReducers({
+        admin_auth: adminAuthSlice,
+        analytics: analyticsSlice,
+    }),
+});
 
-    const reducers = combineReducers({
-        admin_auth: adminAuthSlice ,
-      })
-
-    return configureStore({
-        reducer: reducers,
-        devTools: process.env.NODE_ENV !== 'production',
-    })
-}
+export const store = configureStore({
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== 'production',
+});

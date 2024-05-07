@@ -1,3 +1,4 @@
+import Spinner from '@/components/loader/Spinner';
 import React from 'react';
 
 const Button = ({ type, disabled, onClick, color, bg, className, children, loading, ...rest }) => {
@@ -8,10 +9,13 @@ const Button = ({ type, disabled, onClick, color, bg, className, children, loadi
             type={type}
             className={buttonClasses}
             onClick={onClick}
-            disabled={disabled || loading} 
+            disabled={disabled || loading}
             {...rest}
         >
-            {children}
+            <>
+                { loading && <Spinner className='w-3.5 h-3.5' /> }
+                {children}
+            </>
         </button>
     );
 };

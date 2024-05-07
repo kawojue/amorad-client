@@ -14,7 +14,7 @@ import UserCircleIcon from '@/components/icons/UserCircleIcon';
 import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
 import { useDispatch } from 'react-redux';
 
-const SideBar = ({ open, setOpen }) => {
+const SideBar = ({ open, setOpen, user }) => {
 
     const pathname = usePathname()
     const dispatch = useDispatch()
@@ -137,7 +137,7 @@ const SideBar = ({ open, setOpen }) => {
                     </div>
 
                     <Link href='/admin/dashboard/settings' className="flex-1">
-                        <div className='text-white text-xs font-medium'>Dominic Praise</div>
+                        <div className='text-white text-xs font-medium'> { user?.fullname?.split(' ')[0] }</div>
                         <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                     </Link>
 

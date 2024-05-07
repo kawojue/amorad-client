@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
+const profile = Cookies.get('admin_profile') || null;
+const user = JSON.parse(profile)
+
+
 const adminAuthSlice = createSlice({
     name: 'admin_auth',
     initialState: {
         token: Cookies.get('admin_token') || '',
-        profile: Cookies.get('admin_profile') || null,
+        profile: user || null,
     },
     reducers: {
         setToken: (state, action) => {
@@ -25,6 +29,6 @@ const adminAuthSlice = createSlice({
 });
 
 export const { setToken, setUser, Adminlogout } = adminAuthSlice.actions;
-export const getProfile = (state) => state.admin_auth.profile;
+export const getProfile = (state) => state.admin.admin_auth.profile;
 
 export default adminAuthSlice.reducer;

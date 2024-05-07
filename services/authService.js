@@ -1,4 +1,5 @@
 import axios from "@/utils/axiosConfig";
+import Cookies from "js-cookie";
 
 // LOGIN
 const adminLogin = async (payload) => {
@@ -7,11 +8,12 @@ const adminLogin = async (payload) => {
 };
 
 function getToken() {
-    return localStorage.getItem('token');
+    return Cookies.get('admin_token');
   }
 
   const authService = {
-    adminLogin
+    adminLogin,
+    getToken
 };
 
 export default authService;

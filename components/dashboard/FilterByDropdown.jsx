@@ -67,16 +67,16 @@ const FilterByDropdown = ({ setFilter, filter }) => {
 
                     <ul className="text-[12px] font-medium text-center text-gray-500 rounded-lg flex border border-border_color capitalize">
 
-                        <li onClick={() => handleSortOptionClick('all')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'all' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color rounded-s-lg cursor-pointer`}>all</span>
-                        </li>
-
                         <li onClick={() => handleSortOptionClick('active')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'active' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color cursor-pointer`}>active</span>
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'active' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color rounded-s-lg cursor-pointer`}>Active</span>
                         </li>
 
-                        <li onClick={() => handleSortOptionClick('inactive')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'inactive' ? 'bg-primary text-white' : 'bg-white'} border-s-0 border-border_color cursor-pointer  rounded-e-lg`}>inactive</span>
+                        <li onClick={() => handleSortOptionClick('pending')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'pending' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color cursor-pointer`}>Pending</span>
+                        </li>
+
+                        <li onClick={() => handleSortOptionClick('suspended')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'suspended' ? 'bg-primary text-white' : 'bg-white'} border-s-0 border-border_color cursor-pointer  rounded-e-lg`}>Suspended</span>
                         </li>
 
                     </ul>

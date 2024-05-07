@@ -5,12 +5,8 @@ import { store } from './store'
 
 export function Providers({ children }) {
 
-    const storeRef = useRef()
 
-    if (!storeRef.current) {
-        storeRef.current = store()
-    }
 
-    return <Provider store={storeRef.current}>{children}</Provider>
+    return <Provider store={store}>{children}</Provider>
 
 }

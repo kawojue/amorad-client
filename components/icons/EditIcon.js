@@ -27,7 +27,7 @@ EditIcon.propTypes = {
 };
 
 EditIcon.defaultProps = {
-    color: "#FFF",
+    color: "#586283",
     width: "16",
     height: "16",
 };

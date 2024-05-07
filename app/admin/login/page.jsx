@@ -2,6 +2,7 @@
 import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
 import AuthHeader from '@/components/auth/AuthHeader';
+import Spinner from '@/components/loader/Spinner';
 import Button from '@/components/ui/buttons/Button';
 import useAuthMiddleware from '@/middleware/adminAuthMiddleware';
 import { setToken, setUser } from '@/redux/features/slices/adminAuthSlice';
@@ -111,12 +112,12 @@ const page = () => {
                                     </div>
 
                                     <Button
-                                        disabled={loading}
+                                        loading={loading}
                                         type="submit"
                                         color="btn-primary"
                                         className="mt-8 py-3.5 w-full"
                                     >
-                                        Sign In
+                                       <span> Sign In</span>
                                     </Button>
 
                                 </Form>
