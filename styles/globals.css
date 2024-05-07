@@ -14,6 +14,7 @@ body {
 
 body {
     overflow-x: hidden !important;
+    font-family: 'Euclid Circular A', sans-serif !important;
 }
 
 @layer base {

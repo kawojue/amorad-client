@@ -14,9 +14,18 @@ const getChart = async (token, payload) => {
     return response.data;
 };
 
+const getFacilities = async (token, query) => {
+    const response = await axios.get('adradospec/facilities', {
+        params: query,
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
   const adminService = {
     getAnalytics,
-    getChart
+    getChart,
+    getFacilities
 };
 
 export default adminService;

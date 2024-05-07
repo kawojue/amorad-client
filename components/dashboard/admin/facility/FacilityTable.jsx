@@ -1,18 +1,22 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
-import staffs from '@/json/staff'
 import { EachElement } from "@/utils/Each";
 import FacilityAction from "./FacilityAction";
+import moment from "moment";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
 
     switch (status) {
-        case "active":
+        case "ACTIVE":
             textColor = "text-[#35C332]";
             bgColor = "bg-[#F4FFF3]";
             break;
-        case "suspended":
+        case "PENDING":
+            textColor = "text-[#6667FA]";
+            bgColor = "bg-[#F4F7FE]";
+            break;
+        case "SUSPENDED":
             textColor = "text-danger";
             bgColor = "bg-[#FEEAEA]";
             break;
@@ -21,7 +25,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const FacilityTable = () => {
+const FacilityTable = ({ datas }) => {
 
     // ACTIONS
     const [open, setOpen] = useState(null);
@@ -65,17 +69,6 @@ const FacilityTable = () => {
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
                                                     ID
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left whitespace-nowrap"
-                                        >
-                                            <div className="flex items-center gap-x-2">
-                                                <span className="text-xs tracking-tight font-semibold ">
-                                                    Gender
                                                 </span>
                                             </div>
                                         </th>
@@ -163,7 +156,7 @@ const FacilityTable = () => {
 
                                 <tbody className="divide-y divide-border_color ">
 
-                                    <EachElement of={staffs} render={(staff, index) => (
+                                    <EachElement of={datas} render={(staff, index) => (
 
                                         <>
 
@@ -171,7 +164,7 @@ const FacilityTable = () => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                        {staff.name}
+                                                        {staff.centerName}
                                                     </span>
                                                 </td>
 
@@ -179,14 +172,6 @@ const FacilityTable = () => {
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
                                                             {staff.id}
-                                                        </span>
-                                                    </div>
-                                                </td>
-
-                                                <td className="px-6 py-3 whitespace-nowrap">
-                                                    <div className="">
-                                                        <span className="block text-xs text-textColor ">
-                                                            {staff.gender}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -226,7 +211,7 @@ const FacilityTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.reg_date}
+                                                            {moment(staff.createdAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -234,7 +219,7 @@ const FacilityTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
-                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(staff.status).bgColor
+                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[10px] text-center ${getStatusStyles(staff.status).bgColor
                                                                 } ${getStatusStyles(staff.status).textColor
                                                                 }`}
                                                         >

@@ -43,10 +43,11 @@ const SortByDropdown = ({ onSortChange }) => {
 
                 <div className="flex flex-col gap-y-2">
 
-                    <button onClick={() => handleSortOptionClick('newest')} className="px-3 btn rounded-lg bg-[#EDF6FF] text-textColor w-full py-2 text-[11px] text-left">Newest</button>
-                    <button onClick={() => handleSortOptionClick('oldest')} className="px-3 btn rounded-lg bg-[#FFEDED] text-danger w-full py-2 text-[11px] text-left">Oldest</button>
-                    <button onClick={() => handleSortOptionClick('recent')} className="px-3 btn rounded-lg bg-[#FFFAED] text-[#97741A] w-full py-2 text-[11px] text-left">Least Recently Updated</button>
-                    <button onClick={() => handleSortOptionClick('alphabetical')} className="px-3 btn rounded-lg bg-[#EDFCFF] text-[#093A44] w-full py-2 text-[11px] text-left">Alphabetical (Name)</button>
+                    {/* <button onClick={() => handleSortOptionClick('newest')} className="px-3 btn rounded-lg bg-[#EDF6FF] text-textColor w-full py-2 text-[11px] text-left">Newest</button> */}
+                    {/* <button onClick={() => handleSortOptionClick('date')} className="px-3 btn rounded-lg bg-[#FFFAED] text-[#97741A] w-full py-2 text-[11px] text-left">Date</button> */}
+                    <button onClick={() => handleSortOptionClick('name')} className="px-3 btn rounded-lg bg-[#EDFCFF] text-[#093A44] w-full py-2 text-[11px] text-left">Alphabetical (Name)</button>
+                    
+                    <button onClick={() => handleSortOptionClick('date')} className="px-3 btn rounded-lg bg-[#FFEDED] text-danger w-full py-2 text-[11px] text-left">Oldest</button>
 
                 </div>
 

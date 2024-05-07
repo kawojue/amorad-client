@@ -30,5 +30,6 @@ const adminAuthSlice = createSlice({
 
 export const { setToken, setUser, Adminlogout } = adminAuthSlice.actions;
 export const getProfile = (state) => state.admin.admin_auth.profile;
+export const getToken = (state) => state.admin.admin_auth.token;
 
 export default adminAuthSlice.reducer;

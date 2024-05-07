@@ -62,29 +62,33 @@ const FilterByDropdown = ({ setFilter, filter }) => {
                 <div className="px-4 py-2 mb-3 text-center bg-primary rounded-t-xl text-white font-medium text-xs">Filter By</div>
 
                 {/* STATUS */}
-                <div className="flex items-center gap-x-4 mb-4">
-                    <span className="text-xs text-textColor">Status:</span>
+                <span className="text-xs text-textColor pb-1 font-semibold">Status</span>
+                <div className="flex items-center gap-x-4 mb-4 justify-end">
 
                     <ul className="text-[12px] font-medium text-center text-gray-500 rounded-lg flex border border-border_color capitalize">
 
-                        <li onClick={() => handleSortOptionClick('active')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'active' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color rounded-s-lg cursor-pointer`}>Active</span>
+                        <li onClick={() => handleSortOptionClick('')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === '' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color rounded-s-lg cursor-pointer`}>All</span>
                         </li>
 
-                        <li onClick={() => handleSortOptionClick('pending')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'pending' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color cursor-pointer`}>Pending</span>
+                        <li onClick={() => handleSortOptionClick('ACTIVE')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'ACTIVE' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color cursor-pointer`}>Active</span>
                         </li>
 
-                        <li onClick={() => handleSortOptionClick('suspended')} className="w-full focus-within:z-10">
-                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'suspended' ? 'bg-primary text-white' : 'bg-white'} border-s-0 border-border_color cursor-pointer  rounded-e-lg`}>Suspended</span>
+                        <li onClick={() => handleSortOptionClick('PENDING')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'PENDING' ? 'bg-primary text-white' : 'bg-white'} border-r border-border_color cursor-pointer`}>Pending</span>
+                        </li>
+
+                        <li onClick={() => handleSortOptionClick('SUSPENDED')} className="w-full focus-within:z-10">
+                            <span className={`inline-block w-full py-2 px-4 ${filter.status === 'SUSPENDED' ? 'bg-primary text-white' : 'bg-white'} border-s-0 border-border_color cursor-pointer  rounded-e-lg`}>Suspended</span>
                         </li>
 
                     </ul>
 
                 </div>
 
+                <span className="text-xs text-textColor pb-1 font-semibold">Date Range</span>
                 <div className="flex items-center gap-x-4">
-                    <span className="text-xs text-textColor">Date Range:</span>
 
                     <ul className="text-[12px] font-medium text-center text-gray-500 rounded-lg flex border border-border_color capitalize">
 
