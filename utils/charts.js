@@ -14,13 +14,13 @@ export const RecordsOptions = {
   tooltip: {
     style: {
       fontSize: "11px",
-      fontFamily: undefined,
+      fontFamily:  'Euclid Circular A',
       backgroundColor: "#000000"
     },
     onDatasetHover: {
       style: {
         fontSize: "11px",
-        fontFamily: undefined,
+        fontFamily:  'Euclid Circular A',
       },
     },
     theme: "dark",

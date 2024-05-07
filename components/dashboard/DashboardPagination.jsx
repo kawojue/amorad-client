@@ -24,7 +24,7 @@ const DashboardPagination = ({ currentPage, totalPages, perPage, onChangePage, t
                 <span
                     key={i}
                     onClick={() => handlePageChange(i)}
-                    className={`w-5 cursor-pointer h-5 justify-center text-gray-500 hover:text-blue-600 p-[14px] inline-flex items-center text-[12px] font-medium rounded-full ${currentPage === i ? 'bg-blue-500 text-white bg-blue' : 'bg-white text-blue/80'
+                    className={`w-4 cursor-pointer h-4 justify-center text-gray-500 p-[11px] inline-flex items-center text-[11px] font-medium rounded-full ${currentPage === i ? 'bg-blue-500 text-white bg-blue' : 'bg-white text-blue/80'
                         }`}
                 >
                     {i}
@@ -37,14 +37,15 @@ const DashboardPagination = ({ currentPage, totalPages, perPage, onChangePage, t
 
     return (
         <div className="flex px-5 gap-y-3 items-center justify-between flex-wrap text-xs">
-            <p className='text-blue/60 text-[12.5px] sm:text-[14px] font-medium'>
-                Show {startingOrder} to {endingOrder} of {totalPages} { title }
+
+            <p className='text-blue/60 text-xs font-medium'>
+                Show {startingOrder} to {endingOrder} of {totalPages}
             </p>
 
             <nav className="flex flex-wrap gap-y-2 items-center space-x-2">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
-                    className={`text-dark hover:text-blue cursor-pointer inline-flex items-center gap-2 rounded-md ${currentPage === 1 ? 'opacity-50' : ''}`}
+                    className={`text-dark text-xs hover:text-blue cursor-pointer inline-flex items-center gap-2 rounded-md ${currentPage === 1 ? 'opacity-50' : ''}`}
                     type='button'
                     disabled={currentPage === 1}
                 >
@@ -56,7 +57,7 @@ const DashboardPagination = ({ currentPage, totalPages, perPage, onChangePage, t
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     type="button"
-                    className={`text-dark cursor-pointer hover:text-blue inline-flex items-center gap-2 rounded-md ${currentPage === disableNext ? 'opacity-50' : ''}`}
+                    className={`text-dark text-xs cursor-pointer hover:text-blue inline-flex items-center gap-2 rounded-md ${currentPage === disableNext ? 'opacity-50' : ''}`}
                     disabled={currentPage === disableNext}
                 >
                     <span>Next</span>
