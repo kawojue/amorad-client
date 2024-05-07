@@ -1,15 +1,18 @@
 import CustomInput from '@/components/FormElements/CustomInput'
-import CustomPassword from '@/components/FormElements/CustomPassword'
-import CustomPhoneInput from '@/components/FormElements/CustomPhoneInput'
 import CustomSelect from '@/components/FormElements/CustomSelect'
 import Button from '@/components/ui/buttons/Button'
 import DialogContainer from '@/components/ui/modals/Dialog'
+import adminService from '@/services/adminService'
+import { getErrorMessage } from '@/utils/errorUtils'
 import { addUserRole } from '@/utils/schema'
 import { XCircleIcon } from '@heroicons/react/24/solid'
 import { Form, Formik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
-const RoleModal = ({ open, setOpen }) => {
+const RoleModal = ({ fetchData, open, setOpen, token }) => {
+
+    const [ loading, setLoading] = useState(false)
 
     const closeDialog = () => {
         setOpen(false)
@@ -24,7 +27,7 @@ const RoleModal = ({ open, setOpen }) => {
 
                     <div className="flex items-center justify-between border-b pb-4 mb-6">
 
-                        <h2 className="font-semibold text-sm"> Manage Roles </h2>
+                        <h2 className="font-semibold text-sm"> Invite Members </h2>
 
                         <div className='cursor-pointer' onClick={closeDialog}>
                             <XCircleIcon className='h-6 w-6 text-primary' />
@@ -34,14 +37,32 @@ const RoleModal = ({ open, setOpen }) => {
 
                     <Formik
                         initialValues={{
-                            name: '',
+                            fullname: '',
                             email: '',
-                            phone: '',
                             role: '',
-                            password: '',
                         }}
                         validationSchema={addUserRole}
-                        onSubmit={(values, actions) => {
+                        onSubmit={async (values, actions) => {
+
+                            
+                            setLoading(true);
+
+                            try {
+
+                                const response = await adminService.inviteMember(values, token);
+                                toast.success(response?.message);
+
+                                fetchData()
+                                setOpen(false)
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message);
+
+                            } finally {
+                                setLoading(false);
+                            }
 
                         }}
                     >
@@ -53,21 +74,17 @@ const RoleModal = ({ open, setOpen }) => {
 
                                     <div className="w-full">
 
-                                        <CustomInput label="Full name" name="name" type="text" placeholder="John Doe" />
+                                        <CustomInput label="Full name" name="fullname" type="text" placeholder="John Doe" />
 
                                         <CustomInput label="Email Address" name="email" type="email" placeholder="example@gmail.com" />
 
-                                        <CustomPhoneInput name="phone" label="Phone Number" />
-
                                         <CustomSelect label="Role" name="role">
                                             <option value="" disabled> Select Role </option>
-                                            <option value="doctor"> Doctor </option>
-                                            <option value="radiologist"> Radiologist </option>
+                                            <option value="admin"> Admin </option>
+                                            <option value="specialist"> Specialist </option>
                                         </CustomSelect>
 
-                                        <CustomPassword label="Password" name="password" placeholder="Password" />
-
-                                        <Button type='submit' className='btn-primary py-3.5 w-full mt-5'>
+                                        <Button loading={loading} type='submit' className='btn-primary py-3.5 w-full mt-5'>
                                             <span>Add User</span>
                                         </Button>
 

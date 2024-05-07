@@ -11,7 +11,7 @@ const NavBar = ({ open, setOpen, user }) => {
                 <div className="w-full flex items-center ml-auto justify-between sm:gap-x-3 sm:order-3">
 
                     <div className="mr-5 md:mr-8 tracking-tighter">
-                        <h2 class="flex-none text-sm font-bold text-dark capitalize">Hello, { user?.fullname?.split(' ')[0] }</h2>
+                        <h2 class="flex-none text-sm font-bold text-dark capitalize  overflow-hidden whitespace-nowrap overflow-ellipsis">Hello, { user?.fullname?.split(' ')[0] }</h2>
                         <p className="text-xs text-textColor">See your activities for the day</p>
                     </div>
 

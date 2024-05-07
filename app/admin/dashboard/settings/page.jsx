@@ -4,8 +4,10 @@ import Account from '@/components/dashboard/admin/settings/Account';
 import Preferences from '@/components/dashboard/admin/settings/preferences/Preferences';
 import Role from '@/components/dashboard/admin/settings/roles/Role';
 import Security from '@/components/dashboard/admin/settings/security/Security';
+import { getProfile, getToken } from '@/redux/features/slices/adminAuthSlice';
 import { EachElement } from '@/utils/Each';
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const page = () => {
 
@@ -21,6 +23,9 @@ const page = () => {
   const handleTabClick = (status) => {
     setActiveTab(status);
   };
+
+  const token = useSelector(getToken)
+  const profile = useSelector(getProfile)
 
   return (
     <>
@@ -48,13 +53,13 @@ const page = () => {
         <div className="w-full lg:w-[80%] p-5 bg-white rounded-s-2xl">
 
           {/* Account */}
-          {activeTab === 'account' && <Account /> }
+          {activeTab === 'account' && <Account profile={profile} token={token} /> }
 
           {/* Roles */}
-          {activeTab === 'roles' && <Role /> }
+          {activeTab === 'roles' && <Role token={token} /> }
 
           {/* Security */}
-          {activeTab === 'security' && <Security /> }
+          {activeTab === 'security' && <Security token={token} /> }
 
           {/* Preferences */}
           {activeTab === 'preferences' && <Preferences /> }

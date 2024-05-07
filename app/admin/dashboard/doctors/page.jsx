@@ -1,19 +1,59 @@
 'use client'
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
 import DoctorTable from '@/components/dashboard/admin/doctor/DoctorTable'
-import React, { useState } from 'react'
+import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
+import { getToken } from '@/redux/features/slices/adminAuthSlice'
+import adminService from '@/services/adminService'
+import { removeEmptyFields } from '@/utils/EmptyFields'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const page = () => {
 
+    const token = useSelector(getToken)
+    const [loading, setLoading] = useState(false)
+    const [datas, setDatas] = useState([])
+    const [total, setTotal] = useState(0)
+
     const initialFormData = {
-        sortBy: '',
+        page: 1,
+        limit: 15,
+        sortBy: 'name',
+        role: 'doctor',
         search: '',
-        status: 'active',
+        status: '',
         startDate: '',
         endDate: '',
     };
 
     const [filter, setFilter] = useState(initialFormData);
+    const query = removeEmptyFields(filter);
+
+    // HANLDE PAGINATION PAGE CHANGE
+    const handlePageChange = (newPage) => {
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            page: newPage,
+        }));
+    };
+
+    // FETCH DATA
+    const fetchData = async () => {
+        try {
+            const response = await adminService.getPractitioners(token, query)
+            setDatas(response?.data?.practitioners);
+            setTotal(response?.data?.total)
+        } catch (error) {
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData();
+    }, [filter])
 
     return (
         <>
@@ -26,11 +66,28 @@ const page = () => {
 
             </div>
 
-            <div className="bg-white px-2 py-3 rounded-lg">
+            <div className="bg-white px-2 py-3 rounded-lg mb-5">
 
-            <DoctorTable />
+                {loading ? (
+
+                    <TableSkeletonLoader count={12} height={40} />
+
+                ) : (
+
+                    <DoctorTable datas={datas} />
+
+                )}
 
             </div>
+
+            {/* PAGINATION */}
+            { !loading && <DashboardPagination
+                currentPage={filter?.page}
+                totalPages={total}
+                perPage={filter?.limit}
+                onChangePage={handlePageChange}
+                title="Radiologists"
+            />}
 
         </>
     )

@@ -156,7 +156,7 @@ const FacilityTable = ({ datas }) => {
 
                                 <tbody className="divide-y divide-border_color ">
 
-                                    <EachElement of={datas} render={(staff, index) => (
+                                    <EachElement of={datas} render={(item, index) => (
 
                                         <>
 
@@ -164,14 +164,14 @@ const FacilityTable = ({ datas }) => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                        {staff.centerName}
+                                                        {item.centerName}
                                                     </span>
                                                 </td>
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.id}
+                                                            {item.id}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -179,7 +179,7 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.email}
+                                                            {item.email}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -187,7 +187,7 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.phone}
+                                                            {item.phone}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -195,7 +195,7 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.city}
+                                                            {item.city}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -203,7 +203,7 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.country}
+                                                            {item.country}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -211,7 +211,7 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {moment(staff.createdAt).format('lll')}
+                                                            {moment(item.createdAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -219,11 +219,11 @@ const FacilityTable = ({ datas }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
-                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[10px] text-center ${getStatusStyles(staff.status).bgColor
-                                                                } ${getStatusStyles(staff.status).textColor
+                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[10px] text-center ${getStatusStyles(item.status).bgColor
+                                                                } ${getStatusStyles(item.status).textColor
                                                                 }`}
                                                         >
-                                                            {staff.status}
+                                                            {item.status}
                                                         </span>
                                                     </div>
                                                 </td>

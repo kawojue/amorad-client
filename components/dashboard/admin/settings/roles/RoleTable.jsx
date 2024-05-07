@@ -1,27 +1,31 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import roles from '@/json/roles'
 import { EachElement } from "@/utils/Each";
 import RoleImage from '@/public/images/role.png'
 import Image from "next/image";
+import moment from "moment";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
 
     switch (status) {
-        case "specialist":
+        case "ACTIVE":
             textColor = "text-[#35C332]";
             bgColor = "bg-[#F4FFF3]";
             break;
-        case "admin":
-            textColor = "text-[#1671D9]";
-            bgColor = "bg-[#E3EFFC]";
+        case "PENDING":
+            textColor = "text-[#6667FA]";
+            bgColor = "bg-[#F4F7FE]";
+            break;
+        case "SUSPENDED":
+            textColor = "text-danger";
+            bgColor = "bg-[#FEEAEA]";
             break;
     }
 
     return { textColor, bgColor };
 };
 
-const RoleTable = () => {
+const RoleTable = ({ data }) => {
 
     return (
         <>
@@ -86,7 +90,7 @@ const RoleTable = () => {
 
                                 <tbody className="divide-y divide-border_color ">
 
-                                    <EachElement of={roles} render={(item, index) => (
+                                    <EachElement of={data} render={(item, index) => (
 
                                         <>
 
@@ -98,11 +102,11 @@ const RoleTable = () => {
 
                                                         <div className="flex items-center gap-x-2">
 
-                                                                <Image src={RoleImage} width={44} height={44} className=" object-cover h-10 w-10 rounded-full" />
+                                                            <Image src={RoleImage} width={44} height={44} className=" object-cover h-10 w-10 rounded-full" />
 
                                                             <div className="grow">
                                                                 <span className="block text-sm font-medium text-dark">
-                                                                    {item.name}
+                                                                    {item.fullname}
                                                                 </span>
                                                                 <span className="block -mt-1 text-[11px] font-light text-textColor">
                                                                     {item.email}
@@ -118,7 +122,7 @@ const RoleTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {item.joined_datetime}
+                                                            {moment(item.createdAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -126,11 +130,11 @@ const RoleTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
-                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(item.role).bgColor
-                                                                } ${getStatusStyles(item.role).textColor
+                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(item.status).bgColor
+                                                                } ${getStatusStyles(item.status).textColor
                                                                 }`}
                                                         >
-                                                            {item.role}
+                                                            {item.status}
                                                         </span>
                                                     </div>
                                                 </td>

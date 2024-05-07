@@ -22,10 +22,54 @@ const getFacilities = async (token, query) => {
     return response.data;
 };
 
+const getPractitioners = async (token, query) => {
+    const response = await axios.get('/adradospec/practitioners', {
+        params: query,
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const getMembers = async (token) => {
+    const response = await axios.post('/adradospec/fetch-members', {}, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const inviteMember = async (payload, token) => {
+    const response = await axios.post("/adradospec/invite-member", payload, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const changePassword = async (payload, token) => {
+    const response = await axios.patch("/auth/change-password", payload, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const uploadProfileImage = async (payload, token) => {
+    const response = await axios.put("/auth/upload/profile-photo", payload, {
+        headers: { 
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+    return response.data;
+};
+
   const adminService = {
     getAnalytics,
     getChart,
-    getFacilities
+    getFacilities,
+    getPractitioners,
+    getMembers,
+    inviteMember,
+    changePassword,
+    uploadProfileImage
 };
 
 export default adminService;

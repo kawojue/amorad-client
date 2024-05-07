@@ -1,18 +1,22 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
-import staffs from '@/json/staff'
 import { EachElement } from "@/utils/Each";
+import moment from "moment";
 import RadiologistAction from "./RadiologistAction";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
 
     switch (status) {
-        case "active":
+        case "ACTIVE":
             textColor = "text-[#35C332]";
             bgColor = "bg-[#F4FFF3]";
             break;
-        case "suspended":
+        case "PENDING":
+            textColor = "text-[#6667FA]";
+            bgColor = "bg-[#F4F7FE]";
+            break;
+        case "SUSPENDED":
             textColor = "text-danger";
             bgColor = "bg-[#FEEAEA]";
             break;
@@ -21,7 +25,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const RadiologistTable = () => {
+const RadiologistTable = ({ datas }) => {
 
     // ACTIONS
     const [open, setOpen] = useState(null);
@@ -43,7 +47,7 @@ const RadiologistTable = () => {
                         <div className="p-1.5 min-w-full inline-block align-middle">
                             <table className="min-w-full divide-y divide-border_color">
 
-                                <thead className="bg-whiterounded-t-xl text-dark">
+                                <thead className="bg-white rounded-t-xl text-dark">
 
                                     <tr>
 
@@ -64,7 +68,7 @@ const RadiologistTable = () => {
                                         >
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
-                                                    ID
+                                                    Affiliation
                                                 </span>
                                             </div>
                                         </th>
@@ -75,7 +79,7 @@ const RadiologistTable = () => {
                                         >
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
-                                                    Gender
+                                                Practice Number
                                                 </span>
                                             </div>
                                         </th>
@@ -163,7 +167,7 @@ const RadiologistTable = () => {
 
                                 <tbody className="divide-y divide-border_color ">
 
-                                    <EachElement of={staffs} render={(staff, index) => (
+                                    <EachElement of={datas} render={(item, index) => (
 
                                         <>
 
@@ -171,14 +175,14 @@ const RadiologistTable = () => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                        {staff.name}
+                                                        {item.fullname}
                                                     </span>
                                                 </td>
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.id}
+                                                            {item.affiliation}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -186,7 +190,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.gender}
+                                                            {item.practiceNumber}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -194,7 +198,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.email}
+                                                            {item.email}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -202,7 +206,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.phone}
+                                                            {item.phone}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -210,7 +214,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.city}
+                                                            {item.city}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -218,7 +222,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.country}
+                                                            {item.country}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -226,7 +230,7 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.reg_date}
+                                                            {moment(item.createdAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -234,11 +238,11 @@ const RadiologistTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
-                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(staff.status).bgColor
-                                                                } ${getStatusStyles(staff.status).textColor
+                                                            className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[10px] text-center ${getStatusStyles(item.status).bgColor
+                                                                } ${getStatusStyles(item.status).textColor
                                                                 }`}
                                                         >
-                                                            {staff.status}
+                                                            {item.status}
                                                         </span>
                                                     </div>
                                                 </td>

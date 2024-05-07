@@ -1,4 +1,5 @@
 'use client'
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
 import FacilityTable from '@/components/dashboard/admin/facility/FacilityTable'
 import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
@@ -28,12 +29,20 @@ const page = () => {
     const [filter, setFilter] = useState(initialFormData);
     const query = removeEmptyFields(filter);
 
+    // HANLDE PAGINATION PAGE CHANGE
+    const handlePageChange = (newPage) => {
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            page: newPage,
+        }));
+    };
+
     // FETCH DATA
     const fetchData = async () => {
         try {
             const response = await adminService.getFacilities(token, query)
             setDatas(response?.data?.facilities);
-            setTotal(response?.data?.count)
+            setTotal(response?.data?.total)
         } catch (error) {
         } finally {
             setLoading(false);
@@ -57,9 +66,9 @@ const page = () => {
 
             </div>
 
-            <div className="bg-white px-2 py-3 rounded-lg">
+            <div className="bg-white px-2 py-3 rounded-lg mb-5">
 
-                { loading ? (
+                {loading ? (
 
                     <TableSkeletonLoader count={12} height={40} />
 
@@ -70,6 +79,15 @@ const page = () => {
                 )}
 
             </div>
+
+            {/* PAGINATION */}
+            {!loading && <DashboardPagination
+                currentPage={filter?.page}
+                totalPages={total}
+                perPage={filter?.limit}
+                onChangePage={handlePageChange}
+                title="Facilities"
+            />}
 
         </>
     )

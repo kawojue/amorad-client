@@ -61,20 +61,18 @@ export const profileSchema = Yup.object({
 });
 
 export const PasswordChangeSchema = Yup.object({
-  password: Yup.string()
+  newPassword: Yup.string()
     .required('Password is required')
     .min(6, 'Password must be at least 6 characters'),
-    current_password: Yup.string()
+    currentPassword: Yup.string()
     .required('Current password is required'),
   confirm_password: Yup.string()
     .required('Confirm password is required')
-    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
 });
 
 export const addUserRole = Yup.object({
-  name: Yup.string().required('Name is required'),
+  fullname: Yup.string().required('Name is required'),
   role: Yup.string().required('Role is required'),
-  email: Yup.string().email('Invalid email address').required('Email is required'),
-  password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
-  phone: Yup.string().required('Phone is required'),
+  email: Yup.string().email('Invalid email address').required('Email is required')
 });

@@ -13,7 +13,7 @@ const Button = ({ type, disabled, onClick, color, bg, className, children, loadi
             {...rest}
         >
             <>
-                { loading && <Spinner className='w-3.5 h-3.5' /> }
+                { loading && <Spinner className='w-4 h-4' /> }
                 {children}
             </>
         </button>

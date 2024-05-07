@@ -24,7 +24,7 @@ body {
     }
 
     .form-control {
-        @apply py-2.5 px-4 focus:outline-none focus:ring-0 block outline-none border tracking-tight border-gray-300 w-full rounded-xl text-xs font-normal text-opacity-80 text-textColor focus:bg-white focus:shadow-md focus:border-[#18678480] focus:border-2 placeholder:text-xs placeholder:font-light
+        @apply py-2.5 px-4 focus:outline-none focus:ring-0 block outline-none border tracking-tight border-gray-300 w-full rounded-xl text-xs font-normal text-opacity-80 text-dark focus:bg-white focus:shadow-md focus:border-[#18678480] focus:border-2 placeholder:text-xs placeholder:font-light
     }
 
     label {

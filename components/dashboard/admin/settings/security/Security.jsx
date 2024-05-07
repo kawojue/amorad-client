@@ -2,7 +2,7 @@ import Button from '@/components/ui/buttons/Button'
 import React, { useState } from 'react'
 import SecurityModal from './SecurityModal'
 
-const Security = () => {
+const Security = ({ token }) => {
 
     const [ open, setOpen ] = useState(false)
 
@@ -36,7 +36,7 @@ const Security = () => {
 
             </div>
 
-            <SecurityModal open={open} setOpen={setOpen} />
+            <SecurityModal token={token} open={open} setOpen={setOpen} />
 
         </>
     )

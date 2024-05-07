@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
-import Avatar from '@/public/images/avatar.png'
-import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
+import Avatar from '@/components/Avatar';
+import Image from 'next/image';
 
 const ProfileDropdown = ({ user }) => {
 
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
+
+    const avatar = user?.avatar
 
     const toggleDropdown = () => {
         setOpen(!open);
@@ -36,13 +38,21 @@ const ProfileDropdown = ({ user }) => {
     return (
         <div ref={profileMenu} className="relative inline-flex">
 
-            <div onClick={toggleDropdown} className="flex items-center gap-x-3 cursor-pointer w-full">
+            <div onClick={toggleDropdown} className="flex items-center gap-x-2 cursor-pointer w-full">
 
-                <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={Avatar} width={32} height={32} alt="Profile Image" />
+                {avatar ? (
+
+                    <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={avatar.url} width={500} height={500} alt="Profile Image" />
+
+                ) : (
+
+                    <Avatar name={user?.fullname} size="h-9 w-9" bgColor="bg-primary" textColor="text-white" fontSize="text-[12px]" />
+
+                )}
 
                 <div className="flex-1 tracking-tighter hidden sm:block">
-                    <div className='text-dark text-xs font-semibold'> { user?.fullname?.split(' ')[0] } </div>
-                    <p className='text-textColor text-[11px] font-light -mt-2'>dominic@gmail.com</p>
+                    <div className='text-dark text-xs font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.fullname} </div>
+                    <p className='text-textColor text-[11px] font-light -mt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.email} </p>
                 </div>
 
                 <div className="hidden sm:block">
@@ -61,11 +71,19 @@ const ProfileDropdown = ({ user }) => {
 
                     <div className="flex items-center gap-x-3 px-4">
 
-                        <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={Avatar} width={32} height={32} alt="Profile Image" />
+                        {avatar ? (
+
+                            <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={avatar.url} width={32} height={32} alt="Profile Image" />
+
+                        ) : (
+
+                            <Avatar name={user?.fullname} size="h-9 w-9" bgColor="bg-primary" textColor="text-white" fontSize="text-[12px]" />
+
+                        )}
 
                         <div className="flex-1 tracking-tight">
-                            <div className='text-dark text-xs font-semibold'> { user?.fullname?.split(' ')[0] } </div>
-                            <p className='text-textColor text-[11px] font-light -mt-2'>dominic@gmail.com</p>
+                            <div className='text-dark text-xs font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.fullname} </div>
+                            <p className='text-textColor text-[11px] font-light -mt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.email} </p>
                         </div>
 
                     </div>

@@ -10,9 +10,9 @@ import FacilityIcon from '@/components/icons/FacilityIcon';
 import SettingsIcon from '@/components/icons/SettingsIcon';
 import LogoutIcon from '@/components/icons/LogoutIcon';
 import PeopleIcon from '@/components/icons/PeopleIcon';
-import UserCircleIcon from '@/components/icons/UserCircleIcon';
 import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
 import { useDispatch } from 'react-redux';
+import Avatar from '@/components/Avatar';
 
 const SideBar = ({ open, setOpen, user }) => {
 
@@ -20,23 +20,23 @@ const SideBar = ({ open, setOpen, user }) => {
     const dispatch = useDispatch()
 
     const links = [
+        // {
+        //     href: '/admin/dashboard/doctors',
+        //     icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
+        //     activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
+        //     text: 'Doctors'
+        // },
+
         {
-            href: '/admin/dashboard/doctors',
-            icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
-            text: 'Doctors'
+            href: '/admin/dashboard/facilities', text: 'Facilities',
+            icon: <FacilityIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <FacilityIcon className='w-5 h-5' color='#186784' />
         },
 
         {
             href: '/admin/dashboard/radiologists', text: 'Radiologists',
             icon: <PeopleIcon className='w-5 h-5' color='#FFF' />,
             activeIcon: <PeopleIcon className='w-5 h-5' color='#186784' />
-        },
-
-        {
-            href: '/admin/dashboard/facilities', text: 'Facilities',
-            icon: <FacilityIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <FacilityIcon className='w-5 h-5' color='#186784' />
         }
     ];
 
@@ -64,7 +64,7 @@ const SideBar = ({ open, setOpen, user }) => {
                         <i className="absolute top-3 right-0 p-4 opacity-50 cursor-pointer text-white"> <XMarkIcon className='h-6 w-6 ' /> </i>
                     </div>
 
-                    <Link href="/dashboard" className="block px-8 py-8 m-auto text-center text-sm whitespace-nowrap" onClick={handleLinkClick}>
+                    <Link href="" className="block px-8 py-8 m-auto text-center text-sm whitespace-nowrap" onClick={handleLinkClick}>
                         <Image
                             src='/images/logo.svg'
                             width={28} height={28}
@@ -132,12 +132,13 @@ const SideBar = ({ open, setOpen, user }) => {
 
                 <div className="flex items-center gap-x-3 px-4 pt-12 absolute bottom-10">
 
-                    <div className="h-10 w-10 rounded-full font-semibold p-3 text-xs bg-white flex items-center justify-center">
-                        DP
-                    </div>
+                    <Avatar name={user?.fullname} size="h-10 w-10" bgColor="bg-white" textColor="text-dark" fontSize="text-base" />
 
                     <Link href='/admin/dashboard/settings' className="flex-1">
-                        <div className='text-white text-xs font-medium'> { user?.fullname?.split(' ')[0] }</div>
+                        <div className='text-white text-xs font-medium overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                            {user?.fullname}
+                        </div>
+
                         <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                     </Link>
 

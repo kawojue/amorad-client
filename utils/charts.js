@@ -13,13 +13,13 @@ export const RecordsOptions = {
   },
   tooltip: {
     style: {
-      fontSize: "12px",
+      fontSize: "11px",
       fontFamily: undefined,
       backgroundColor: "#000000"
     },
     onDatasetHover: {
       style: {
-        fontSize: "12px",
+        fontSize: "11px",
         fontFamily: undefined,
       },
     },
@@ -32,7 +32,7 @@ export const RecordsOptions = {
       show: true,
       style: {
         colors: "#1D2329",
-        fontSize: "12px",
+        fontSize: "11px",
         fontWeight: "500",
       },
     },
@@ -51,7 +51,7 @@ export const RecordsOptions = {
       show: true,
       style: {
         colors: "#1D2329",
-        fontSize: "12px",
+        fontSize: "11px",
       },
     },
   },
