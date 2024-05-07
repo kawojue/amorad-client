@@ -3,10 +3,13 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 import Avatar from '@/public/images/avatar.png'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
 
 const ProfileDropdown = () => {
 
     const [open, setOpen] = useState(false);
+    const dispatch = useDispatch()
 
     const toggleDropdown = () => {
         setOpen(!open);
@@ -79,7 +82,7 @@ const ProfileDropdown = () => {
                         Help Desk
                     </Link>
 
-                    <Link href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
+                    <Link onClick={() => dispatch(Adminlogout())} href="javascript:vold(0)" class="block w-full cursor-pointer text-textColor hover:text-dark">
                         Sign Out
                     </Link>
 

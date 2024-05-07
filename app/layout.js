@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import '/styles/globals.css'
 import '/styles/style.css'
+import { Providers } from "@/redux/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +14,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/images/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/logo.svg" sizes="any" />
+        <link rel="apple-touch-icon" href="/images/logo.svg" sizes="any" />
       </head>
       <body className={`${inter.className} debug-screens`} >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

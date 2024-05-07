@@ -3,11 +3,29 @@ import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
 import AuthHeader from '@/components/auth/AuthHeader';
 import Button from '@/components/ui/buttons/Button';
+import useAuthMiddleware from '@/middleware/adminAuthMiddleware';
+import { setToken, setUser } from '@/redux/features/slices/adminAuthSlice';
+import authService from '@/services/authService';
+import { getErrorMessage } from '@/utils/errorUtils';
 import { LoginSchema } from '@/utils/schema';
 import { Form, Formik } from 'formik';
-import React from 'react'
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 
 const page = () => {
+
+    const [loading, setLoading] = useState(false)
+    const router = useRouter();
+    const dispatch = useDispatch()
+
+    const { isAuthenticated, checkAuthorization } = useAuthMiddleware();
+
+    if (isAuthenticated() || checkAuthorization()) {
+        router.replace('/admin/dashboard')
+    }
+
     return (
         <>
 
@@ -27,7 +45,6 @@ const page = () => {
 
                     </div>
 
-
                     <div className="main mt-5">
 
                         <Formik
@@ -37,6 +54,37 @@ const page = () => {
                             }}
                             validationSchema={LoginSchema}
                             onSubmit={async (values, actions) => {
+
+                                setLoading(true);
+
+                                try {
+
+                                    const response = await authService.adminLogin(values);
+                                    const { access_token, ...data } = response;
+
+                                    // // SEND TOKEN AND DATA TO REDUX TOOLKIT
+                                    const expirationSeconds = 30 * 24 * 60 * 60;
+                                    const expire = Math.floor(Date.now() / 1000) + expirationSeconds;
+
+
+                                    Cookies.set('admin_token', access_token, { secure: true, sameSite: 'lax' });
+                                    Cookies.set('admin_token_exp', expire);
+
+                                    dispatch(setToken(access_token));
+                                    dispatch(setUser(data.data));
+
+                                    // Navigate
+                                    router.replace('/admin/dashboard')
+
+                                } catch (error) {
+
+                                    const message = getErrorMessage(error);
+                                    console.log(message);
+
+                                } finally {
+                                    setLoading(false);
+                                }
+
                             }}
                         >
 
@@ -58,6 +106,7 @@ const page = () => {
                                     </div>
 
                                     <Button
+                                        disabled={loading}
                                         type="submit"
                                         color="btn-primary"
                                         className="mt-8 py-3.5 w-full"

@@ -11,10 +11,13 @@ import SettingsIcon from '@/components/icons/SettingsIcon';
 import LogoutIcon from '@/components/icons/LogoutIcon';
 import PeopleIcon from '@/components/icons/PeopleIcon';
 import UserCircleIcon from '@/components/icons/UserCircleIcon';
+import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
+import { useDispatch } from 'react-redux';
 
 const SideBar = ({ open, setOpen }) => {
 
     const pathname = usePathname()
+    const dispatch = useDispatch()
 
     const links = [
         {
@@ -138,7 +141,7 @@ const SideBar = ({ open, setOpen }) => {
                         <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                     </Link>
 
-                    <div className="cursor-pointer">
+                    <div onClick={() => dispatch(Adminlogout())} className="cursor-pointer">
                         <LogoutIcon className='w-6 h-6' color='#FFF' />
                     </div>
 

@@ -7,6 +7,7 @@ import { ArrowUpRightIcon, ExclamationCircleIcon } from '@heroicons/react/24/out
 import React from 'react'
 
 const page = () => {
+
   return (
     <>
 
@@ -59,7 +60,7 @@ const page = () => {
             chartOptions={RecordsOptions}
           />
         </div>
-        
+
       </div>
 
     </>
