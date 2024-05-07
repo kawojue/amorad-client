@@ -51,7 +51,7 @@ const ProfileDropdown = ({ user }) => {
                 )}
 
                 <div className="flex-1 tracking-tighter hidden sm:block">
-                    <div className='text-dark text-xs font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.fullname} </div>
+                    <span className='text-dark text-xs font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.fullname} </span>
                     <p className='text-textColor text-[11px] font-light -mt-2 overflow-hidden whitespace-nowrap overflow-ellipsis'> {user?.email} </p>
                 </div>
 

@@ -1,9 +1,11 @@
+'use client'
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { Adminlogout, LogoutAccount } from "@/redux/features/slices/adminAuthSlice";
+import { Adminlogout } from "@/redux/features/slices/adminAuthSlice";
 
 const AdminTokenCheck = () => {
+
     const dispatch = useDispatch();
 
     useEffect(() => {

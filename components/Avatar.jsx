@@ -9,9 +9,9 @@ const Avatar = ({ name, size = 'h-10 w-10', bgColor = 'bg-white', textColor = 't
     };
 
     return (
-        <div className={`rounded-full font-semibold p-3 ${size} ${bgColor} ${textColor} ${fontSize} ${className} flex items-center justify-center`}>
+        <span className={`rounded-full font-semibold p-3 ${size} ${bgColor} ${textColor} ${fontSize} ${className} flex items-center justify-center`}>
             {getInitials(name)}
-        </div>
+        </span>
     );
 };
 

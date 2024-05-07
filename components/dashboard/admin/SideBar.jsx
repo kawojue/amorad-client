@@ -56,7 +56,7 @@ const SideBar = ({ open, setOpen, user }) => {
                 />
             )}
 
-            <aside className={`sidebar fixed inset-y-0 left-0 flex-wrap items-center justify-between scrollbar-none overflow-x-hidden block p-0  pb-10 transition-all duration-200 -translate-x-full bg-blue border-0 z-10 ${open && 'translate-x-0'} max-w-64 xl:translate-x-0 w-[270px] z-50`}>
+            <div className={`sidebar fixed inset-y-0 left-0 flex-wrap items-center justify-between scrollbar-none overflow-x-hidden block p-0  pb-10 transition-all duration-200 -translate-x-full bg-blue border-0 z-10 ${open && 'translate-x-0'} max-w-64 xl:translate-x-0 w-[270px] z-50`}>
 
                 <div className="sticky top-0 bg-blue w-full z-50 pb-4">
 
@@ -135,20 +135,20 @@ const SideBar = ({ open, setOpen, user }) => {
                     <Avatar name={user?.fullname} size="h-10 w-10" bgColor="bg-white" textColor="text-dark" fontSize="text-base" />
 
                     <Link href='/admin/dashboard/settings' className="flex-1">
-                        <div className='text-white text-xs font-medium overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                        <span className='text-white text-xs font-medium overflow-hidden whitespace-nowrap overflow-ellipsis'>
                             {user?.fullname}
-                        </div>
+                        </span>
 
-                        <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
+                        <p className='text-white text-[11px] font-light -mt-2'> { user?.email } </p>
                     </Link>
 
-                    <div onClick={() => dispatch(Adminlogout())} className="cursor-pointer">
+                    <button onClick={() => dispatch(Adminlogout())} className="cursor-pointer">
                         <LogoutIcon className='w-6 h-6' color='#FFF' />
-                    </div>
+                    </button>
 
                 </div>
 
-            </aside>
+            </div>
 
         </>
     )
