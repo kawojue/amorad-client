@@ -1,8 +1,13 @@
 'use client'
 import BellIcon from '@/components/icons/BellIcon';
 import ProfileDropdown from './ProfileDropdown';
+import { useSelector } from 'react-redux';
+import { getProfile } from '@/redux/features/slices/adminAuthSlice';
 
 const NavBar = ({ open, setOpen }) => {
+
+    const profile = useSelector(getProfile)
+    const user = JSON.parse(profile)
 
     return (
         <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-[#FAFAFA]  text-xs py-3 ">
@@ -11,7 +16,7 @@ const NavBar = ({ open, setOpen }) => {
                 <div className="w-full flex items-center ml-auto justify-between sm:gap-x-3 sm:order-3">
 
                     <div className="mr-5 md:mr-8 tracking-tighter">
-                        <h2 class="flex-none text-sm font-bold text-dark capitalize">Hello, Dominic! 🏡</h2>
+                        <h2 class="flex-none text-sm font-bold text-dark capitalize">Hello, { user.fullname.split(' ')[0] }!</h2>
                         <p className="text-xs text-textColor">See your activities for the day</p>
                     </div>
 
@@ -33,7 +38,7 @@ const NavBar = ({ open, setOpen }) => {
                             <BellIcon className='w-5 h-5' />
                         </div>
 
-                        <ProfileDropdown />
+                        <ProfileDropdown user={user} />
 
                     </div>
 

@@ -12,6 +12,7 @@ import { Form, Formik } from 'formik';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 const page = () => {
@@ -61,6 +62,7 @@ const page = () => {
 
                                     const response = await authService.adminLogin(values);
                                     const { access_token, ...data } = response;
+                                    const profile =data.data
 
                                     // // SEND TOKEN AND DATA TO REDUX TOOLKIT
                                     const expirationSeconds = 30 * 24 * 60 * 60;
@@ -69,9 +71,12 @@ const page = () => {
 
                                     Cookies.set('admin_token', access_token, { secure: true, sameSite: 'lax' });
                                     Cookies.set('admin_token_exp', expire);
+                                    Cookies.set('admin_profile', JSON.stringify(profile));
 
                                     dispatch(setToken(access_token));
-                                    dispatch(setUser(data.data));
+                                    dispatch(setUser(profile));
+
+                                    toast.success('User logged in successfully!');
 
                                     // Navigate
                                     router.replace('/admin/dashboard')
@@ -79,7 +84,7 @@ const page = () => {
                                 } catch (error) {
 
                                     const message = getErrorMessage(error);
-                                    console.log(message);
+                                    toast.error(message);
 
                                 } finally {
                                     setLoading(false);

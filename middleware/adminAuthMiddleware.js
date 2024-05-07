@@ -1,14 +1,12 @@
-'use client'
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
 const useAuthMiddleware = () => {
 
-    const router = useRouter();
     const token = useSelector((state) => state.admin_auth.token);
 
     const isAuthenticated = () => {
-        return !!token;
+        return !!token; 
     };
 
     const handleUnauthorizedAccess = () => {

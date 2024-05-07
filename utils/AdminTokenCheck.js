@@ -18,7 +18,6 @@ const AdminTokenCheck = () => {
 
         const interval = setInterval(() => {
             const currentTime = Math.floor(Date.now() / 1000); 
-            console.log(currentTime >= expirationDate);
             if (currentTime >= expirationDate) {
                 clearInterval(interval);
                 dispatch(Adminlogout());

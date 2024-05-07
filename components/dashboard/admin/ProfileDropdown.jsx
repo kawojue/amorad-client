@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ user }) => {
 
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const ProfileDropdown = () => {
                 <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={Avatar} width={32} height={32} alt="Profile Image" />
 
                 <div className="flex-1 tracking-tighter hidden sm:block">
-                    <div className='text-dark text-xs font-semibold'>Dominic Praise</div>
+                    <div className='text-dark text-xs font-semibold'> { user.fullname.split(' ')[0] } </div>
                     <p className='text-textColor text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                 </div>
 
@@ -59,12 +59,12 @@ const ProfileDropdown = () => {
 
                 <div className="border-b border-[#5862831A] pb-4 mb-3">
 
-                    <div className="flex items-center gap-x-3 px-5">
+                    <div className="flex items-center gap-x-3 px-4">
 
                         <Image className="inline-block h-[2rem] w-[2rem] object-cover mb-0 pb-0 rounded-full" src={Avatar} width={32} height={32} alt="Profile Image" />
 
                         <div className="flex-1 tracking-tight">
-                            <div className='text-dark text-xs font-semibold'>Dominic Praise</div>
+                            <div className='text-dark text-xs font-semibold'> { user.fullname.split(' ')[0] } </div>
                             <p className='text-textColor text-[11px] font-light -mt-2'>dominic@gmail.com</p>
                         </div>
 
