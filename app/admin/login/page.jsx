@@ -20,9 +20,9 @@ const page = () => {
     const router = useRouter();
     const dispatch = useDispatch()
 
-    const { isAuthenticated, checkAuthorization } = useAuthMiddleware();
+    const { isAuthenticated } = useAuthMiddleware();
 
-    if (isAuthenticated() || checkAuthorization()) {
+    if (isAuthenticated()) {
         router.replace('/admin/dashboard')
     }
 

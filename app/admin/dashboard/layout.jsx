@@ -4,7 +4,7 @@ import NavBar from "@/components/dashboard/admin/Navbar";
 import SideBar from "@/components/dashboard/admin/SideBar";
 import useAuthMiddleware from "@/middleware/adminAuthMiddleware";
 import AdminTokenCheck from "@/utils/AdminTokenCheck";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -15,12 +15,11 @@ const DashboardLayout = ({ children }) => {
     AdminTokenCheck(admin_token)
 
     const [open, setOpen] = useState(false);
-    const router = useRouter()
 
     const { isAuthenticated, checkAuthorization } = useAuthMiddleware();
 
     if (!isAuthenticated() || !checkAuthorization()) {
-        router.replace('/admin/login');
+        redirect('/admin/login');
     }
 
     return (

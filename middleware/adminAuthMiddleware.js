@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
 const useAuthMiddleware = () => {
@@ -12,7 +12,7 @@ const useAuthMiddleware = () => {
     };
 
     const handleUnauthorizedAccess = () => {
-        router.replace('/admin/login');
+        redirect('/admin/login');
     };
 
     const checkAuthorization = () => {
