@@ -2,7 +2,6 @@
 import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
 import AuthHeader from '@/components/auth/AuthHeader';
-import Spinner from '@/components/loader/Spinner';
 import Button from '@/components/ui/buttons/Button';
 import useAuthMiddleware from '@/middleware/adminAuthMiddleware';
 import { setToken, setUser } from '@/redux/features/slices/adminAuthSlice';
@@ -24,9 +23,11 @@ const page = () => {
 
     const { isAuthenticated } = useAuthMiddleware();
 
-    if (isAuthenticated()) {
-        router.replace('/admin/dashboard')
-    }
+    React.useEffect(() => {
+        if (isAuthenticated()) {
+            router.replace('/admin/dashboard');
+        }
+    }, [isAuthenticated, router]);
 
     return (
         <>
@@ -66,7 +67,7 @@ const page = () => {
                                     const profile =data.data
 
                                     // // SEND TOKEN AND DATA TO REDUX TOOLKIT
-                                    const expirationSeconds = 30 * 24 * 60 * 60;
+                                    const expirationSeconds = 1 * 24 * 60 * 60;
                                     const expire = Math.floor(Date.now() / 1000) + expirationSeconds;
 
 
