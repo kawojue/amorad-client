@@ -76,14 +76,14 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
 
     return (
         <>
-            <div className={`bg-white rounded-xl px-5 py-3 ${className} ${error && error && 'border-red-600'}`}>
+            <div className={`bg-white rounded-xl px-3 md:px-5 py-3 ${className} ${error && error && 'border-red-600'}`}>
 
                 <div
                     onDragOver={handleDragOver}
                     onDragEnter={handleDragEnter}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                    className='flex items-center gap-x-5 justify-between cursor-pointer'
+                    className='flex items-center gap-x-5 justify-between cursor-pointer flex-wrap'
                     onClick={() => fileInputRef.current.click()}
                 >
                     <input type="file" onChange={handleFileChange} ref={fileInputRef} style={{ display: 'none' }} multiple={multiple} accept={accept}/>
@@ -104,7 +104,7 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
 
                     </div>
 
-                    <Button type="button" className={`${btnColor} py-1`}>
+                    <Button type="button" className={`${btnColor} py-1 hidden sm:block`}>
                         Upload
                     </Button>
 

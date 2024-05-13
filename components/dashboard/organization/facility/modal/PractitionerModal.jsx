@@ -55,7 +55,7 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                             <Form autoComplete='off'>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                                     <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
 
@@ -63,7 +63,7 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                                     <CustomSelect name="profession" label="Profession">
                                         <option value="" selected disabled> Select Profession </option>
@@ -79,7 +79,7 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                                 <CustomInput label="Address" name="address" type="text" placeholder="What’s your address" />
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                                     <CustomInput label="Country" name="country" type="text" placeholder="Nigeria" />
 
@@ -87,7 +87,7 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                                     <CustomInput label="City" name="city" type="text" placeholder="Lagos" />
 

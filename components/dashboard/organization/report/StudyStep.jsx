@@ -51,7 +51,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
 
                     <Form autoComplete='off'>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomSelect label="Body Part (Procedure Name)" name="body_part">
                                 <option value="" selected disabled> Select the body part being examined </option>
@@ -66,7 +66,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomInput label="CPT Code" name="cpt_code" type="text" placeholder="CPT code" />
 
@@ -78,7 +78,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <TextArea name="description" className="h-32" label="Description" />
 
@@ -86,7 +86,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomInput label="Site" name="site" type="text" placeholder="Site" />
 

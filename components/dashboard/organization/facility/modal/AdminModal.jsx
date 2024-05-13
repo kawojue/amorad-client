@@ -47,7 +47,7 @@ const AdminModal = ({ open, setOpen }) => {
 
                             <Form autoComplete='off'>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                                     <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
 

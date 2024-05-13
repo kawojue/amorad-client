@@ -48,7 +48,7 @@ const PatientStep = ({ onNextStep }) => {
 
                     <Form autoComplete='off'>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
 
@@ -56,7 +56,7 @@ const PatientStep = ({ onNextStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomInput label="Nin" name="nin" type="text" placeholder="0000000000" />
 
@@ -64,7 +64,7 @@ const PatientStep = ({ onNextStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomPhoneInput label="Phone Number" name="phone" type="text" placeholder="+234 123 4567 890" />
 
@@ -72,7 +72,7 @@ const PatientStep = ({ onNextStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomSelect label="Gender" name="gender">
                                 <option value="" selected disabled> Select Gender </option>
@@ -90,7 +90,7 @@ const PatientStep = ({ onNextStep }) => {
 
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
                             <CustomInput label="Address" name="address" type="text" placeholder="What’s your address" />
 
