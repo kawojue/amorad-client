@@ -47,7 +47,7 @@ const page = () => {
 
                 <div className="mb-8">
                     <h2 className="text-base font-bold">Drag & Drop DICOM files here</h2>
-                    <p className="text-xs text-textColor pt-0.5">Drop files here (PDF, doc, docx, PNG, JPG, JPEG, GIF)</p>
+                    <p className="text-xs text-textColor pt-0.5">Drop files here (DICOM File | .dcm)</p>
                 </div>
 
                 <Formik
