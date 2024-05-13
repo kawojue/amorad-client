@@ -1,16 +1,16 @@
 import React from 'react'
-import reportStatus from '@/json/reportStatus'
+import patientStatus from '@/json/patientStatus'
 import { EachElement } from '@/utils/Each';
 
-const ReportStatus = () => {
+const PatientStatus = () => {
 
     const badgeColor = [
         { background: '#1D2329', inner: '#FF3333', text: 'text-white', innerColor: 'text-white' },
-        { background: '#35C332', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
-        { background: '#0000FF', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
-        { background: '#FF0000', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
-        { background: '#FFFF00', inner: '#FFF', text: 'text-black', innerColor: 'text-black' },
-        { background: '#808080', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
+        // { background: '#35C332', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
+        // { background: '#0000FF', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
+        // { background: '#FF0000', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
+        // { background: '#FFFF00', inner: '#FFF', text: 'text-black', innerColor: 'text-black' },
+        // { background: '#808080', inner: '#FFF', text: 'text-black', innerColor: 'text-white' },
         { background: '#766060', inner: '#FFF', text: 'text-black', innerColor: 'text-white' }
     ];
     
@@ -18,7 +18,7 @@ const ReportStatus = () => {
     return (
         <div className="flex items-center gap-2 flex-wrap">
 
-            <EachElement of={reportStatus} render={(item, index) => {
+            <EachElement of={patientStatus} render={(item, index) => {
 
                 const colorIndex = index % badgeColor.length;
                 const bg = badgeColor[colorIndex].background;
@@ -35,4 +35,4 @@ const ReportStatus = () => {
     )
 }
 
-export default ReportStatus
+export default PatientStatus

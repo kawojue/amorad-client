@@ -9,7 +9,7 @@ function CustomSelect({ label, className, formGroupClass, ...props }) {
       <label className="form-label text-xs mb-1"> {label} </label>
       <select {...field} {...props} className={`form-control ${meta.touched && meta.error && 'is-invalid'} ${className || ''}`} />
       {meta.touched && meta.error ? (
-        <div className="text-red-600 text-xs font-light mt-2">{meta.error}</div>
+        <div className="text-red-600 text-xs font-light mt-1">{meta.error}</div>
       ) : null}
     </div>
   );

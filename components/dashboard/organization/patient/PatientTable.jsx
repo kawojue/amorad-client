@@ -2,7 +2,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import reportsData from '@/json/reports'
 import { EachElement } from "@/utils/Each";
-import ReportAction from "./ReportAction";
+import PatientAction from "./PatientAction";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
@@ -25,7 +25,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const ReportTable = ({ selectedStatus }) => {
+const PatientTable = ({ selectedStatus }) => {
 
     const [expandedRow, setExpandedRow] = useState(null);
 
@@ -194,7 +194,7 @@ const ReportTable = ({ selectedStatus }) => {
                                                         <ChevronDownIcon className="w-3 h-3" />
                                                     </div>
 
-                                                    <ReportAction index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} />
+                                                    <PatientAction index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} />
 
                                                 </td>
 
@@ -302,4 +302,4 @@ const ReportTable = ({ selectedStatus }) => {
     );
 };
 
-export default ReportTable;
+export default PatientTable;

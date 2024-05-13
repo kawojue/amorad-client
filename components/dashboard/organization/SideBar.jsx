@@ -22,10 +22,10 @@ const SideBar = ({ open, setOpen }) => {
 
     const links = [
         {
-            href: '/organization/dashboard/reports',
+            href: '/organization/dashboard/patients',
             icon: <ReportIcon className='w-5 h-5' color='#FFF' />,
             activeIcon: <ReportIcon className='w-5 h-5' color='#000' />,
-            text: 'Reporting'
+            text: 'Patients'
         },
 
         {

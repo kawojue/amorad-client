@@ -4,6 +4,7 @@ import ExportIcon from '@/components/icons/ExportIcon'
 import Button from '@/components/ui/buttons/Button'
 import { RecordsData, RecordsOptions } from '@/utils/charts'
 import { ArrowUpRightIcon, ExclamationCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 import React from 'react'
 
 const page = () => {
@@ -23,10 +24,12 @@ const page = () => {
             <span className='text-xs'>Export CSV</span>
           </Button>
 
-          <Button className='text-white btn-success'>
-            <PlusCircleIcon className='h-5 w-5' />
-            <span className='text-xs'>Add Record</span>
-          </Button>
+          <Link href='dashboard/record/add'>
+            <Button className='text-white btn-success'>
+              <PlusCircleIcon className='h-5 w-5' />
+              <span className='text-xs'>Add Record</span>
+            </Button>
+          </Link>
         </div>
 
       </div>

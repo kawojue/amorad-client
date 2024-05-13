@@ -4,7 +4,7 @@ import EditIcon from "@/components/icons/EditIcon";
 import TrashIcon from "@/components/icons/TrashIcon";
 import ClockIcon from "@/components/icons/ClockIcon";
 
-const ReportAction = ({ open, index, toggleRow, setOpen }) => {
+const PatientAction = ({ open, index, toggleRow, setOpen }) => {
 
     const reportMenu = useRef(null);
 
@@ -87,4 +87,4 @@ const ReportAction = ({ open, index, toggleRow, setOpen }) => {
     );
 };
 
-export default ReportAction;
+export default PatientAction;

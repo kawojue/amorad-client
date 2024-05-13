@@ -1,11 +1,13 @@
 'use client'
 import FacilitySearch from '@/components/dashboard/organization/facility/FacilitySearch'
 import FacilityTable from '@/components/dashboard/organization/facility/FacilityTable'
+import AdminModal from '@/components/dashboard/organization/facility/modal/AdminModal'
+import PractitionerModal from '@/components/dashboard/organization/facility/modal/PractitionerModal'
 import HealthIcon from '@/components/icons/HealthIcon'
 import Profileicon from '@/components/icons/Profileicon'
 import UserCircleIcon from '@/components/icons/UserCircleIcon'
 import { PlusIcon } from '@heroicons/react/24/solid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const page = () => {
 
@@ -26,6 +28,19 @@ const page = () => {
     const handleTabClick = (status) => {
         setActiveTab(status);
     };
+
+    const [practitionerOpen, setPractitionerOpen] = useState(false)
+    const [adminOpen, setAdminOpen] = useState(false)
+
+    const handleOpen = () => {
+        if (activeTab === 'doctor' || activeTab === 'radiologists') {
+            setPractitionerOpen(true);
+            setAdminOpen(false);
+        } else {
+            setAdminOpen(true);
+            setPractitionerOpen(false);
+        }
+    }
 
     return (
         <>
@@ -51,7 +66,7 @@ const page = () => {
                             </div>
                         ))}
 
-                        <div className=" h-7 w-7 ml-1.5 p-0.5 cursor-pointer rounded-full bg-[#1F89AF] flex items-center justify-center"> <PlusIcon className='w-4 h-4 text-white' /> </div>
+                        <div onClick={handleOpen} className=" h-7 w-7 ml-1.5 p-0.5 cursor-pointer rounded-full bg-[#1F89AF] flex items-center justify-center"> <PlusIcon className='w-4 h-4 text-white' /> </div>
 
                     </div>
 
@@ -59,11 +74,17 @@ const page = () => {
 
             </div>
 
-            <FacilitySearch data={activeTab} setSearch={setSearch} />
+            <FacilitySearch data={activeTab} setSearch={setSearch} handleOpen={handleOpen} />
 
             <div className="bg-white px-2 py-3 rounded-lg">
                 <FacilityTable />
             </div>
+
+            {/* ADMIN */}
+            <AdminModal open={adminOpen} setOpen={setAdminOpen} />
+
+            {/* PRATICES */}
+            <PractitionerModal open={practitionerOpen} setOpen={setPractitionerOpen} />
 
         </>
     )

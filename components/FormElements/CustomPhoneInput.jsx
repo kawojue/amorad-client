@@ -27,7 +27,7 @@ function CustomPhoneInput({ label, className, formGroupClass, ...props }) {
                 className={`form-control py-0.5 ${meta.touched && meta.error && 'is-invalid'} ${className || ''}`}
             />
             {meta.touched && meta.error ? (
-                <div className="text-red-600 text-xs font-light mt-2">{meta.error}</div>
+                <div className="text-red-600 text-xs font-light mt-1">{meta.error}</div>
             ) : null}
         </div>
     );

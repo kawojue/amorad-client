@@ -30,6 +30,12 @@ const ProfileDropdown = () => {
         };
     }, []);
 
+    const closeDropdown = () => {
+        setTimeout(() => {
+            setOpen(false);
+        }, 500);
+    };
+
     return (
         <div ref={profileMenu} className="relative inline-flex">
 
@@ -71,15 +77,15 @@ const ProfileDropdown = () => {
 
                 <div className="px-4 space-y-3">
 
-                    <Link href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
+                    <Link onClick={closeDropdown} href="/organization/dashboard/settings" class="block w-full cursor-pointer text-textColor hover:text-dark">
                         Account Settings
                     </Link>
 
-                    <Link href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
+                    <Link onClick={closeDropdown} href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
                         Help Desk
                     </Link>
 
-                    <Link href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
+                    <Link onClick={closeDropdown} href="#" class="block w-full cursor-pointer text-textColor hover:text-dark">
                         Sign Out
                     </Link>
 

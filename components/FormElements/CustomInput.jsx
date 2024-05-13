@@ -13,7 +13,7 @@ function CustomInput({ label, className, formGroupClass, ...props }) {
                 {...props}
             />
             {meta.touched && meta.error ? (
-                <div className="text-red-600 text-xs font-light mt-2">{meta.error}</div>
+                <div className="text-red-600 text-xs font-light mt-1">{meta.error}</div>
             ) : null}
         </div>
     );

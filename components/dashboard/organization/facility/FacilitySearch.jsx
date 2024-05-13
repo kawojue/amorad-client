@@ -3,7 +3,7 @@ import SearchIcon from '@/components/icons/SearchIcon'
 import React, { useEffect, useState } from 'react'
 import SortByDropdown from '../../SortByDropdown'
 
-const FacilitySearch = ({ setSearch, data }) => {
+const FacilitySearch = ({ setSearch, data, handleOpen }) => {
 
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -44,7 +44,7 @@ const FacilitySearch = ({ setSearch, data }) => {
 
                         <SortByDropdown onSortChange={handleSortChange} />
 
-                        <div className="flex items-center gap-x-2 capitalize text-xs py-2 text-white bg-primary cursor-pointer px-3 rounded-r-xl">
+                        <div onClick={handleOpen} className="flex items-center gap-x-2 capitalize text-xs py-2 text-white bg-primary cursor-pointer px-3 rounded-r-xl">
                             Add new { data }
                         </div>
 
