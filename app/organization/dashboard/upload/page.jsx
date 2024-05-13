@@ -2,6 +2,7 @@
 
 import FileUpload from '@/components/dashboard/FileUpload';
 import Button from '@/components/ui/buttons/Button';
+import { uploadDicom } from '@/utils/schema';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react'
 
@@ -52,13 +53,12 @@ const page = () => {
 
                 <Formik
                     initialValues={{
-                        file: null,
+                        file: [],
                     }}
-                    // validationSchema={studySchema}
+                    validationSchema={uploadDicom}
                     onSubmit={async (values, actions) => {
 
                         setLoading(true);
-                        console.log(values);
 
                         setTimeout(() => {
                             setLoading(false)
@@ -71,7 +71,7 @@ const page = () => {
 
                         <Form autoComplete='off'>
 
-                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 13MB max." btnColor="btn-primary" className="py-4" multiple={true}
+                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 10MB max." btnColor="btn-primary" className="py-4" multiple={true}
                                 accept=".dcm, .dicom, application/dicom"
                                 error={touched.file && errors.file} />
 

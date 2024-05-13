@@ -12,7 +12,7 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
-        
+
         if (!validateFileType(selectedFiles)) {
             alert('Invalid file type.');
             return;
@@ -28,12 +28,15 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
     };
 
     const validateFileType = (files) => {
-        console.log(files);
         if (!accept) return true;
         const allowedTypes = accept.split(',');
-        // console.log(allowedTypes);
-        return files.every(file => allowedTypes.includes(file.type));
+        return files.every(file => {
+            const fileType = file.type || '';
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            return allowedTypes.includes(fileType.toLowerCase()) || fileExtension === 'dcm';
+        });
     };
+
 
     const validateFileSize = (files) => {
         if (!maxSize) return true;
@@ -89,7 +92,7 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
 
     return (
         <>
-            <div className={`bg-white rounded-xl px-3 md:px-5 py-3 ${className} ${error && error && 'border-red-600'}`}>
+            <div className={`bg-white rounded-xl px-3 md:px-5 py-3 ${className} ${error && error && 'border-red-600 border'}`}>
 
                 <div
                     onDragOver={handleDragOver}
@@ -99,7 +102,7 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
                     className='flex items-center gap-x-5 justify-between cursor-pointer flex-wrap'
                     onClick={() => fileInputRef.current.click()}
                 >
-                    <input type="file" onChange={handleFileChange} ref={fileInputRef} style={{ display: 'none' }} multiple={multiple} accept={accept}/>
+                    <input type="file" onChange={handleFileChange} ref={fileInputRef} style={{ display: 'none' }} multiple={multiple} accept={accept} />
 
                     <div className="flex gap-x-3 flex-1 items-center">
 
