@@ -36,13 +36,13 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
                 validationSchema={studySchema}
                 onSubmit={async (values, actions) => {
 
-                    // setLoading(true);
+                    setLoading(true);
                     console.log(values);
 
-                    // setTimeout(() => {
-                    //     setLoading(false)
-                    //     setOpen(true)
-                    // }, 1000);
+                    setTimeout(() => {
+                        setLoading(false)
+                        setOpen(true)
+                    }, 1000);
 
                 }}
             >
@@ -117,7 +117,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
                                 onClick={onPrevStep}
                                 type="button"
                                 color="text-success font-medium"
-                                className=" py-3 w-full"
+                                className=" py-3 w-full order-2 sm:order-1"
                             >
                                 Back to Previous
                             </Button>
@@ -125,7 +125,7 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
                             <Button
                                 type="submit"
                                 color="btn-success"
-                                className=" py-3 w-full"
+                                className=" py-3 w-full order-1 sm:order-2"
                                 loading={loading}
                             >
                                 Save

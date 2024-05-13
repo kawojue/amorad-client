@@ -13,7 +13,7 @@ const page = () => {
         { id: 'referral', component: ReferralStep },
     ];
 
-    const [currentStep, setCurrentStep] = useState(steps[1].id);
+    const [currentStep, setCurrentStep] = useState(steps[0].id);
 
     const handleNextStep = () => {
         const currentStepIndex = steps.findIndex(step => step.id === currentStep);

@@ -137,3 +137,20 @@ export const addCenterAdmin = Yup.object({
   email: Yup.string().email('Invalid email').required('Email Address is required'),
 })
 
+export const uploadDicom = Yup.object({
+  file: Yup.mixed()
+  .required('Please upload a DICOM file')
+  .test('fileType', 'Only DICOM files are allowed', (value) => {
+    if (!value) return true; // If no file is selected, pass validation
+    const fileType = value.type;
+    return fileType === 'application/dicom';
+  })
+  .test('fileSize', 'File size must be less than 50MB', (value) => {
+    if (!value) return true; // If no file is selected, pass validation
+    const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+    return value.size <= maxSize;
+  })
+})
+
+
+

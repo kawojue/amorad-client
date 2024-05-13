@@ -63,7 +63,7 @@ const AdminModal = ({ open, setOpen }) => {
                                         onClick={() => setOpen(false)}
                                         type="button"
                                         color="text-success font-medium"
-                                        className=" py-3 w-full"
+                                        className=" py-3 w-full order-2 sm:order-1"
                                     >
                                         Cancel Record
                                     </Button>
@@ -71,7 +71,7 @@ const AdminModal = ({ open, setOpen }) => {
                                     <Button
                                         type="submit"
                                         color="btn-success"
-                                        className=" py-3 w-full"
+                                        className=" py-3 w-full order-1 sm:order-2"
                                         loading={loading}
                                     >
                                         Invite Now

@@ -25,7 +25,7 @@ const ReportModal = ({ open, setOpen, onNextStep }) => {
                         onClick={() => router.push('/organization/dashboard/patients')}
                         type="button"
                         color="text-success font-medium"
-                        className=" py-3 w-full"
+                        className=" py-3 w-full order-2 sm:order-1"
                     >
                         Cancel
                     </Button>
@@ -33,7 +33,7 @@ const ReportModal = ({ open, setOpen, onNextStep }) => {
                     <Button
                         type="button"
                         color="btn-success"
-                        className=" py-3 w-full"
+                        className=" py-3 w-full order-1 sm:order-2"
                         onClick={onNextStep}
                     >
                         Assign To Doctor

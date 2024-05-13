@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }) => {
 
                 <NavBar open={open} setOpen={setOpen} />
 
-                <div className="w-full p-3 md:p-6 m-auto bg-[#F0F2F5]">
+                <div className="w-full p-3 md:p-6 m-auto bg-[#F0F2F5] min-h-screen">
                     {children}
                 </div>
                 
