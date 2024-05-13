@@ -28,8 +28,10 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
     };
 
     const validateFileType = (files) => {
+        console.log(files);
         if (!accept) return true;
         const allowedTypes = accept.split(',');
+        // console.log(allowedTypes);
         return files.every(file => allowedTypes.includes(file.type));
     };
 
@@ -70,6 +72,17 @@ const FileUpload = ({ name, title, label, btnColor, className, multiple, accept,
         event.preventDefault();
         event.stopPropagation();
         const droppedFiles = Array.from(event.dataTransfer.files);
+
+        if (!validateFileType(droppedFiles)) {
+            alert('Invalid file type.');
+            return;
+        }
+
+        if (!validateFileSize(droppedFiles)) {
+            alert('File size exceeds the limit.');
+            return;
+        }
+
         setFiles(multiple ? [...files, ...droppedFiles] : droppedFiles[0]);
         helpers.setValue(multiple ? [...files, ...droppedFiles] : droppedFiles[0]);
     };

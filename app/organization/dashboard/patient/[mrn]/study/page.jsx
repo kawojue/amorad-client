@@ -1,14 +1,12 @@
 'use client'
 
-import PatientStep from '@/components/dashboard/organization/report/PatientStep';
-import ReferralStep from '@/components/dashboard/organization/report/ReferralStep';
-import StudyStep from '@/components/dashboard/organization/report/StudyStep';
+import ReferralStep from '@/components/dashboard/organization/patient/study/ReferralStep';
+import StudyStep from '@/components/dashboard/organization/patient/study/StudyStep';
 import React, { useState } from 'react'
 
 const page = () => {
 
     const steps = [
-        { id: 'patient', component: PatientStep },
         { id: 'study', component: StudyStep },
         { id: 'referral', component: ReferralStep },
     ];

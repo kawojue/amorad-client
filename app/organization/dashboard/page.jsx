@@ -24,12 +24,13 @@ const page = () => {
             <span className='text-xs'>Export CSV</span>
           </Button>
 
-          <Link href='dashboard/record/add'>
+          {/* <Link href='dashboard/record/add'>
             <Button className='text-white btn-success'>
               <PlusCircleIcon className='h-5 w-5' />
               <span className='text-xs'>Add Record</span>
             </Button>
-          </Link>
+          </Link> */}
+
         </div>
 
       </div>

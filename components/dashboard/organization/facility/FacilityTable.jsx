@@ -24,15 +24,15 @@ const getStatusStyles = (status) => {
 const FacilityTable = () => {
 
     // ACTIONS
-    const [open, setOpen] = useState(null);
+    // const [open, setOpen] = useState(null);
 
-    const toggleDropdown = (index) => {
-        if (open == index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
-    };
+    // const toggleDropdown = (index) => {
+    //     if (open == index) {
+    //         setOpen(null);
+    //     } else {
+    //         setOpen(index);
+    //     }
+    // };
 
     return (
         <>
@@ -75,17 +75,6 @@ const FacilityTable = () => {
                                         >
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
-                                                    Gender
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left whitespace-nowrap"
-                                        >
-                                            <div className="flex items-center gap-x-2">
-                                                <span className="text-xs tracking-tight font-semibold ">
                                                     Email
                                                 </span>
                                             </div>
@@ -102,7 +91,7 @@ const FacilityTable = () => {
                                             </div>
                                         </th>
 
-                                        <th
+                                        {/* <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
                                         >
@@ -122,7 +111,7 @@ const FacilityTable = () => {
                                                     Country
                                                 </span>
                                             </div>
-                                        </th>
+                                        </th> */}
 
                                         <th
                                             scope="col"
@@ -183,13 +172,13 @@ const FacilityTable = () => {
                                                     </div>
                                                 </td>
 
-                                                <td className="px-6 py-3 whitespace-nowrap">
+                                                {/* <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
                                                             {staff.gender}
                                                         </span>
                                                     </div>
-                                                </td>
+                                                </td> */}
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
@@ -207,7 +196,7 @@ const FacilityTable = () => {
                                                     </div>
                                                 </td>
 
-                                                <td className="px-6 py-3 whitespace-nowrap">
+                                                {/* <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
                                                             {staff.city}
@@ -221,7 +210,7 @@ const FacilityTable = () => {
                                                             {staff.country}
                                                         </span>
                                                     </div>
-                                                </td>
+                                                </td> */}
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
@@ -245,14 +234,14 @@ const FacilityTable = () => {
 
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
+                                                    <div className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
                                                             Expand
                                                         </span>
                                                         <ChevronDownIcon className="w-3 h-3" />
                                                     </div>
 
-                                                    <FacilityAction index={index} open={open} setOpen={setOpen} />
+                                                    {/* <FacilityAction index={index} open={open} setOpen={setOpen} /> */}
 
                                                 </td>
 

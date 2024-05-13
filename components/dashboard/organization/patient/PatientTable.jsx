@@ -93,7 +93,7 @@ const PatientTable = ({ selectedStatus }) => {
                                         >
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
-                                                    Modality
+                                                    Email
                                                 </span>
                                             </div>
                                         </th>
@@ -104,7 +104,18 @@ const PatientTable = ({ selectedStatus }) => {
                                         >
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
-                                                    Priority
+                                                    Phone
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left whitespace-nowrap"
+                                        >
+                                            <div className="flex items-center gap-x-2">
+                                                <span className="text-xs tracking-tight font-semibold ">
+                                                    Age
                                                 </span>
                                             </div>
                                         </th>
@@ -175,6 +186,14 @@ const PatientTable = ({ selectedStatus }) => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
+                                                        <span className="block text-xs text-textColor ">
+                                                            {report.priority}
+                                                        </span>
+                                                    </div>
+                                                </td>
+
+                                                <td className="px-6 py-3 whitespace-nowrap">
+                                                    <div className="">
                                                         <span
                                                             className={`inline-flex items-center justify-center gap-1.5 py-0.5 px-3 tracking-tight rounded-full font-medium text-[11px] capitalize text-center ${getStatusStyles(report.status).bgColor
                                                                 } ${getStatusStyles(report.status).textColor
@@ -194,7 +213,7 @@ const PatientTable = ({ selectedStatus }) => {
                                                         <ChevronDownIcon className="w-3 h-3" />
                                                     </div>
 
-                                                    <PatientAction index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} />
+                                                    <PatientAction data={report} index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} />
 
                                                 </td>
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Breadcrumb from './Breadcrumb'
 import { Form, Formik } from 'formik'
 import CustomSelect from '@/components/FormElements/CustomSelect'
 import Button from '@/components/ui/buttons/Button'
 import { referralSchema } from '@/utils/schema'
+import Breadcrumb from '../../Breadcrumb'
 
 const ReferralStep = ({ onPrevStep }) => {
 

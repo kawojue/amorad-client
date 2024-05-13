@@ -47,7 +47,7 @@ const page = () => {
 
                 <div className="mb-8">
                     <h2 className="text-base font-bold">Drag & Drop DICOM files here</h2>
-                    <p className="text-xs text-textColor pt-0.5">Drop files here (DICOM File | .dcm)</p>
+                    <p className="text-xs text-textColor ">Drop files here (DICOM File | .dcm)</p>
                 </div>
 
                 <Formik
@@ -72,7 +72,7 @@ const page = () => {
                         <Form autoComplete='off'>
 
                             <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 13MB max." btnColor="btn-primary" className="py-4" multiple={true}
-                                accept=""
+                                accept=".dcm, .dicom, application/dicom"
                                 error={touched.file && errors.file} />
 
                             {touched.file && errors.file && (
@@ -82,7 +82,7 @@ const page = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-6">
 
                                 <Button
-                                    // onClick={() => setFieldValue('file', null)}
+                                    onClick={() => setFieldValue('file', null)}
                                     type="button"
                                     color="text-success font-medium"
                                     className=" py-3 w-full order-2 sm:order-1 bg-white"

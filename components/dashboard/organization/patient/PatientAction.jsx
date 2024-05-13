@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ForwardIcon from "@/components/icons/ForwardIcon";
 import EditIcon from "@/components/icons/EditIcon";
-import TrashIcon from "@/components/icons/TrashIcon";
-import ClockIcon from "@/components/icons/ClockIcon";
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
-const PatientAction = ({ open, index, toggleRow, setOpen }) => {
+const PatientAction = ({ open, index, toggleRow, setOpen, data }) => {
 
     const reportMenu = useRef(null);
 
@@ -64,22 +64,41 @@ const PatientAction = ({ open, index, toggleRow, setOpen }) => {
             {open === index && (
                 <div ref={reportMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap min-w-full left-0 duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
                     <div className="space-y-1">
+
                         <div onClick={() => handleOpenRow(index)} className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <ForwardIcon className='w-4 h-4' />
                             <span>Expand</span>
                         </div>
+
+                        <Link href={`patient/${data.mrn}`}>
+                            <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                                <ForwardIcon className='w-4 h-4' />
+                                <span>View Details</span>
+                            </div>
+                        </Link>
+
+                        <Link href={`patient/${data.mrn}/edit`}>
+                            <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                                <EditIcon className='w-4 h-4' />
+                                <span>Edit Patient</span>
+                            </div>
+                        </Link>
+
+                        <Link href={`patient/${data.mrn}/study`}>
                         <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                            <EditIcon className='w-4 h-4' />
-                            <span>Edit Patient</span>
+                            <PlusCircleIcon className='w-4 h-4' />
+                            <span>Add Patient Study</span>
                         </div>
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                        </Link>
+
+                        {/* <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <TrashIcon className='w-4 h-4' />
                             <span>Erase Record</span>
-                        </div>
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                        </div> */}
+                        {/* <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <ClockIcon className='w-4 h-4' />
                             <span>History</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             )}

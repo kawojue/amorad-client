@@ -1,8 +1,8 @@
 import React from 'react'
-import Breadcrumb from './Breadcrumb'
 import DialogContainer from '@/components/ui/modals/Dialog'
 import Button from '@/components/ui/buttons/Button'
 import { useRouter } from 'next/navigation'
+import Breadcrumb from '../../Breadcrumb'
 
 const ReportModal = ({ open, setOpen, onNextStep }) => {
 
@@ -17,12 +17,12 @@ const ReportModal = ({ open, setOpen, onNextStep }) => {
 
             <div className="px-5 py-10">
 
-                <Breadcrumb title="Patient Study" desc="Kindly note that an email containing login credentials and a link to the report download page will be sent to the patient " />
+                <Breadcrumb title="Assign Record to a Doctor" desc="This process involves assigning a patient's record to a doctor for further review or treatment." />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-8">
 
                     <Button
-                        onClick={() => router.push('/organization/dashboard/patients')}
+                        onClick={() => router.push('/organization/dashboard/patient')}
                         type="button"
                         color="text-success font-medium"
                         className=" py-3 w-full order-2 sm:order-1"

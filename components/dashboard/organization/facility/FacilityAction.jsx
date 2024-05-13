@@ -71,7 +71,7 @@ const FacilityAction = ({ open, index, setOpen }) => {
                             <span>Edit Patient</span>
                         </div>
 
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                        {/* <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <TrashIcon className='w-4 h-4' />
                             <span>Erase Record</span>
                         </div>
@@ -79,7 +79,7 @@ const FacilityAction = ({ open, index, setOpen }) => {
                         <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <ClockIcon className='w-4 h-4' />
                             <span>History</span>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

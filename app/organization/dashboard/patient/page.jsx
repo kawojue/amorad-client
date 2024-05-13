@@ -70,10 +70,10 @@ const page = () => {
                     </div>
                 </div>
 
-                <Link className='flex justify-end' href='record/add'>
+                <Link className='flex justify-end' href='patient/add'>
                     <Button className='text-white btn-success'>
                         <PlusCircleIcon className='h-5 w-5' />
-                        <span className='text-xs'>Add Record</span>
+                        <span className='text-xs'>Add Patient</span>
                     </Button>
                 </Link>
 

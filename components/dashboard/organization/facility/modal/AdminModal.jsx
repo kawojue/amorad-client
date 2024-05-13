@@ -1,6 +1,6 @@
 import DialogContainer from '@/components/ui/modals/Dialog'
 import React, { useState } from 'react'
-import Breadcrumb from '../../report/Breadcrumb'
+import Breadcrumb from '../../Breadcrumb'
 import { Form, Formik } from 'formik'
 import Button from '@/components/ui/buttons/Button'
 import CustomInput from '@/components/FormElements/CustomInput'

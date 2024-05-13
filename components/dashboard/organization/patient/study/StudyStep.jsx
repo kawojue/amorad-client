@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Breadcrumb from './Breadcrumb'
 import CustomInput from '@/components/FormElements/CustomInput'
 import { Form, Formik } from 'formik'
 import Button from '@/components/ui/buttons/Button'
@@ -7,12 +6,15 @@ import CustomSelect from '@/components/FormElements/CustomSelect'
 import { studySchema } from '@/utils/schema'
 import TextArea from '@/components/FormElements/TextArea'
 import ReportModal from './ReportModal'
-import FileUpload from '../../FileUpload'
+import Breadcrumb from '../../Breadcrumb'
+import FileUpload from '@/components/dashboard/FileUpload'
+import { useRouter } from 'next/navigation'
 
-const StudyStep = ({ onNextStep, onPrevStep }) => {
+const StudyStep = ({ onNextStep }) => {
 
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
+    const router = useRouter()
 
     return (
 
@@ -102,9 +104,9 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
 
                         <div className="mt-4">
                             <FileUpload name="paperworks" title="Paper Work Attachment(s)" label="Paper Work Attachment(s)
-                                Drop files here (PDF, doc, docx, PNG, JPG, JPEG, GIF)" btnColor="btn-primary" className="border border-dashed border-[#D0D5DD]" multiple={true}
+                                Drop files here (PDF, doc, docx, PNG, JPG, JPEG, GIF)" btnColor="btn-success" className="border border-dashed border-[#D0D5DD]" multiple={true}
                                 accept="image/jpeg,image/png,application/pdf"
-                           error={touched.paperworks && errors.paperworks} />
+                                error={touched.paperworks && errors.paperworks} />
 
                             {touched.paperworks && errors.paperworks && (
                                 <div className="text-red-600 text-xs font-light mt-0 pt-1">{errors.paperworks}</div>
@@ -114,12 +116,12 @@ const StudyStep = ({ onNextStep, onPrevStep }) => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-8">
 
                             <Button
-                                onClick={onPrevStep}
+                                onClick={() => router.push('/organization/dashboard/patient')}
                                 type="button"
                                 color="text-success font-medium"
                                 className=" py-3 w-full order-2 sm:order-1"
                             >
-                                Back to Previous
+                                Go Back
                             </Button>
 
                             <Button
