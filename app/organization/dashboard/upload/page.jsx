@@ -72,7 +72,7 @@ const page = () => {
                         <Form autoComplete='off'>
 
                             <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 10MB max." btnColor="btn-primary" className="py-4" multiple={true}
-                                accept=".dcm, .dicom, application/dicom"
+                                // accept=".dcm, .dicom, application/dicom"
                                 error={touched.file && errors.file} />
 
                             {touched.file && errors.file && (
