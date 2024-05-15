@@ -89,7 +89,7 @@ export const patientSchema = Yup.object({
   gender: Yup.string().required('Gender is required'),
   marital: Yup.string().required('Marital Status is required'),
   address: Yup.string().required('Address is required'),
-  zip_code: Yup.string().matches(/^\d{5}$/, 'Invalid zip code').required('Zip Code is required'),
+  zip_code: Yup.string().required('Zip Code is required'),
 });
 
 export const studySchema = Yup.object({
