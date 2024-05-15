@@ -54,6 +54,18 @@ const page = () => {
         fetchData();
     }, [filter])
 
+    const status = [
+        {
+            value: "PENDING", name: "Pending"
+        },
+        {
+            value: "ACTIVE", name: "Active"
+        },
+        {
+            value: "SUSPENDED", name: "Suspended"
+        },
+    ]
+
     return (
         <>
 
@@ -62,7 +74,7 @@ const page = () => {
                 <h2 class="text-sm font-bold text-dark capitalize">Facilities
                 </h2>
 
-                <DashboardFilter filter={filter} setFilter={setFilter} />
+                <DashboardFilter filter={filter} setFilter={setFilter} statuses={status} />
 
             </div>
 

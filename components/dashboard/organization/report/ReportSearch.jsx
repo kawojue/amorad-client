@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import SortByDropdown from '../../SortByDropdown'
 import AdvanceSearch from './AdvanceSearch'
 
-const PatientSearch = ({ onSubmit, setSearch, initialFormData }) => {
+const ReportSearch = ({ onSubmit, setSearch, initialFormData }) => {
 
     const [type, setType] = useState('basic')
     const [searchQuery, setSearchQuery] = useState('');
@@ -72,4 +72,4 @@ const PatientSearch = ({ onSubmit, setSearch, initialFormData }) => {
     )
 }
 
-export default PatientSearch
+export default ReportSearch

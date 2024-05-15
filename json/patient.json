@@ -1,0 +1,82 @@
+[
+    {
+        "name": "John Doe",
+        "dob": "1980-06-15",
+        "phone": "123-456-7890",
+        "gender": "Male",
+        "mrn": "JD12345",
+        "status": "new"
+    },
+    {
+        "name": "Jane Smith",
+        "dob": "1975-09-20",
+        "phone": "987-654-3210",
+        "gender": "Female",
+        "mrn": "JS67890",
+        "status": "Archived"
+    },
+    {
+        "name": "Michael Johnson",
+        "dob": "1992-03-10",
+        "phone": "456-789-0123",
+        "gender": "Male",
+        "mrn": "MJ54321",
+        "status": "new"
+    },
+    {
+        "name": "Emily Brown",
+        "dob": "1988-11-25",
+        "phone": "789-012-3456",
+        "gender": "Female",
+        "mrn": "EB09876",
+        "status": "Archived"
+    },
+    {
+        "name": "David Lee",
+        "dob": "1970-04-05",
+        "phone": "321-654-9870",
+        "gender": "Male",
+        "mrn": "DL45678",
+        "status": "Archived"
+    },
+    {
+        "name": "Sarah Garcia",
+        "dob": "1985-12-30",
+        "phone": "654-321-0987",
+        "gender": "Female",
+        "mrn": "SG23456",
+        "status": "new"
+    },
+    {
+        "name": "Daniel Martinez",
+        "dob": "1998-08-12",
+        "phone": "210-987-6543",
+        "gender": "Male",
+        "mrn": "DM78901",
+        "status": "new"
+    },
+    {
+        "name": "Jennifer Wilson",
+        "dob": "1982-05-18",
+        "phone": "543-210-8765",
+        "gender": "Female",
+        "mrn": "JW56789",
+        "status": "new"
+    },
+    {
+        "name": "Christopher Taylor",
+        "dob": "1978-02-28",
+        "phone": "876-543-2109",
+        "gender": "Male",
+        "mrn": "CT12309",
+        "status": "Archived"
+    },
+    {
+        "name": "Amanda Anderson",
+        "dob": "1990-10-15",
+        "phone": "432-109-8765",
+        "gender": "Female",
+        "mrn": "AA34567",
+        "status": "new"
+    }
+]

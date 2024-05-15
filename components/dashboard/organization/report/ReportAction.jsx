@@ -3,8 +3,9 @@ import ForwardIcon from "@/components/icons/ForwardIcon";
 import EditIcon from "@/components/icons/EditIcon";
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import TrashIcon from '@/components/icons/TrashIcon';
 
-const PatientAction = ({ open, index, setOpen, data }) => {
+const ReportAction = ({ open, index, toggleRow, setOpen, data }) => {
 
     const reportMenu = useRef(null);
 
@@ -54,6 +55,10 @@ const PatientAction = ({ open, index, setOpen, data }) => {
         };
     }, []);
 
+    const handleOpenRow = (index) => {
+        toggleRow(index);
+        setOpen(false);
+    };
 
     return (
         <>
@@ -66,35 +71,21 @@ const PatientAction = ({ open, index, setOpen, data }) => {
                             <span>Expand</span>
                         </div>
 
-                        <Link href={`patient/${data.mrn}`}>
-                            <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                                <ForwardIcon className='w-4 h-4' />
-                                <span>View Details</span>
-                            </div>
-                        </Link>
-
-                        <Link href={`patient/${data.mrn}/edit`}>
-                            <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                                <EditIcon className='w-4 h-4' />
-                                <span>Edit Patient</span>
-                            </div>
-                        </Link>
-
-                        <Link href={`patient/${data.mrn}/study`}>
                         <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                            <PlusCircleIcon className='w-4 h-4' />
-                            <span>Add Patient Study</span>
+                            <ForwardIcon className='w-4 h-4' />
+                            <span>View Details</span>
                         </div>
-                        </Link>
 
-                        {/* <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <TrashIcon className='w-4 h-4' />
                             <span>Erase Record</span>
-                        </div> */}
+                        </div>
+
                         {/* <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <ClockIcon className='w-4 h-4' />
                             <span>History</span>
                         </div> */}
+
                     </div>
                 </div>
             )}
@@ -102,4 +93,4 @@ const PatientAction = ({ open, index, setOpen, data }) => {
     );
 };
 
-export default PatientAction;
+export default ReportAction;

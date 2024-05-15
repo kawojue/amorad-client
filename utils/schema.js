@@ -82,14 +82,13 @@ export const addUserRole = Yup.object({
 export const patientSchema = Yup.object({
   name: Yup.string().required('Full Name is required'),
   email: Yup.string().email('Invalid email address').required('Email address is required'),
-  nin: Yup.string().matches(/^\d{10}$/, 'NIN must be 10 digits').required('NIN is required'),
-  mrn: Yup.string(),
+  nin: Yup.string().matches(/^\d{10}$/, 'NIN must be 10 digits').optional('NIN is required'),
   phone: Yup.string().required('Phone number is required'),
   dob: Yup.date().required('Date of Birth is required'),
   gender: Yup.string().required('Gender is required'),
   marital: Yup.string().required('Marital Status is required'),
   address: Yup.string().required('Address is required'),
-  zip_code: Yup.string().required('Zip Code is required'),
+  zip_code: Yup.string().optional('Zip Code is required'),
 });
 
 export const studySchema = Yup.object({

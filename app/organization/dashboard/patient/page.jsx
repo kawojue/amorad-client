@@ -1,5 +1,5 @@
 'use client'
-import PatientSearch from '@/components/dashboard/organization/patient/PatientSearch'
+import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
 import PatientStatus from '@/components/dashboard/organization/patient/PatientStatus'
 import PatientTable from '@/components/dashboard/organization/patient/PatientTable'
 import Button from '@/components/ui/buttons/Button'
@@ -10,29 +10,35 @@ import React, { useState } from 'react'
 const page = () => {
 
     const initialFormData = {
-        patientName: '',
-        specialist: '',
-        facility: '',
-        description: '',
+        page: 1,
+        limit: 15,
+        sortBy: 'name',
+        search: '',
+        status: '',
         startDate: '',
         endDate: '',
-        modality: '',
-        priority: '',
-        sortBy: '',
-        search: ''
     };
 
-    const [search, setSearch] = useState(initialFormData);
+    const [filter, setFilter] = useState(initialFormData);
 
-    const handleSearch = (data) => {
-        setSearch(data);
-    };
+    console.log(filter);
 
     const statuses = [
         { name: 'All', value: 'all' },
-        // { name: 'Assigned', value: 'assigned' },
+        { name: 'New', value: 'new' },
         { name: 'Archived', value: 'archived' }
     ];
+
+    const status = [
+        {
+            value: "New", name: "New"
+        },
+        {
+            value: "Archived", name: "Archived"
+        }
+    ]
+
+
     const [activeTab, setActiveTab] = useState(statuses[0].value);
 
     const handleTabClick = (status) => {
@@ -50,9 +56,9 @@ const page = () => {
 
             </div>
 
-            <PatientSearch initialFormData={initialFormData} onSubmit={handleSearch} setSearch={setSearch} />
+            <DashboardFilter filter={filter} setFilter={setFilter} statuses={status} />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-y-3 mb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-y-3 my-5">
 
                 <div className="bg-primary text-white max-w-max py-1.5 px-2 rounded-full">
                     <div className="flex flex-wrap space-x-1">

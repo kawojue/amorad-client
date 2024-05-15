@@ -15,6 +15,7 @@ import ConfigurationIcon from '@/components/icons/ConfigurationIcon';
 import SettingsIcon from '@/components/icons/SettingsIcon';
 import SupportIcon from '@/components/icons/SupportIcon';
 import LogoutIcon from '@/components/icons/LogoutIcon';
+import UserCircleIcon from '@/components/icons/UserCircleIcon';
 
 const SideBar = ({ open, setOpen }) => {
 
@@ -23,11 +24,16 @@ const SideBar = ({ open, setOpen }) => {
     const links = [
         {
             href: '/organization/dashboard/patient',
-            icon: <ReportIcon className='w-5 h-5' color='#FFF' />,
-            activeIcon: <ReportIcon className='w-5 h-5' color='#000' />,
+            icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
             text: 'Patients'
         },
-
+        {
+            href: '/organization/dashboard/report',
+            icon: <ReportIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <ReportIcon className='w-5 h-5' color='#186784' />,
+            text: 'Report'
+        },
         {
             href: '/organization/dashboard/upload', text: 'Upload',
             icon: <UploadIcon className='w-5 h-5' color='#FFF' />,

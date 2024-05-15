@@ -29,7 +29,6 @@ const page = () => {
                             name: "",
                             email: "",
                             nin: "",
-                            mrn: "",
                             phone: "",
                             dob: "",
                             gender: "",
@@ -65,19 +64,13 @@ const page = () => {
 
                                     <CustomInput label="Nin" name="nin" type="text" placeholder="0000000000" />
 
-                                    <CustomInput label="MRN" name="mrn" type="text" placeholder="Leave blank for new record" />
-
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
-
                                     <CustomPhoneInput label="Phone Number" name="phone" type="text" placeholder="+234 123 4567 890" />
 
-                                    <CustomInput label="Date of Birth" name="dob" type="date" placeholder="Choose Date" />
-
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
+
+                                    <CustomInput label="Date of Birth" name="dob" type="date" placeholder="Choose Date" />
 
                                     <CustomSelect label="Gender" name="gender">
                                         <option value="" selected disabled> Select Gender </option>
@@ -86,6 +79,10 @@ const page = () => {
                                         <option value="other"> Other </option>
                                     </CustomSelect>
 
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
+
                                     <CustomSelect label="Marital Status" name="marital">
                                         <option value="" selected disabled> Select Marital Status </option>
                                         <option value="single"> Single </option>
@@ -93,15 +90,12 @@ const page = () => {
                                         <option value="divorce"> Divorce </option>
                                     </CustomSelect>
 
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
-
-                                    <CustomInput label="Address" name="address" type="text" placeholder="What’s your address" />
-
                                     <CustomInput label="Zip Code" name="zip_code" type="text" placeholder="11001" />
 
+
                                 </div>
+
+                                <CustomInput label="Address" name="address" type="text" placeholder="What’s your address" />
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-5">
 

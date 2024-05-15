@@ -11,6 +11,18 @@ import { useSelector } from 'react-redux';
 
 const page = () => {
 
+    const status = [
+        {
+            value: "PENDING", name: "Pending"
+        },
+        {
+            value: "ACTIVE", name: "Active"
+        },
+        {
+            value: "SUSPENDED", name: "Suspended"
+        },
+    ]
+
     const token = useSelector(getToken)
     const [loading, setLoading] = useState(false)
     const [datas, setDatas] = useState([])
@@ -55,6 +67,7 @@ const page = () => {
         fetchData();
     }, [filter])
 
+
     return (
         <>
 
@@ -62,7 +75,7 @@ const page = () => {
 
                 <h2 class="text-sm font-bold text-dark capitalize">Radiologists</h2>
 
-                <DashboardFilter filter={filter} setFilter={setFilter} />
+                <DashboardFilter filter={filter} setFilter={setFilter} statuses={status} />
 
             </div>
 

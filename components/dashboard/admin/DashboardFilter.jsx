@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import SortByDropdown from '../SortByDropdown'
 import FilterByDropdown from '../FilterByDropdown'
 
-const DashboardFilter = ({ setFilter, filter }) => {
+const DashboardFilter = ({ setFilter, filter, statuses }) => {
 
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -43,7 +43,7 @@ const DashboardFilter = ({ setFilter, filter }) => {
 
                     <SortByDropdown onSortChange={handleSortChange} />
 
-                    <FilterByDropdown filter={filter} setFilter={setFilter} />
+                    <FilterByDropdown statuses={statuses} filter={filter} setFilter={setFilter} />
 
                 </div>
 

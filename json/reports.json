@@ -1,73 +1,132 @@
 [
-    {
-      "patient_name": "John Doe",
-      "mrn": "123456",
-      "modality": "X-Ray",
-      "priority": "Routine",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "Jane Smith",
-      "mrn": "654321",
-      "modality": "MRI",
-      "priority": "Urgent",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "Michael Johnson",
-      "mrn": "987654",
-      "modality": "CT Scan",
-      "priority": "Routine",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "Emily Brown",
-      "mrn": "234567",
-      "modality": "Ultrasound",
-      "priority": "Urgent",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "David Wilson",
-      "mrn": "876543",
-      "modality": "PET Scan",
-      "priority": "Routine",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "Sophia Martinez",
-      "mrn": "345678",
-      "modality": "X-Ray",
-      "priority": "Urgent",
-      "status": "assigned"
-    },
-    {
-      "patient_name": "William Taylor",
-      "mrn": "765432",
-      "modality": "MRI",
-      "priority": "Routine",
-      "status": "archived"
-    },
-    {
-      "patient_name": "Olivia Anderson",
-      "mrn": "456789",
-      "modality": "CT Scan",
-      "priority": "Urgent",
-      "status": "archived"
-    },
-    {
-      "patient_name": "Daniel Lee",
-      "mrn": "543210",
-      "modality": "Ultrasound",
-      "priority": "Routine",
-      "status": "archived"
-    },
-    {
-      "patient_name": "Isabella Garcia",
-      "mrn": "678901",
-      "modality": "PET Scan",
-      "priority": "Urgent",
-      "status": "archived"
-    }
-  ]
-  
+  {
+    "patient_name": "John Doe",
+    "study_id": "STUDY001",
+    "body_part": "Head",
+    "priority": "High",
+    "modality": "MRI",
+    "cpt_code": "12345",
+    "paper_work": "https://example.com/paper1.pdf",
+    "dicoms": "https://example.com/dicoms1.zip",
+    "status": "Opened",
+    "created_at": "2024-05-15T08:00:00Z",
+    "updated_at": "2024-05-15T09:30:00Z"
+  },
+  {
+    "patient_name": "Jane Smith",
+    "study_id": "STUDY002",
+    "body_part": "Chest",
+    "priority": "Medium",
+    "modality": "X-ray",
+    "cpt_code": "67890",
+    "paper_work": "https://example.com/paper2.pdf",
+    "dicoms": "https://example.com/dicoms2.zip",
+    "status": "Assigned",
+    "created_at": "2024-05-14T10:00:00Z",
+    "updated_at": "2024-05-14T11:45:00Z"
+  },
+  {
+    "patient_name": "Alice Johnson",
+    "study_id": "STUDY003",
+    "body_part": "Abdomen",
+    "priority": "Low",
+    "modality": "CT",
+    "cpt_code": "54321",
+    "paper_work": "https://example.com/paper3.pdf",
+    "dicoms": "https://example.com/dicoms3.zip",
+    "status": "Closed",
+    "created_at": "2024-05-13T15:00:00Z",
+    "updated_at": "2024-05-13T16:20:00Z"
+  },
+  {
+    "patient_name": "Michael Brown",
+    "study_id": "STUDY004",
+    "body_part": "Spine",
+    "priority": "High",
+    "modality": "MRI",
+    "cpt_code": "13579",
+    "paper_work": "https://example.com/paper4.pdf",
+    "dicoms": "https://example.com/dicoms4.zip",
+    "status": "Unassigned",
+    "created_at": "2024-05-12T09:00:00Z",
+    "updated_at": "2024-05-12T10:45:00Z"
+  },
+  {
+    "patient_name": "David Lee",
+    "study_id": "STUDY005",
+    "body_part": "Knee",
+    "priority": "Medium",
+    "modality": "X-ray",
+    "cpt_code": "24680",
+    "paper_work": "https://example.com/paper5.pdf",
+    "dicoms": "https://example.com/dicoms5.zip",
+    "status": "Opened",
+    "created_at": "2024-05-11T11:30:00Z",
+    "updated_at": "2024-05-11T12:55:00Z"
+  },
+  {
+    "patient_name": "Sarah Wilson",
+    "study_id": "STUDY006",
+    "body_part": "Brain",
+    "priority": "High",
+    "modality": "CT",
+    "cpt_code": "97531",
+    "paper_work": "https://example.com/paper6.pdf",
+    "dicoms": "https://example.com/dicoms6.zip",
+    "status": "Assigned",
+    "created_at": "2024-05-10T14:00:00Z",
+    "updated_at": "2024-05-10T15:25:00Z"
+  },
+  {
+    "patient_name": "Emily Clark",
+    "study_id": "STUDY007",
+    "body_part": "Shoulder",
+    "priority": "Low",
+    "modality": "MRI",
+    "cpt_code": "86420",
+    "paper_work": "https://example.com/paper7.pdf",
+    "dicoms": "https://example.com/dicoms7.zip",
+    "status": "Closed",
+    "created_at": "2024-05-09T12:00:00Z",
+    "updated_at": "2024-05-09T13:20:00Z"
+  },
+  {
+    "patient_name": "James Taylor",
+    "study_id": "STUDY008",
+    "body_part": "Pelvis",
+    "priority": "High",
+    "modality": "CT",
+    "cpt_code": "75319",
+    "paper_work": "https://example.com/paper8.pdf",
+    "dicoms": "https://example.com/dicoms8.zip",
+    "status": "Opened",
+    "created_at": "2024-05-08T08:30:00Z",
+    "updated_at": "2024-05-08T10:10:00Z"
+  },
+  {
+    "patient_name": "Olivia Evans",
+    "study_id": "STUDY009",
+    "body_part": "Ankle",
+    "priority": "Medium",
+    "modality": "X-ray",
+    "cpt_code": "35791",
+    "paper_work": "https://example.com/paper9.pdf",
+    "dicoms": "https://example.com/dicoms9.zip",
+    "status": "Assigned",
+    "created_at": "2024-05-07T09:45:00Z",
+    "updated_at": "2024-05-07T11:00:00Z"
+  },
+  {
+    "patient_name": "William Adams",
+    "study_id": "STUDY010",
+    "body_part": "Foot",
+    "priority": "Low",
+    "modality": "MRI",
+    "cpt_code": "15973",
+    "paper_work": "https://example.com/paper10.pdf",
+    "dicoms": "https://example.com/dicoms10.zip",
+    "status": "Unassigned",
+    "created_at": "2024-05-06T14:20:00Z",
+    "updated_at": "2024-05-06T15:40:00Z"
+  }
+]
