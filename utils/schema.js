@@ -136,15 +136,20 @@ export const addCenterAdmin = Yup.object({
   email: Yup.string().email('Invalid email').required('Email Address is required'),
 })
 
+const fileSizeValidation = (files) => {
+  const maxSize = 50 * 1024 * 1024; // 30MB in bytes
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > maxSize) {
+      return false; 
+    }
+  }
+  return true; 
+};
+
 export const uploadDicom = Yup.object({
   file: Yup.array()
     .min(1, 'At least one file is required')
-    .test('fileSize', 'File size must be less than 10MB', (value) => {
-      if (!value || typeof value.size !== 'number') return true;
-      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-      return value.size <= maxSize;
+    .test('file-size', 'File size exceeds the limit (50MB)', function(files) {
+      return fileSizeValidation(files);
     })
-    .required('Please upload at least one file')
 });
-
-

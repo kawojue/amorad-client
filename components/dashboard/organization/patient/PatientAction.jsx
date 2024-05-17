@@ -61,10 +61,10 @@ const PatientAction = ({ open, index, setOpen, data }) => {
                 <div ref={reportMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap min-w-full left-0 duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
                     <div className="space-y-2">
 
-                        <div onClick={() => handleOpenRow(index)} className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+                        {/* <div onClick={() => handleOpenRow(index)} className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
                             <ForwardIcon className='w-4 h-4' />
                             <span>Expand</span>
-                        </div>
+                        </div> */}
 
                         <Link href={`patient/${data.mrn}`}>
                             <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">

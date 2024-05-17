@@ -23,7 +23,7 @@ const page = () => {
                         type="text"
                         name="patientName"
                         className="py-2.5 px-4 text-xs  tracking-tight block flex-shrink w-full sm:min-w-[250px] lg:min-w-[350px] border-border_color rounded-s-lg relative focus:z-10"
-                        placeholder='Enter MRN or Study ID to associate upload(s) with'
+                        placeholder='Enter Study ID to associate upload(s) with'
                     />
 
                     <div className="py-2.5 flex-1 px-4 inline-flex items-center min-w-fit w-full border border-border_color bg-white text-xs text-center m-auto sm:w-auto rounded-e-lg gap-x-2">
@@ -71,7 +71,7 @@ const page = () => {
 
                         <Form autoComplete='off'>
 
-                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 10MB max." btnColor="btn-primary" className="py-4" multiple={true}
+                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 50MB max." btnColor="btn-primary" className="py-4" multiple={true} 
                                 // accept=".dcm, .dicom, application/dicom"
                                 error={touched.file && errors.file} />
 
