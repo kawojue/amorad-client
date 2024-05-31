@@ -8,8 +8,8 @@ const PatientAction = ({ open, index, setOpen, data }) => {
     const containerRef = useRef(null);
     const [position, setPosition] = useState('down');
 
-    const updatePosition = () => {
-        if (containerRef.current) {
+    useEffect(() => {
+        if (open === index && containerRef.current) {
             const containerRect = containerRef.current.getBoundingClientRect();
             const spaceBelow = window.innerHeight - containerRect.bottom;
             const spaceAbove = containerRect.top;
@@ -20,33 +20,7 @@ const PatientAction = ({ open, index, setOpen, data }) => {
                 setPosition('down');
             }
         }
-    };
-
-    useEffect(() => {
-        if (open === index) {
-            updatePosition();
-        }
-
-        const handleClickOutside = (event) => {
-            if (containerRef.current && !containerRef.current.contains(event.target)) {
-                setOpen(null);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [open, index, setOpen]);
-
-    useEffect(() => {
-        window.addEventListener('resize', updatePosition);
-
-        return () => {
-            window.removeEventListener('resize', updatePosition);
-        };
-    }, []);
+    }, [open, index]);
 
     return (
         <>
