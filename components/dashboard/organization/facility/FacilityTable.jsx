@@ -1,8 +1,9 @@
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+// import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import staffs from '@/json/staff'
 import { EachElement } from "@/utils/Each";
-import FacilityAction from "./FacilityAction";
+import Button from "@/components/ui/buttons/Button";
+// import FacilityAction from "./FacilityAction";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
@@ -234,12 +235,22 @@ const FacilityTable = () => {
 
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div className="flex items-center gap-x-2 text-textColor cursor-pointer">
+                                                    {staff?.status == 'active' ? (
+                                                        <Button title="Suspend Facility" className="text-danger bg-[#FEEAEA]">
+                                                            Suspend
+                                                        </Button>
+                                                    ) : (
+                                                        <Button title="Activate Facility" className="text-[#35C332] bg-[#F4FFF3]">
+                                                            Activate
+                                                        </Button>
+                                                    )}
+
+                                                    {/* <div className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
                                                             Expand
                                                         </span>
                                                         <ChevronDownIcon className="w-3 h-3" />
-                                                    </div>
+                                                    </div> */}
 
                                                     {/* <FacilityAction index={index} open={open} setOpen={setOpen} /> */}
 

@@ -30,7 +30,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const ReportTable = () => {
+const ReportTable = ({ hideName }) => {
 
     const [expandedRow, setExpandedRow] = useState(null);
 
@@ -66,16 +66,18 @@ const ReportTable = () => {
 
                                     <tr>
 
-                                        <th
-                                            scope="col"
-                                            className="px-6 py-3 text-left whitespace-nowrap"
-                                        >
-                                            <div className="flex items-center gap-x-2">
-                                                <span className="text-xs tracking-tight font-semibold">
-                                                    Patient Name
-                                                </span>
-                                            </div>
-                                        </th>
+                                        {!hideName && (
+                                            <th
+                                                scope="col"
+                                                className="px-6 py-3 text-left whitespace-nowrap"
+                                            >
+                                                <div className="flex items-center gap-x-2">
+                                                    <span className="text-xs tracking-tight font-semibold">
+                                                        Patient Name
+                                                    </span>
+                                                </div>
+                                            </th>
+                                        )}
 
                                         <th
                                             scope="col"
@@ -210,11 +212,13 @@ const ReportTable = () => {
 
                                             <tr>
 
-                                                <td className="px-6 py-3 whitespace-nowrap">
-                                                    <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                        {report.patient_name}
-                                                    </span>
-                                                </td>
+                                                {!hideName && (
+                                                    <td className="px-6 py-3 whitespace-nowrap">
+                                                        <span className="block text-xs pb-0 mb-0 text-dark ">
+                                                            {report.patient_name}
+                                                        </span>
+                                                    </td>
+                                                )}
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
@@ -302,14 +306,14 @@ const ReportTable = () => {
 
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
+                                                    <div onClick={() => toggleRow(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
                                                             Expand
                                                         </span>
                                                         <ChevronDownIcon className="w-3 h-3" />
                                                     </div>
 
-                                                    <ReportAction data={report} index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} />
+                                                    {/* <ReportAction data={report} index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} /> */}
 
                                                 </td>
 
