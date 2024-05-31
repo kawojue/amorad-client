@@ -11,7 +11,7 @@ const BreadCrumb = ({ segments }) => {
     return (
         <div className="">
 
-            <div className="flex items-center flex-wrap gap-x-3">
+            <div className="flex items-center flex-wrap gap-x-1.5">
 
                 <div  onClick={() => router.back()} className="flex items-center gap-x-2 text-dark pr-3">
                     <ArrowLeftIcon className='w-3 h-3' />
