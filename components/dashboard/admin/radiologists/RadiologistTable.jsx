@@ -28,15 +28,15 @@ const getStatusStyles = (status) => {
 const RadiologistTable = ({ datas }) => {
 
     // ACTIONS
-    const [open, setOpen] = useState(null);
+    // const [open, setOpen] = useState(null);
 
-    const toggleDropdown = (index) => {
-        if (open == index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
-    };
+    // const toggleDropdown = (index) => {
+    //     if (open == index) {
+    //         setOpen(null);
+    //     } else {
+    //         setOpen(index);
+    //     }
+    // };
 
     return (
         <>
@@ -150,7 +150,7 @@ const RadiologistTable = ({ datas }) => {
                                             </div>
                                         </th>
 
-                                        <th
+                                        {/* <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
                                         >
@@ -159,7 +159,7 @@ const RadiologistTable = ({ datas }) => {
                                                     Action
                                                 </span>
                                             </div>
-                                        </th>
+                                        </th> */}
 
                                     </tr>
 
@@ -247,7 +247,7 @@ const RadiologistTable = ({ datas }) => {
                                                     </div>
                                                 </td>
 
-                                                <td className="relative px-6 py-3 whitespace-nowrap">
+                                                {/* <td className="relative px-6 py-3 whitespace-nowrap">
 
                                                     <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
@@ -258,7 +258,7 @@ const RadiologistTable = ({ datas }) => {
 
                                                     <RadiologistAction index={index} open={open} setOpen={setOpen} />
 
-                                                </td>
+                                                </td> */}
 
                                             </tr>
 

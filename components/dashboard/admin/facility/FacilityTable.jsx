@@ -1,7 +1,7 @@
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+// import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { EachElement } from "@/utils/Each";
-import FacilityAction from "./FacilityAction";
+// import FacilityAction from "./FacilityAction";
 import moment from "moment";
 
 const getStatusStyles = (status) => {
@@ -28,15 +28,15 @@ const getStatusStyles = (status) => {
 const FacilityTable = ({ datas }) => {
 
     // ACTIONS
-    const [open, setOpen] = useState(null);
+    // const [open, setOpen] = useState(null);
 
-    const toggleDropdown = (index) => {
-        if (open == index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
-    };
+    // const toggleDropdown = (index) => {
+    //     if (open == index) {
+    //         setOpen(null);
+    //     } else {
+    //         setOpen(index);
+    //     }
+    // };
 
     return (
         <>
@@ -139,7 +139,7 @@ const FacilityTable = ({ datas }) => {
                                             </div>
                                         </th>
 
-                                        <th
+                                        {/* <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
                                         >
@@ -148,7 +148,7 @@ const FacilityTable = ({ datas }) => {
                                                     Action
                                                 </span>
                                             </div>
-                                        </th>
+                                        </th> */}
 
                                     </tr>
 
@@ -228,7 +228,7 @@ const FacilityTable = ({ datas }) => {
                                                     </div>
                                                 </td>
 
-                                                <td className="relative px-6 py-3 whitespace-nowrap">
+                                                {/* <td className="relative px-6 py-3 whitespace-nowrap">
 
                                                     <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
@@ -239,7 +239,7 @@ const FacilityTable = ({ datas }) => {
 
                                                     <FacilityAction index={index} open={open} setOpen={setOpen} />
 
-                                                </td>
+                                                </td> */}
 
                                             </tr>
 
