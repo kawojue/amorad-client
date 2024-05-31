@@ -1,74 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import ForwardIcon from "@/components/icons/ForwardIcon";
 import EditIcon from "@/components/icons/EditIcon";
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 const PatientAction = ({ open, index, setOpen, data }) => {
-    const reportMenu = useRef(null);
-    const [menuPosition, setMenuPosition] = useState({ top: '100%', bottom: 'auto', left: 0, transform: 'translateY(10px)' });
-
-    const updateMenuPosition = () => {
-        if (reportMenu.current) {
-            const rect = reportMenu.current.getBoundingClientRect();
-            const belowSpace = window.innerHeight - rect.bottom;
-            const aboveSpace = rect.top;
-
-            if (belowSpace < rect.height && aboveSpace > rect.height) {
-                // If there's not enough space below and enough space above, show above
-                setMenuPosition({
-                    top: 'auto',
-                    bottom: '100%',
-                    left: 0,
-                    transform: 'translateY(-10px)'
-                });
-            } else {
-                // Otherwise, default position below
-                setMenuPosition({
-                    top: '100%',
-                    bottom: 'auto',
-                    left: 0,
-                    transform: 'translateY(10px)'
-                });
-            }
-        }
-    };
+    const containerRef = useRef(null);
+    const [position, setPosition] = useState('down');
 
     useEffect(() => {
-        if (open === index) {
-            updateMenuPosition();
+        if (open === index && containerRef.current) {
+            const containerRect = containerRef.current.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - containerRect.bottom;
+            const spaceAbove = containerRect.top;
+
+            if (spaceBelow < containerRect.height && spaceAbove > containerRect.height) {
+                setPosition('up');
+            } else {
+                setPosition('down');
+            }
         }
     }, [open, index]);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (reportMenu.current && !reportMenu.current.contains(event.target)) {
-                setOpen(null);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [setOpen]);
-
-    useEffect(() => {
-        window.addEventListener('resize', updateMenuPosition);
-        return () => {
-            window.removeEventListener('resize', updateMenuPosition);
-        };
-    }, []);
 
     return (
         <>
             {open === index && (
                 <div
-                    ref={reportMenu}
-                    style={menuPosition}
+                    ref={containerRef}
                     className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap min-w-full left-0 duration-300 ${
                         open === index ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                    }`}
+                    } ${position === 'up' ? 'bottom-full mb-2' : 'top-full mt-2'}`}
                 >
                     <div className="space-y-2">
                         <Link href={`patient/${data.mrn}`}>
