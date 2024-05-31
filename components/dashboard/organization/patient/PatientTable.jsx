@@ -30,17 +30,6 @@ const PatientTable = ({ selectedStatus }) => {
         ? patientData
         : patientData.filter((patient) => patient.status.toLowerCase() === selectedStatus);
 
-    // ACTIONS
-    const [open, setOpen] = useState(null);
-
-    const toggleDropdown = (index) => {
-        if (open === index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
-    };
-
     return (
         <>
 
