@@ -8,9 +8,7 @@ const PatientAction = ({ data }) => {
 
     const handleLinkClick = (onClose) => (event) => {
         if (onClose) {
-            setTimeout(() => {
-                onClose();
-            }, 500);
+            onClose();
         }
     };
 
@@ -43,7 +41,7 @@ const PatientAction = ({ data }) => {
                                 <span>Edit Patient</span>
                             </div>
                         </Link>
-                        <Link href={`patient/${data.mrn}/study`} passHref>
+                        <Link href={`patient/${data.mrn}/study`}  passHref>
                             <div
                                 className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
                                 onClick={handleLinkClick(onClose)}
