@@ -1,5 +1,3 @@
-// ActionBar.js
-
 import React, { useState } from 'react';
 import { Menu } from '@mui/material';
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -15,11 +13,6 @@ const ActionBar = ({ trigger, children }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    // Injecting handleClose function to children
-    const childrenWithProps = React.Children.map(children, child =>
-        React.cloneElement(child, { onClose: handleClose }) // Use `onClose` instead of `handleClose`
-    );
 
     return (
         <>
@@ -41,7 +34,7 @@ const ActionBar = ({ trigger, children }) => {
                     },
                 }}
             >
-                {childrenWithProps}
+                {typeof children === 'function' ? children({ onClose: handleClose }) : children}
             </Menu>
         </>
     );
@@ -49,7 +42,10 @@ const ActionBar = ({ trigger, children }) => {
 
 ActionBar.propTypes = {
     trigger: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.func,
+    ]).isRequired,
 };
 
 export default ActionBar;
