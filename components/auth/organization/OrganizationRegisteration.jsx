@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
@@ -8,8 +8,13 @@ import Button from '@/components/ui/buttons/Button';
 import CustomPhoneInput from '@/components/FormElements/CustomPhoneInput';
 import TermsCheck from '@/components/auth/TermsCheck';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { updateOrganization } from '@/redux/features/slices/stepSlice';
 
-const OrganizationRegisteration = ({ onNextStep }) => {
+const OrganizationRegisteration = ({ onNextStep, organization }) => {
+
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
 
     return (
         <>
@@ -44,16 +49,21 @@ const OrganizationRegisteration = ({ onNextStep }) => {
 
                     <Formik
                         initialValues={{
-                            name: '',
-                            organization_name: '',
-                            email: '',
-                            password: '',
-                            phone: '',
+                            fullname: organization?.fullname || '',
+                            organizationName: organization?.organizationName || '',
+                            email: organization?.email || '',
+                            password: organization?.password || '',
+                            phone: organization?.phone || '',
                             terms: false
                         }}
                         validationSchema={OrganizationRegisterSchema}
                         onSubmit={async (values, actions) => {
-                            onNextStep()
+                            setLoading(true)
+                            const { terms, ...filteredValues } = values;
+                            dispatch(updateOrganization(filteredValues))
+                            setTimeout(() => {
+                                onNextStep()
+                            }, 500);
                         }}
                     >
 
@@ -61,9 +71,9 @@ const OrganizationRegisteration = ({ onNextStep }) => {
 
                             <Form autoComplete='off'>
 
-                                <CustomInput label="Full name" name="name" type="text" placeholder="John Doe" />
+                                <CustomInput label="Full name" name="fullname" type="text" placeholder="John Doe" />
 
-                                <CustomInput label="Organization Name" name="organization_name" type="text" placeholder="John Doe" />
+                                <CustomInput label="Organization Name" name="organizationName" type="text" placeholder="John Doe" />
 
                                 <CustomInput label="Business Email Address" name="email" type="email" placeholder="example@gmail.com" />
 
@@ -76,6 +86,7 @@ const OrganizationRegisteration = ({ onNextStep }) => {
                                     name="terms" />
 
                                 <Button
+                                    loading={loading}
                                     type="submit"
                                     color="btn-primary"
                                     className="mt-8 w-full py-3.5"

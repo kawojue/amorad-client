@@ -1,8 +1,7 @@
-// import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { EachElement } from "@/utils/Each";
-// import FacilityAction from "./FacilityAction";
 import moment from "moment";
+import FacilityAction from "./FacilityAction";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
@@ -25,18 +24,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const FacilityTable = ({ datas }) => {
-
-    // ACTIONS
-    // const [open, setOpen] = useState(null);
-
-    // const toggleDropdown = (index) => {
-    //     if (open == index) {
-    //         setOpen(null);
-    //     } else {
-    //         setOpen(index);
-    //     }
-    // };
+const FacilityTable = ({ datas, fetchData, token }) => {
 
     return (
         <>
@@ -139,7 +127,7 @@ const FacilityTable = ({ datas }) => {
                                             </div>
                                         </th>
 
-                                        {/* <th
+                                        <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
                                         >
@@ -148,7 +136,7 @@ const FacilityTable = ({ datas }) => {
                                                     Action
                                                 </span>
                                             </div>
-                                        </th> */}
+                                        </th>
 
                                     </tr>
 
@@ -228,18 +216,11 @@ const FacilityTable = ({ datas }) => {
                                                     </div>
                                                 </td>
 
-                                                {/* <td className="relative px-6 py-3 whitespace-nowrap">
+                                                <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
-                                                        <span className="block text-xs font-medium">
-                                                            Expand
-                                                        </span>
-                                                        <ChevronDownIcon className="w-3 h-3" />
-                                                    </div>
+                                                    <FacilityAction token={token} index={index} data={item} fetchData={fetchData} />
 
-                                                    <FacilityAction index={index} open={open} setOpen={setOpen} />
-
-                                                </td> */}
+                                                </td>
 
                                             </tr>
 

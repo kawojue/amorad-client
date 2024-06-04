@@ -1,15 +1,27 @@
 'use client'
-import DashboardPagination from '@/components/dashboard/DashboardPagination'
+import DashboardPagination from '@/components/dashboard/DashboardPagination';
 import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
-import DoctorTable from '@/components/dashboard/admin/doctor/DoctorTable'
-import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
-import { getToken } from '@/redux/features/slices/adminAuthSlice'
-import adminService from '@/services/adminService'
-import { removeEmptyFields } from '@/utils/EmptyFields'
+import DoctorTable from '@/components/dashboard/admin/doctor/DoctorTable';
+import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader';
+import { getToken } from '@/redux/features/slices/adminAuthSlice';
+import adminService from '@/services/adminService';
+import { removeEmptyFields } from '@/utils/EmptyFields';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const page = () => {
+
+    const status = [
+        {
+            value: "PENDING", name: "Pending"
+        },
+        {
+            value: "ACTIVE", name: "Active"
+        },
+        {
+            value: "SUSPENDED", name: "Suspended"
+        },
+    ]
 
     const token = useSelector(getToken)
     const [loading, setLoading] = useState(false)
@@ -55,6 +67,7 @@ const page = () => {
         fetchData();
     }, [filter])
 
+
     return (
         <>
 
@@ -62,7 +75,7 @@ const page = () => {
 
                 <h2 class="text-sm font-bold text-dark capitalize">Doctors</h2>
 
-                <DashboardFilter filter={filter} setFilter={setFilter} />
+                <DashboardFilter filter={filter} setFilter={setFilter} statuses={status} />
 
             </div>
 
@@ -74,19 +87,19 @@ const page = () => {
 
                 ) : (
 
-                    <DoctorTable datas={datas} />
+                    <DoctorTable token={token} datas={datas} fetchData={fetchData} />
 
                 )}
 
             </div>
 
             {/* PAGINATION */}
-            { !loading && <DashboardPagination
+            {!loading && <DashboardPagination
                 currentPage={filter?.page}
                 totalPages={total}
                 perPage={filter?.limit}
                 onChangePage={handlePageChange}
-                title="Radiologists"
+                title="Doctors"
             />}
 
         </>

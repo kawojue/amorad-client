@@ -87,7 +87,7 @@ const page = () => {
 
                 ) : (
 
-                    <RadiologistTable datas={datas} />
+                    <RadiologistTable token={token} datas={datas} fetchData={fetchData} />
 
                 )}
 

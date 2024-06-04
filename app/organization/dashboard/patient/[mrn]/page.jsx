@@ -96,7 +96,7 @@ const page = ({ params }) => {
 
                         </div>
 
-                        <button onClick={() => copyToClipboard('email')}  className="flex-col items-end">
+                        <button onClick={() => copyToClipboard('email')} className="flex-col items-end">
                             <CopyIcon className='w-5 h-5 text-textColor cursor-pointer' />
                         </button>
 
@@ -117,7 +117,7 @@ const page = ({ params }) => {
 
                         </div>
 
-                        <button onClick={() => copyToClipboard('Phone')}  className="flex-col items-end">
+                        <button onClick={() => copyToClipboard('Phone')} className="flex-col items-end">
                             <CopyIcon className='w-5 h-5 text-textColor cursor-pointer' />
                         </button>
 
@@ -138,7 +138,7 @@ const page = ({ params }) => {
 
                         </div>
 
-                        <button onClick={() => copyToClipboard('Address')}  className="flex-col items-end">
+                        <button onClick={() => copyToClipboard('Address')} className="flex-col items-end">
                             <CopyIcon className='w-5 h-5 text-textColor cursor-pointer' />
                         </button>
 

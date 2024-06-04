@@ -1,11 +1,21 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInput from '@/components/FormElements/CustomInput';
 import Button from '@/components/ui/buttons/Button';
 import { organizationAddressSchema } from '@/utils/schema';
+import authService from '@/services/authService';
+import toast from 'react-hot-toast';
+import { getErrorMessage } from '@/utils/errorUtils';
+import { useRouter } from 'next/navigation';
+import { resetOrganization } from '@/redux/features/slices/stepSlice';
+import { useDispatch } from 'react-redux';
 
-const OrganizationAddress = ({ onPrev }) => {
+const OrganizationAddress = ({ onPrev, organization }) => {
+
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const router = useRouter();
 
     return (
         <>
@@ -29,7 +39,7 @@ const OrganizationAddress = ({ onPrev }) => {
                 <div className="text-left m-auto">
 
                     <h2 className="text-xl text-dark font-bold tracking-tighter mt-7">
-                    Additional Information
+                        Additional Information
                     </h2>
 
                     <p className='text-xs pt-1 text-textColor'>Proceed with the remaining info to continue.</p>
@@ -48,7 +58,30 @@ const OrganizationAddress = ({ onPrev }) => {
                         }}
                         validationSchema={organizationAddressSchema}
                         onSubmit={async (values, actions) => {
-                            onNextStep()
+
+                            const data = { ...organization, ...values };
+
+                            setLoading(true);
+
+                            try {
+
+                                const response = await authService.registerOrganization(data);
+
+                                toast.success(response.message, { duration: 6000 });
+                                dispatch(resetOrganization())
+
+                                // Navigate
+                                router.replace('/auth/signin')
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message);
+
+                            } finally {
+                                setLoading(false);
+                            }
+
                         }}
                     >
 
@@ -56,7 +89,7 @@ const OrganizationAddress = ({ onPrev }) => {
 
                             <Form autoComplete='off'>
 
-                                <CustomInput label="OrganizationAddress" name="OrganizationAddress" type="text" placeholder="What’s your OrganizationAddress?" />
+                                <CustomInput label="OrganizationAddress" name="address" type="text" placeholder="What’s your Organization Address?" />
 
                                 <div className="grid grid-cols-2 gap-5">
 
@@ -72,6 +105,7 @@ const OrganizationAddress = ({ onPrev }) => {
 
 
                                 <Button
+                                    loading={loading}
                                     type="submit"
                                     color="btn-primary"
                                     className="mt-8 w-full py-3.5"

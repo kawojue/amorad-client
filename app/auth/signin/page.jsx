@@ -6,9 +6,24 @@ import Button from '@/components/ui/buttons/Button';
 import { LoginSchema } from '@/utils/schema';
 import { Form, Formik } from 'formik';
 import Link from 'next/link';
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 
 const page = () => {
+
+    const [loading, setLoading] = useState(false)
+    const router = useRouter();
+    const dispatch = useDispatch()
+
+    // const { isAuthenticated } = useAuthMiddleware();
+
+    // useEffect(() => {
+    //     if (isAuthenticated()) {
+    //         router.replace('/admin/dashboard');
+    //     }
+    // }, [isAuthenticated, router]);
+
     return (
         <>
 
@@ -38,6 +53,40 @@ const page = () => {
                             }}
                             validationSchema={LoginSchema}
                             onSubmit={async (values, actions) => {
+
+                                setLoading(true);
+
+                                try {
+
+                                    const response = await authService.adminLogin(values);
+                                    const { access_token, ...data } = response;
+                                    const profile = data.data
+
+                                    // // SEND TOKEN AND DATA TO REDUX TOOLKIT
+                                    const expirationSeconds = 1 * 24 * 60 * 60;
+                                    const expire = Math.floor(Date.now() / 1000) + expirationSeconds;
+
+                                    Cookies.set('admin_token', access_token, { secure: true, sameSite: 'lax' });
+                                    Cookies.set('admin_token_exp', expire);
+                                    Cookies.set('admin_profile', JSON.stringify(profile));
+
+                                    dispatch(setToken(access_token));
+                                    dispatch(setUser(profile));
+
+                                    // Navigate
+                                    router.replace('/organization/dashboard')
+
+                                    toast.success('User logged in successfully!');
+
+                                } catch (error) {
+
+                                    const message = getErrorMessage(error);
+                                    toast.error(message);
+
+                                } finally {
+                                    setLoading(false);
+                                }
+
                             }}
                         >
 
@@ -57,11 +106,12 @@ const page = () => {
                                         </div>
 
 
-                                        <Link href='forgot-password' className='text-textColor text-xs'>Forget password?</Link>
+                                        <Link href='reset-password' className='text-textColor text-xs'>Forget password?</Link>
 
                                     </div>
 
                                     <Button
+                                        loading={loading}
                                         type="submit"
                                         color="btn-primary"
                                         className="mt-8 py-3 w-full"

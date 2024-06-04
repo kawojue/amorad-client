@@ -2,12 +2,19 @@
 import CustomInput from '@/components/FormElements/CustomInput';
 import AuthHeader from '@/components/auth/AuthHeader';
 import Button from '@/components/ui/buttons/Button';
+import authService from '@/services/authService';
+import { getErrorMessage } from '@/utils/errorUtils';
 import { ForgotPassword } from '@/utils/schema';
 import { Form, Formik } from 'formik';
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const page = () => {
-    
+
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
     return (
         <>
 
@@ -36,6 +43,27 @@ const page = () => {
                             }}
                             validationSchema={ForgotPassword}
                             onSubmit={async (values, actions) => {
+
+                                setLoading(true);
+
+                                try {
+
+                                    const response = await authService.forgottenPassword(values)
+
+                                    toast.success(response.message, { duration: 5000 });
+
+                                    // // Navigate
+                                    router.replace('/auth/signin')
+
+                                } catch (error) {
+
+                                    const message = getErrorMessage(error);
+                                    toast.error(message, { duration: 5000 });
+
+                                } finally {
+                                    setLoading(false);
+                                }
+
                             }}
                         >
 
@@ -46,6 +74,7 @@ const page = () => {
                                     <CustomInput label="Email address" name="email" type="email" placeholder="example@gmail.com" />
 
                                     <Button
+                                        loading={loading}
                                         type="submit"
                                         color="btn-primary"
                                         className="mt-8 w-full py-3.5"

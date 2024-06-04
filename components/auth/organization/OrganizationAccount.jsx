@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import AuthBg from '../AuthBg'
 import OrganizationRegisteration from './OrganizationRegisteration';
 import OrganizationAddress from './OrganizationAddress';
+import { useSelector } from 'react-redux';
+import { getOrganization } from '@/redux/features/slices/stepSlice';
 
 const OrganizationAccount = () => {
 
@@ -9,6 +11,8 @@ const OrganizationAccount = () => {
     { id: 'details', component: OrganizationRegisteration },
     { id: 'address', component: OrganizationAddress },
   ];
+
+  const organization = useSelector(getOrganization)
 
   const [currentStep, setCurrentStep] = useState(steps[0].id);
 
@@ -32,7 +36,7 @@ const OrganizationAccount = () => {
 
     if (currentStepObj) {
       const StepComponent = currentStepObj.component;
-      return <StepComponent onPrev={handlePreviousStep} onNextStep={handleNextStep} />;
+      return <StepComponent organization={organization} onPrev={handlePreviousStep} onNextStep={handleNextStep} />;
     }
 
     return null;

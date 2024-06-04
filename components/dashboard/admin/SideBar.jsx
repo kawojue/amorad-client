@@ -13,6 +13,7 @@ import PeopleIcon from '@/components/icons/PeopleIcon';
 import { Adminlogout } from '@/redux/features/slices/adminAuthSlice';
 import { useDispatch } from 'react-redux';
 import Avatar from '@/components/Avatar';
+import UserCircleIcon from '@/components/icons/UserCircleIcon';
 
 const SideBar = ({ open, setOpen, user }) => {
 
@@ -20,12 +21,12 @@ const SideBar = ({ open, setOpen, user }) => {
     const dispatch = useDispatch()
 
     const links = [
-        // {
-        //     href: '/admin/dashboard/doctors',
-        //     icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
-        //     activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
-        //     text: 'Doctors'
-        // },
+        {
+            href: '/admin/dashboard/doctors',
+            icon: <UserCircleIcon className='w-5 h-5' color='#FFF' />,
+            activeIcon: <UserCircleIcon className='w-5 h-5' color='#186784' />,
+            text: 'Doctors'
+        },
 
         {
             href: '/admin/dashboard/facilities', text: 'Facilities',

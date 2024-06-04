@@ -86,7 +86,7 @@ const page = () => {
 
                 ) : (
 
-                    <FacilityTable datas={datas} />
+                    <FacilityTable datas={datas} fetchData={fetchData} token={token} />
 
                 )}
 

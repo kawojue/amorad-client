@@ -1,12 +1,22 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInput from '@/components/FormElements/CustomInput';
 import { practitionerAddressSchema } from '@/utils/schema';
 import Button from '@/components/ui/buttons/Button';
-import CustomSelect from '@/components/FormElements/CustomSelect';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { resetPractitioner } from '@/redux/features/slices/stepSlice';
+import toast from 'react-hot-toast';
+import authService from '@/services/authService';
+import { getErrorMessage } from '@/utils/errorUtils';
+// import CustomSelect from '@/components/FormElements/CustomSelect';
 
-const Address = ({ onPrev }) => {
+const Address = ({ onPrev, practitioner }) => {
+
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const router = useRouter();
 
     return (
         <>
@@ -30,7 +40,7 @@ const Address = ({ onPrev }) => {
                 <div className="text-left m-auto">
 
                     <h2 className="text-xl text-dark font-bold tracking-tighter mt-7">
-                    Additional Information
+                        Additional Information
                     </h2>
 
                     <p className='text-xs pt-1 text-textColor'>Proceed with the remaining info to continue.</p>
@@ -41,7 +51,7 @@ const Address = ({ onPrev }) => {
 
                     <Formik
                         initialValues={{
-                            profession: '',
+                            // profession: '',
                             address: '',
                             city: '',
                             state: '',
@@ -50,7 +60,30 @@ const Address = ({ onPrev }) => {
                         }}
                         validationSchema={practitionerAddressSchema}
                         onSubmit={async (values, actions) => {
-                            onNextStep()
+
+                            const data = { ...practitioner, ...values };
+
+                            setLoading(true);
+
+                            try {
+
+                                const response = await authService.registerPractitioner(data);
+
+                                toast.success(response.message, { duration: 6000 });
+                                dispatch(resetPractitioner())
+
+                                // Navigate
+                                router.replace('/auth/signin')
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message);
+
+                            } finally {
+                                setLoading(false);
+                            }
+
                         }}
                     >
 
@@ -58,11 +91,11 @@ const Address = ({ onPrev }) => {
 
                             <Form autoComplete='off'>
 
-                                <CustomSelect label="Medical Profession" name="profession">
+                                {/* <CustomSelect label="Medical Profession" name="profession">
                                     <option value="" disabled> Select Profession </option>
                                     <option value="doctor"> Doctor </option>
                                     <option value="radiologist"> Radiologist </option>
-                                </CustomSelect>
+                                </CustomSelect> */}
 
                                 <CustomInput label="Address" name="address" type="text" placeholder="What’s your address?" />
 
@@ -80,6 +113,7 @@ const Address = ({ onPrev }) => {
 
 
                                 <Button
+                                    loading={loading}
                                     type="submit"
                                     color="btn-primary"
                                     className="mt-8 w-full py-3.5"

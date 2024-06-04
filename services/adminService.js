@@ -22,11 +22,41 @@ const getFacilities = async (token, query) => {
     return response.data;
 };
 
+const getFacitlity = async (id, token) => {
+    const response = await axios.get(`/adradospec/facilities/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const toggleFacilites = async (payload, token) => {
+    const response = await axios.patch(`/adradospec/facilities/${payload?.id }/toggle-status?status=${payload?.status}`, { },
+        {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+    return response.data;
+};
+
 const getPractitioners = async (token, query) => {
     const response = await axios.get('/adradospec/practitioners', {
         params: query,
         headers: { Authorization: `Bearer ${token}` }
     });
+    return response.data;
+};
+
+const getPractitioner = async (id, token) => {
+    const response = await axios.get(`/adradospec/practitioners/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const togglePractitioners = async (payload, token) => {
+    const response = await axios.patch(`/adradospec/practitioners/${payload?.practitionerId }/toggle-status?status=${payload?.status}`, { },
+        {
+            headers: { Authorization: `Bearer ${token}` }
+        });
     return response.data;
 };
 
@@ -53,7 +83,7 @@ const changePassword = async (payload, token) => {
 
 const uploadProfileImage = async (payload, token) => {
     const response = await axios.put("/auth/upload/profile-photo", payload, {
-        headers: { 
+        headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
@@ -61,7 +91,7 @@ const uploadProfileImage = async (payload, token) => {
     return response.data;
 };
 
-  const adminService = {
+const adminService = {
     getAnalytics,
     getChart,
     getFacilities,
@@ -69,7 +99,11 @@ const uploadProfileImage = async (payload, token) => {
     getMembers,
     inviteMember,
     changePassword,
-    uploadProfileImage
+    uploadProfileImage,
+    togglePractitioners,
+    toggleFacilites,
+    getPractitioner,
+    getFacitlity
 };
 
 export default adminService;

@@ -1,5 +1,4 @@
 import axios from "@/utils/axiosConfig";
-import Cookies from "js-cookie";
 
 // LOGIN
 const adminLogin = async (payload) => {
@@ -7,13 +6,29 @@ const adminLogin = async (payload) => {
     return response.data;
 };
 
-function getToken() {
-    return Cookies.get('admin_token');
-  }
+// REGISTER ORGANIZATION
+const registerOrganization = async (payload) => {
+    const response = await axios.post("/auth/register/organization", payload);
+    return response.data;
+};
+
+// REGISTER practitioner
+const registerPractitioner = async (payload) => {
+    const response = await axios.post("/auth/register/practitioner", payload);
+    return response.data;
+};
+
+// FORGOTTEN PASSWORD
+const forgottenPassword = async (payload) => {
+    const response = await axios.patch("/auth/reset-password", payload);
+    return response.data;
+};
 
   const authService = {
     adminLogin,
-    getToken
+    registerPractitioner,
+    registerOrganization,
+    forgottenPassword
 };
 
 export default authService;

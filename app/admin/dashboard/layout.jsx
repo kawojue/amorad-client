@@ -10,6 +10,7 @@ import SideBar from '@/components/dashboard/admin/SideBar';
 import AdminTokenCheck from '@/utils/AdminTokenCheck';
 
 const DashboardLayout = ({ children }) => {
+
     const router = useRouter();
     const { isAuthenticated, checkAuthorization } = useAuthMiddleware();
     const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const DashboardLayout = ({ children }) => {
     useEffect(() => {
         const redirectToLogin = async () => {
             if (!isAuthenticated() || !checkAuthorization()) {
-                await router.push('/admin/login');
+                await router.replace('/admin/login');
             }
         };
 

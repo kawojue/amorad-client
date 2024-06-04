@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
@@ -8,8 +8,13 @@ import Button from '@/components/ui/buttons/Button';
 import CustomPhoneInput from '@/components/FormElements/CustomPhoneInput';
 import TermsCheck from '@/components/auth/TermsCheck';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { updatePractitioner } from '@/redux/features/slices/stepSlice';
 
-const Registeration = ({ onNextStep }) => {
+const Registeration = ({ onNextStep, practitioner }) => {
+
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
 
     return (
         <>
@@ -44,22 +49,30 @@ const Registeration = ({ onNextStep }) => {
 
                     <Formik
                         initialValues={{
-                            affiliation: '',
-                            practiceNumber: '',
-                            email: '',
-                            password: '',
-                            phone: '',
+                            fullname: practitioner?.fullname || '',
+                            affiliation: practitioner?.affiliation || '',
+                            practiceNumber: practitioner?.practiceNumber || '',
+                            email: practitioner?.email || '',
+                            password: practitioner?.password || '',
+                            phone: practitioner?.phone || '',
                             terms: false
                         }}
                         validationSchema={practitionerRegisterSchema}
                         onSubmit={async (values, actions) => {
-                            onNextStep()
+                            setLoading(true)
+                            const { terms, ...filteredValues } = values;
+                            dispatch(updatePractitioner(filteredValues))
+                            setTimeout(() => {
+                                onNextStep()
+                            }, 500);
                         }}
                     >
 
                         {(props) => (
 
                             <Form autoComplete='off'>
+
+                                <CustomInput label="Full name" name="fullname" type="text" placeholder="Full name" />
 
                                 <CustomInput label="Affiliation" name="affiliation" type="text" placeholder=" Ezemmuo Enterprises" />
 
@@ -76,6 +89,7 @@ const Registeration = ({ onNextStep }) => {
                                     name="terms" />
 
                                 <Button
+                                    loading={loading}
                                     type="submit"
                                     color="btn-primary"
                                     className="mt-8 w-full py-3.5"

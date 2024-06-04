@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import Registeration from './Registeration'
 import AuthBg from '../AuthBg'
 import Address from './Address';
+import { useSelector } from 'react-redux';
+import { getPractitioner } from '@/redux/features/slices/stepSlice';
 
 const PractitionerAccount = () => {
+
+  const practitioner = useSelector(getPractitioner)
 
   const steps = [
     { id: 'details', component: Registeration },
@@ -32,7 +36,7 @@ const PractitionerAccount = () => {
 
     if (currentStepObj) {
       const StepComponent = currentStepObj.component;
-      return <StepComponent onPrev={handlePreviousStep} onNextStep={handleNextStep} />;
+      return <StepComponent practitioner={practitioner} onPrev={handlePreviousStep} onNextStep={handleNextStep} />;
     }
 
     return null;

@@ -2,8 +2,8 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import reportsData from '@/json/reports'
 import { EachElement } from "@/utils/Each";
-import ReportAction from "./ReportAction";
 import moment from "moment";
+import PapperWorkModal from "../../PapperWorkModal";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
@@ -33,6 +33,8 @@ const getStatusStyles = (status) => {
 const ReportTable = ({ hideName }) => {
 
     const [expandedRow, setExpandedRow] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [paper, setPaper] = useState(null)
 
     const toggleRow = (index) => {
         if (expandedRow === index) {
@@ -42,30 +44,20 @@ const ReportTable = ({ hideName }) => {
         }
     };
 
-    // ACTIONS
-    const [open, setOpen] = useState(null);
-
-    const toggleDropdown = (index) => {
-        if (open === index) {
-            setOpen(null);
-        } else {
-            setOpen(index);
-        }
+    const handleViewPaperWork = (report) => {
+        setPaper(report.paper_work);
+        setOpen(true);
     };
 
     return (
         <>
-
             <div className="mx-auto">
                 <div className="flex flex-col">
                     <div className="-m-1.5 overflow-x-auto scrollbar-thin">
                         <div className="p-1.5 min-w-full inline-block align-middle">
                             <table className="min-w-full divide-y divide-border_color">
-
                                 <thead className="bg-white rounded-t-xl text-dark">
-
                                     <tr>
-
                                         {!hideName && (
                                             <th
                                                 scope="col"
@@ -78,7 +70,6 @@ const ReportTable = ({ hideName }) => {
                                                 </div>
                                             </th>
                                         )}
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -89,7 +80,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -100,7 +90,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -111,7 +100,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -122,7 +110,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -133,7 +120,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -144,7 +130,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -155,7 +140,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -166,7 +150,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -177,7 +160,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left whitespace-nowrap"
@@ -188,7 +170,6 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
@@ -199,19 +180,12 @@ const ReportTable = ({ hideName }) => {
                                                 </span>
                                             </div>
                                         </th>
-
                                     </tr>
-
                                 </thead>
-
                                 <tbody className="divide-y divide-border_color ">
-
                                     <EachElement of={reportsData} render={(report, index) => (
-
                                         <>
-
-                                            <tr>
-
+                                            <tr key={report.study_id}>
                                                 {!hideName && (
                                                     <td className="px-6 py-3 whitespace-nowrap">
                                                         <span className="block text-xs pb-0 mb-0 text-dark ">
@@ -219,7 +193,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </td>
                                                 )}
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -227,7 +200,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -235,7 +207,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -243,7 +214,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -251,7 +221,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -259,15 +228,16 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
-                                                        <span className="block text-xs text-[#0070FF] underline underline-offset-4 cursor-pointer">
+                                                        <span
+                                                            className="block text-xs text-[#0070FF] underline underline-offset-4 cursor-pointer"
+                                                            onClick={() => handleViewPaperWork(report)}
+                                                        >
                                                             View Paper Work
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-[#0070FF] underline underline-offset-4 cursor-pointer">
@@ -275,7 +245,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -283,7 +252,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -291,7 +259,6 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span
@@ -303,119 +270,85 @@ const ReportTable = ({ hideName }) => {
                                                         </span>
                                                     </div>
                                                 </td>
-
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
-
                                                     <div onClick={() => toggleRow(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
                                                         <span className="block text-xs font-medium">
                                                             Expand
                                                         </span>
                                                         <ChevronDownIcon className="w-3 h-3" />
                                                     </div>
-
-                                                    {/* <ReportAction data={report} index={index} open={open} toggleRow={toggleRow} setOpen={setOpen} /> */}
-
                                                 </td>
-
                                             </tr>
-
                                             {expandedRow === index && (
-
                                                 <tr key={`${index}-expanded`} className="bg-secondary">
-
                                                     <td colSpan="2" className="px-6 py-4">
-
                                                         <div className="space-y-2 whitespace-nowrap">
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOB:</h2>
                                                                 <p>1985-01-23</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">Age:</h2>
                                                                 <p>32</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">SEX:</h2>
                                                                 <p>F</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">Series:</h2>
                                                                 <p>1</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-green">
                                                                 <h2 className="font-semibold">Images:</h2>
                                                                 <p> 4 (38mb)</p>
                                                             </div>
-
                                                         </div>
-
                                                     </td>
-
                                                     <td colSpan="3" className="px-6 py-4">
-
                                                         <div className="space-y-2 whitespace-nowrap">
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOR:</h2>
                                                                 <p>2023-07-23, 10:03:13</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOU:</h2>
                                                                 <p>2023-07-28, 12:06:23</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOS:</h2>
                                                                 <p>0000-00-00, 00:00:00</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOF:</h2>
                                                                 <p>0000-00-00, 00:00:00</p>
                                                             </div>
-
                                                             <div className="flex items-start gap-x-1 text-[12px] text-danger">
                                                                 <h2 className="font-semibold">RTA:</h2>
                                                                 <p> 2023-07-29, 12:06:23</p>
                                                             </div>
-
                                                         </div>
-
                                                     </td>
-
                                                     <td colSpan="8" className="px-6 py-4 w-full">
-
                                                         <div className="flex items-start gap-x-3">
                                                             <h2 className="text-xs font-semibold">Summary:</h2>
                                                             <p className="text-[12px] text-textColor leading-5">
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                                             </p>
                                                         </div>
-
                                                     </td>
-
                                                 </tr>
                                             )}
-
                                         </>
-
                                     )} />
-
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <PapperWorkModal open={open} setOpen={setOpen} data={paper} />
 
         </>
     );

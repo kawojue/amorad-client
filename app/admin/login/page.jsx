@@ -64,12 +64,11 @@ const page = () => {
 
                                     const response = await authService.adminLogin(values);
                                     const { access_token, ...data } = response;
-                                    const profile =data.data
+                                    const profile = data.data
 
                                     // // SEND TOKEN AND DATA TO REDUX TOOLKIT
                                     const expirationSeconds = 1 * 24 * 60 * 60;
                                     const expire = Math.floor(Date.now() / 1000) + expirationSeconds;
-
 
                                     Cookies.set('admin_token', access_token, { secure: true, sameSite: 'lax' });
                                     Cookies.set('admin_token_exp', expire);
@@ -118,7 +117,7 @@ const page = () => {
                                         color="btn-primary"
                                         className="mt-8 py-3.5 w-full"
                                     >
-                                       <span> Sign In</span>
+                                        <span> Sign In</span>
                                     </Button>
 
                                 </Form>

@@ -1,4 +1,3 @@
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { EachElement } from "@/utils/Each";
 import moment from "moment";
@@ -25,18 +24,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const RadiologistTable = ({ datas }) => {
-
-    // ACTIONS
-    // const [open, setOpen] = useState(null);
-
-    // const toggleDropdown = (index) => {
-    //     if (open == index) {
-    //         setOpen(null);
-    //     } else {
-    //         setOpen(index);
-    //     }
-    // };
+const RadiologistTable = ({ datas, token, fetchData }) => {
 
     return (
         <>
@@ -150,7 +138,7 @@ const RadiologistTable = ({ datas }) => {
                                             </div>
                                         </th>
 
-                                        {/* <th
+                                        <th
                                             scope="col"
                                             className="px-6 py-3 text-right whitespace-nowrap"
                                         >
@@ -159,7 +147,7 @@ const RadiologistTable = ({ datas }) => {
                                                     Action
                                                 </span>
                                             </div>
-                                        </th> */}
+                                        </th>
 
                                     </tr>
 
@@ -247,18 +235,11 @@ const RadiologistTable = ({ datas }) => {
                                                     </div>
                                                 </td>
 
-                                                {/* <td className="relative px-6 py-3 whitespace-nowrap">
+                                                <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <div onClick={() => toggleDropdown(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
-                                                        <span className="block text-xs font-medium">
-                                                            Expand
-                                                        </span>
-                                                        <ChevronDownIcon className="w-3 h-3" />
-                                                    </div>
+                                                    <RadiologistAction fetchData={fetchData} token={token} index={index} data={item} />
 
-                                                    <RadiologistAction index={index} open={open} setOpen={setOpen} />
-
-                                                </td> */}
+                                                </td>
 
                                             </tr>
 

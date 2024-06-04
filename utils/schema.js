@@ -6,8 +6,8 @@ export const LoginSchema = Yup.object({
 });
 
 export const OrganizationRegisterSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  organization_name: Yup.string().required('Organization name is required'),
+  fullname: Yup.string().required('Name is required'),
+  organizationName: Yup.string().required('Organization name is required'),
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
   phone: Yup.string().required('Phone is required'),
@@ -15,7 +15,7 @@ export const OrganizationRegisterSchema = Yup.object().shape({
 });
 
 export const organizationAddressSchema = Yup.object().shape({
-  profession: Yup.string().required('Select a profession'),
+  // profession: Yup.string().required('Select a profession'),
   address: Yup.string().required('Address is required'),
   city: Yup.string().required('City is required'),
   state: Yup.string().required('State is required'),
@@ -33,7 +33,7 @@ export const practitionerRegisterSchema = Yup.object().shape({
 });
 
 export const practitionerAddressSchema = Yup.object().shape({
-  profession: Yup.string().required('Select a profession'),
+  // profession: Yup.string().required('Select a profession'),
   address: Yup.string().required('Address is required'),
   city: Yup.string().required('City is required'),
   state: Yup.string().required('State is required'),

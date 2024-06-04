@@ -1,90 +1,73 @@
-import React, { useEffect, useRef, useState } from 'react';
 import ForwardIcon from "@/components/icons/ForwardIcon";
 import EditIcon from "@/components/icons/EditIcon";
-import TrashIcon from "@/components/icons/TrashIcon";
-import ClockIcon from "@/components/icons/ClockIcon";
+import Link from 'next/link';
+import ActionBar from '../../ActionBar';
+import { useState } from "react";
+import Spinner from "@/components/loader/Spinner";
+import adminService from "@/services/adminService";
+import toast from "react-hot-toast";
+import { getErrorMessage } from "@/utils/errorUtils";
 
-const DoctorAction = ({ open, index, setOpen }) => {
+const DoctorAction = ({ data, token, fetchData }) => {
 
-    const doctorMenu = useRef(null);
+    const [loading, setLoading] = useState(false);
 
-    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+    const toggleStatusChange = async (status, onClose) => {
 
-    useEffect(() => {
-        function updateMenuPosition() {
-            if (doctorMenu.current) {
-                const rect = doctorMenu.current.getBoundingClientRect();
-                const belowSpace = window.innerHeight - rect.bottom;
-                const aboveSpace = rect.top;
+        setLoading(true);
 
-                if (belowSpace < 0 && aboveSpace > rect.height) {
-                    // If there's not enough space below and enough space above, show above
-                    setMenuPosition({
-                        top: `calc(100% - ${rect.height}px)`,
-                        left: 0
-                    });
-                } else {
-                    // Otherwise, default position below
-                    setMenuPosition({
-                        top: '100%',
-                        left: 0
-                    });
-                }
-            }
+        const params = {
+            practitionerId : data?.id,
+            status: status
         }
 
-        updateMenuPosition();
-        window.addEventListener('resize', updateMenuPosition);
+        try {
 
-        return () => {
-            window.removeEventListener('resize', updateMenuPosition);
-        };
-    }, [open]);
+            const response = await adminService.togglePractitioners(params, token)
+            toast.success(response.message);
+            fetchData()
 
-    const handleClickOutside = (event) => {
-        if (doctorMenu.current && !doctorMenu.current.contains(event.target)) {
-            setOpen(false);
+        } catch (error) {
+
+            const message = getErrorMessage(error);
+            toast.error(message);
+
+        } finally {
+            setLoading(false);
+            onClose();
         }
-    };
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
+    }
 
     return (
-        <>
-            {open === index && (
-                <div ref={doctorMenu} style={{ ...menuPosition }} className={`bg-white absolute shadow-soft-xl z-50 py-3 rounded-xl text-textColor whitespace-nowrap top-8 min-w-full duration-300 ${open === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
-                    <div className="space-y-1">
-
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
+        <ActionBar
+            trigger={<span className="block text-xs font-medium">Expand</span>}
+        >
+            {({ onClose }) => (
+                <div className="py-1">
+                    <Link href={`doctors/${data.id}`} passHref>
+                        <div className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer">
                             <ForwardIcon className='w-4 h-4' />
-                            <span>Expand</span>
+                            <span>View Details</span>
                         </div>
+                    </Link>
 
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                            <EditIcon className='w-4 h-4' />
-                            <span>Edit Patient</span>
+                    <button disabled={loading}>
+                        <div
+                            className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => toggleStatusChange(data?.status === 'PENDING' || data?.status === 'SUSPENDED' ? 'ACTIVE' : 'SUSPENDED', onClose)}
+                        >
+                            {loading ? (
+                                <Spinner className='w-3 h-3' />
+                            ) : (
+                                <EditIcon className='w-4 h-4' />
+                            )}
+                            <span>{data?.status === 'PENDING' || data?.status === 'SUSPENDED' ? 'Activate Radiologist' : 'Suspend Radiologist'}</span>
                         </div>
-
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                            <TrashIcon className='w-4 h-4' />
-                            <span>Erase Record</span>
-                        </div>
-
-                        <div className="flex items-center gap-x-2 text-xs hover:bg-[#F4F4FF] cursor-pointer py-1 px-4">
-                            <ClockIcon className='w-4 h-4' />
-                            <span>History</span>
-                        </div>
-
-                    </div>
+                    </button>
                 </div>
             )}
-        </>
+        </ActionBar>
     );
 };
 
