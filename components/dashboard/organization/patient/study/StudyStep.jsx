@@ -52,20 +52,29 @@ const StudyStep = ({ mrn }) => {
                     try {
 
                         const formData = new FormData();
-                        formData.append('body_part', values.body_part);
-                        formData.append('priority', values.priority);
-                        formData.append('cpt_code', values.cpt_code);
-                        formData.append('modality', values.modality);
-                        formData.append('description', values.description);
-                        formData.append('clinical_info', values.clinical_info);
-                        formData.append('site', values.site);
-                        formData.append('access_code', values.access_code);
-                        formData.append('reporting_status', values.reporting_status);
+
+                        const payload = {
+                            body_part: values.body_part,
+                            priority: values.priority,
+                            cpt_code: values.cpt_code,
+                            modality: values.modality,
+                            description: values.description,
+                            clinical_info: values.clinical_info,
+                            site: values.site,
+                            access_code: values.access_code,
+                            reporting_status: values.reporting_status,
+                        }
 
                         if (values.paperworks) {
-                            Array.from(values.paperworks).forEach((file) => {
-                                formData.append('paperworks', file);
-                            });
+                            for (let i = 0; i < values.paperworks.length; i++) {
+                                formData.append('paperworks', values.paperworks[i], values.paperworks[i].name)
+                            }
+                        }
+
+                        for (const key in payload) {
+                            if (payload.hasOwnProperty(key)) {
+                                formData.append(key, payload[key]);
+                            }
                         }
 
                         const response = await organizationService.uploadPatientStudy(mrn, formData, token);

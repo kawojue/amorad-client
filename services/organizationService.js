@@ -56,21 +56,19 @@ const updatePatient = async (id, payload, token) => {
 
 const uploadPatientStudy = async (id, payload, token) => {
     try {
-        const response = await fetch(`https://amorad.onrender.com/center/patient/${id}/study`, {
-            method: 'POST',
+        const res = await axios.post(`https://amorad.onrender.com/center/patient/${id}/study`, payload, {
             headers: {
                 'Authorization': `Bearer ${token}`,
-                // 'Content-Type': 'multipart/form-data' // Do not set this header manually
+                'Content-Type': 'multipart/form-data'
             },
-            body: payload // FormData object is set directly as the body
-        });
+        })
 
-        if (!response.ok) {
-            const errorData = await response.json();
+        if (!res.ok) {
+            const errorData = await res.json();
             throw new Error(errorData.message || 'Something went wrong');
         }
 
-        const data = await response.json();
+        const data = await res.json();
         return data;
     } catch (error) {
         console.error('Error uploading patient study:', error);
