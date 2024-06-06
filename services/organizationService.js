@@ -46,47 +46,48 @@ const updatePatient = async (id, payload, token) => {
 };
 
 // PATIENT STUDIES
-// const uploadPatientStudy = async (id, payload, token) => {
-//     const response = await axios.post(`/center/patient/${id}/study`, payload, {
-//         headers: { Authorization: `Bearer ${token}` },
-//         'Content-Type': 'multipart/form-data'
-//     });
-//     return response.data;
-// };
-
 const uploadPatientStudy = async (id, payload, token) => {
-    try {
-        const res = await axios.post(`https://amorad.onrender.com/center/patient/${id}/study`, payload, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
-            },
-        })
-
-        if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message || 'Something went wrong');
-        }
-
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.error('Error uploading patient study:', error);
-        throw error;
-    }
+    const response = await axios.post(`/center/patient/${id}/study`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+        'Content-Type': 'multipart/form-data'
+    });
+    return response.data;
 };
 
 const updatePatientStudy = async (mrn, studyId, payload, token) => {
     const response = await axios.put(`/center/patient/${mrn}/study/${studyId}/edit`, payload, {
-        headers: { 
-            Authorization: `Bearer ${token}` ,
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
         }
     });
     return response.data;
 };
 
-const designateStudy = async (mrn, studyId, practitionerId, token) => {
-    const response = await axios.patch(`/center/patient/${mrn}/study/${studyId}/${practitionerId}/designate`, {}, {
+// const uploadPatientStudy = async (id, payload, token) => {
+//     try {
+//         const res = await axios.post(`https://amorad.onrender.com/center/patient/${id}/study`, payload, {
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,
+//                 'Content-Type': 'multipart/form-data'
+//             },
+//         })
+
+//         if (!res.ok) {
+//             const errorData = await res.json();
+//             throw new Error(errorData.message || 'Something went wrong');
+//         }
+
+//         const data = await res.json();
+//         return data;
+//     } catch (error) {
+//         console.error('Error uploading patient study:', error);
+//         throw error;
+//     }
+// };
+
+const designateStudy = async (mrn, studyId, practitionerId, status, token) => {
+    const response = await axios.patch(`/center/patient/${mrn}/study/${studyId}/${practitionerId}/designate?=${status}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
@@ -103,6 +104,13 @@ const getPatientStudy = async (mrn, studyId, token) => {
 const getReports = async (token, query) => {
     const response = await axios.get('/center/reports', {
         params: query,
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const getReportAnalytics = async (token) => {
+    const response = await axios.get('/center/analytics/report', {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
@@ -162,6 +170,7 @@ const organizationService = {
     // REPORS
     getReports,
     getReport,
+    getReportAnalytics,
 
     // STAFFS
     getStaffs,

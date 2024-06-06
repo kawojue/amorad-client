@@ -2,6 +2,9 @@ import SearchIcon from '@/components/icons/SearchIcon';
 import React, { useState } from 'react'
 import DatePickerComponent from '../../DatePicker';
 import Button from '@/components/ui/buttons/Button';
+import modality from "@/json/modality"
+import priority from "@/json/priority"
+import { EachElement } from '@/utils/Each';
 
 const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
 
@@ -34,7 +37,7 @@ const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
     }
 
     const handleClear = () => {
-        setFormData(initialFormData); 
+        setFormData(initialFormData);
         onSubmit(null);
     };
 
@@ -48,28 +51,28 @@ const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
 
             <div className="sm:flex sm:items-center rounded-lg mt-3">
 
-                <div className="relative">
+                <div className="relative w-full">
                     <input
                         type="text"
-                        name="patientName"
-                        value={formData.patientName}
+                        name="search"
+                        value={formData.search}
                         onChange={handleInputChange}
-                        className="py-2.5 pl-10 text-[12px]  tracking-tight px-3 block flex-shrink w-full sm:min-w-[250px] lg:min-w-[400px] border-border_color  first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10"
+                        className="py-2.5 pl-10 text-[12px] w-full tracking-tight px-3 border-border_color  first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg relative focus:z-10"
                         placeholder='Search by Patient Name, MRN or Accession'
                     />
                     <div className="absolute  top-[15px] left-3 z-20"> <SearchIcon className='w-4 h-4' color='#586283' /></div>
                 </div>
 
-                <input
+                {/* <input
                     type="text"
                     name="specialist"
                     value={formData.specialist}
                     onChange={handleInputChange}
                     className="py-2.5 text-[12px]  tracking-tight px-3 block w-full border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10"
                     placeholder='Specialist'
-                />
+                /> */}
 
-                <input
+                {/* <input
                     type="text"
                     name="facility"
                     value={formData.facility}
@@ -85,7 +88,7 @@ const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
                     onChange={handleInputChange}
                     className="py-2.5 text-[12px]  tracking-tight px-3 block w-full border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10"
                     placeholder='Description'
-                />
+                /> */}
 
                 <button onClick={handleTypeChange} className="py-2.5 px-4 inline-flex items-center min-w-fit w-full border border-border_color text-xs text-white bg-primary -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg gap-x-2">
                     <SearchIcon className='w-4 h-4' />
@@ -112,7 +115,9 @@ const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
                         className="py-2.5 text-[12px]  tracking-tight px-3 w-full md:w-[130px] border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10"
                     >
                         <option value="" disabled selected>Select Modality</option>
-                        <option value="modality"> Modality</option>
+                        {<EachElement of={modality} render={(item) => (
+                            <option value={item}> {item} </option>
+                        )} />}
                     </select>
 
                     <select
@@ -122,7 +127,9 @@ const AdvanceSearch = ({ setType, onSubmit, initialFormData, setSearch }) => {
                         className="py-2.5 text-[12px]  tracking-tight px-3 w-full md:w-[130px] border-border_color -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none focus:border-none sm:last:rounded-es-none sm:last:rounded-e-lg  relative focus:z-10"
                     >
                         <option value="" disabled selected>Select Priority</option>
-                        <option value="1"> Priority</option>
+                        {<EachElement of={priority} render={(item) => (
+                            <option value={item}> {item} </option>
+                        )} />}
                     </select>
 
                 </div>

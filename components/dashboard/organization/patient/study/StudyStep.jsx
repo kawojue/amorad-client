@@ -15,6 +15,9 @@ import { useSelector } from 'react-redux'
 import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
 import toast from 'react-hot-toast'
 import { getErrorMessage } from '@/utils/errorUtils'
+import modality from '@/json/modality'
+import priority from '@/json/priority'
+import { EachElement } from '@/utils/Each'
 
 const StudyStep = ({ mrn }) => {
 
@@ -78,7 +81,7 @@ const StudyStep = ({ mrn }) => {
                         }
 
                         const response = await organizationService.uploadPatientStudy(mrn, formData, token);
-                        setStudyId(response.data.studyId);
+                        setStudyId(response.data.study_id);
                         toast.success(response.message);
                         setOpen(true)
 
@@ -100,15 +103,13 @@ const StudyStep = ({ mrn }) => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                            <CustomSelect label="Body Part (Procedure Name)" name="body_part">
-                                <option value="" selected disabled> Select the body part being examined </option>
-                                <option value="leg"> Leg </option>
-                                <option value="Oesophagus"> Oesophagus </option>
-                            </CustomSelect>
+                            <CustomInput label="Body Part (Procedure Name)" name="body_part" type="text" placeholder="Body Part (Procedure Name)" />
 
                             <CustomSelect label="Priority" name="priority">
                                 <option value="" selected disabled> Select Priority</option>
-                                <option value="routine"> Routine </option>
+                                {<EachElement of={priority} render={(item) => (
+                                    <option value={item}> {item} </option>
+                                )} />}
                             </CustomSelect>
 
                         </div>
@@ -119,7 +120,9 @@ const StudyStep = ({ mrn }) => {
 
                             <CustomSelect label="Modality" name="modality">
                                 <option value="" selected disabled> Select Modality </option>
-                                <option value="CT"> CT </option>
+                                {<EachElement of={modality} render={(item) => (
+                                    <option value={item}> {item} </option>
+                                )} />}
                             </CustomSelect>
 
 

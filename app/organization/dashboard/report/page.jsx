@@ -1,8 +1,10 @@
 'use client'
 
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 import ReportSearch from '@/components/dashboard/organization/report/ReportSearch'
 import ReportStatus from '@/components/dashboard/organization/report/ReportStatus'
 import ReportTable from '@/components/dashboard/organization/report/ReportTable'
+import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
 import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
 import organizationService from '@/services/organizationService'
 import { removeEmptyFields } from '@/utils/EmptyFields'
@@ -15,10 +17,10 @@ const page = () => {
         page: 1,
         limit: 20,
         sortBy: 'date',
-        patientName: '',
-        specialist: '',
-        facility: '',
-        description: '',
+        // patientName: '',
+        // specialist: '',
+        // facility: '',
+        // description: '',
         startDate: '',
         endDate: '',
         modality: '',
@@ -27,10 +29,12 @@ const page = () => {
         search: ''
     };
 
+    const [search, setSearch] = useState(initialFormData);
+
     const token = useSelector(getOrganizationToken)
     const [loading, setLoading] = useState(false)
     const [datas, setDatas] = useState([])
-    const [search, setSearch] = useState(initialFormData);
+    const [total, setTotal] = useState(0)
     const query = removeEmptyFields(search);
 
     // HANLDE PAGINATION PAGE CHANGE
@@ -45,9 +49,8 @@ const page = () => {
     const fetchData = async () => {
         try {
             const response = await organizationService.getReports(token, query)
-            console.log(response);
-            // setDatas(response?.data);
-            // setTotal(response?.metadata?.totalCount)
+            setDatas(response?.data);
+            setTotal(response?.metadata?.total)
         } catch (error) {
         } finally {
             setLoading(false);
@@ -57,7 +60,7 @@ const page = () => {
     useEffect(() => {
         setLoading(true);
         fetchData();
-    }, [setSearch])
+    }, [search])
 
     const handleSearch = (data) => {
         setSearch(data);
@@ -78,8 +81,30 @@ const page = () => {
             <ReportSearch initialFormData={initialFormData} onSubmit={handleSearch} setSearch={setSearch} />
 
             <div className="bg-white px-2 py-3 rounded-lg">
-                <ReportTable />
+
+                {loading ? (
+
+                    <TableSkeletonLoader count={12} height={40} />
+
+                ) : (
+
+                    <ReportTable token={token} reports={datas} />
+
+                )}
+
             </div>
+
+
+            {/* PAGINATION */}
+            {!loading && datas?.length > 0 && (
+                <DashboardPagination
+                    currentPage={search?.page}
+                    totalPages={total}
+                    perPage={search?.limit}
+                    onChangePage={handlePageChange}
+                    title="Reports"
+                />
+            )}
 
         </>
     )

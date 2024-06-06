@@ -106,11 +106,30 @@ export const studySchema = Yup.object({
   paperworks: Yup.array()
     .min(1, 'At least one file is required')
     .max(5, 'Maximum of 5 files allowed')
-    .test('fileSize', 'Each file must be less than 1MB', value => {
+    .test('fileSize', 'Each file must be less than 10MB', value => {
       if (!value) return true; // Handle case where no files are uploaded
       return value.every(file => file.size <= maxFileSize);
     })
     .required('Please upload at least one file')
+})
+
+export const supdateStudySchema = Yup.object({
+  body_part: Yup.string().required('Body part is required'),
+  priority: Yup.string().required('Priority is required'),
+  cpt_code: Yup.string().required('CPT code is required'),
+  modality: Yup.string().required('Modality is required'),
+  description: Yup.string().required('Description is required'),
+  clinical_info: Yup.string().required('Clinical information is required'),
+  site: Yup.string().required('Site is required'),
+  access_code: Yup.string().optional('Accession number is required'),
+  reporting_status: Yup.string().required('Reporting status is required'),
+  paperworks: Yup.array()
+    .max(5, 'Maximum of 5 files allowed')
+    .test('fileSize', 'Each file must be less than 10MB', value => {
+      if (!value) return true; // Handle case where no files are uploaded
+      return value.every(file => file.size <= maxFileSize);
+    })
+    .optional()
 })
 
 export const referralSchema = Yup.object({

@@ -1,9 +1,10 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
-import reportsData from '@/json/reports'
 import { EachElement } from "@/utils/Each";
 import moment from "moment";
 import PapperWorkModal from "../../PapperWorkModal";
+import ReportAction from "./ReportAction";
+import { calculateAge } from "@/utils/calculateAge";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
@@ -30,7 +31,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const ReportTable = ({ hideName }) => {
+const ReportTable = ({ hideName, reports }) => {
 
     const [expandedRow, setExpandedRow] = useState(null);
     const [open, setOpen] = useState(false);
@@ -59,6 +60,8 @@ const ReportTable = ({ hideName }) => {
                                 <thead className="bg-white rounded-t-xl text-dark">
                                     <tr>
                                         {!hideName && (
+                                            <>
+
                                             <th
                                                 scope="col"
                                                 className="px-6 py-3 text-left whitespace-nowrap"
@@ -69,6 +72,30 @@ const ReportTable = ({ hideName }) => {
                                                     </span>
                                                 </div>
                                             </th>
+
+                                            {/* <th
+                                                scope="col"
+                                                className="px-6 py-3 text-left whitespace-nowrap"
+                                            >
+                                                <div className="flex items-center gap-x-2">
+                                                    <span className="text-xs tracking-tight font-semibold">
+                                                        Patient Phone
+                                                    </span>
+                                                </div>
+                                            </th> */}
+
+                                            <th
+                                                scope="col"
+                                                className="px-6 py-3 text-left whitespace-nowrap"
+                                            >
+                                                <div className="flex items-center gap-x-2">
+                                                    <span className="text-xs tracking-tight font-semibold">
+                                                        Patient Gender
+                                                    </span>
+                                                </div>
+                                            </th>
+
+                                            </>
                                         )}
                                         <th
                                             scope="col"
@@ -183,15 +210,31 @@ const ReportTable = ({ hideName }) => {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-border_color ">
-                                    <EachElement of={reportsData} render={(report, index) => (
+                                    <EachElement of={reports} render={(report, index) => (
                                         <>
                                             <tr key={report.study_id}>
                                                 {!hideName && (
-                                                    <td className="px-6 py-3 whitespace-nowrap">
-                                                        <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                            {report.patient_name}
-                                                        </span>
-                                                    </td>
+                                                    <>
+
+                                                        <td className="px-6 py-3 whitespace-nowrap">
+                                                            <span className="block text-xs pb-0 mb-0 text-dark ">
+                                                                {report?.patient?.fullname}
+                                                            </span>
+                                                        </td>
+
+                                                        {/* <td className="px-6 py-3 whitespace-nowrap">
+                                                            <span className="block text-xs pb-0 mb-0 text-dark ">
+                                                                {report?.patient?.phone}
+                                                            </span>
+                                                        </td> */}
+
+                                                        <td className="px-6 py-3 whitespace-nowrap">
+                                                            <span className="block text-xs pb-0 mb-0 text-dark ">
+                                                                {report?.patient?.gender}
+                                                            </span>
+                                                        </td>
+
+                                                    </>
                                                 )}
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
@@ -209,7 +252,7 @@ const ReportTable = ({ hideName }) => {
                                                 </td>
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
-                                                        <span className="block text-xs text-textColor ">
+                                                        <span className="block text-xs text-textColor capitalize">
                                                             {report.priority}
                                                         </span>
                                                     </div>
@@ -248,14 +291,14 @@ const ReportTable = ({ hideName }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {moment(report.created_at).format('lll')}
+                                                            {moment(report.createdAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {moment(report.updated_at).format('lll')}
+                                                            {moment(report.updatedAt).format('lll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -271,74 +314,94 @@ const ReportTable = ({ hideName }) => {
                                                     </div>
                                                 </td>
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
-                                                    <div onClick={() => toggleRow(index)} className="flex items-center gap-x-2 text-textColor cursor-pointer">
-                                                        <span className="block text-xs font-medium">
-                                                            Expand
-                                                        </span>
-                                                        <ChevronDownIcon className="w-3 h-3" />
-                                                    </div>
+
+                                                    <ReportAction token={token} data={report} index={index} toggleRow={toggleRow} />
+
                                                 </td>
                                             </tr>
+
                                             {expandedRow === index && (
+
                                                 <tr key={`${index}-expanded`} className="bg-secondary">
+
                                                     <td colSpan="2" className="px-6 py-4">
                                                         <div className="space-y-2 whitespace-nowrap">
+
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOB:</h2>
-                                                                <p>1985-01-23</p>
+                                                                <p> {moment(report?.patient?.dob).format('LL')} </p>
                                                             </div>
+
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">Age:</h2>
-                                                                <p>32</p>
+                                                                <p> { calculateAge(report?.patient?.dob) } </p>
                                                             </div>
+
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">SEX:</h2>
                                                                 <p>F</p>
                                                             </div>
+
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
-                                                                <h2 className="font-semibold">Series:</h2>
+                                                                <h2 className="font-semibold">Marital Status:</h2>
                                                                 <p>1</p>
                                                             </div>
-                                                            <div className="flex items-start gap-x-1 text-[12px] text-green">
+
+                                                            {/* <div className="flex items-start gap-x-1 text-[12px] text-green">
                                                                 <h2 className="font-semibold">Images:</h2>
                                                                 <p> 4 (38mb)</p>
-                                                            </div>
+                                                            </div> */}
+
                                                         </div>
                                                     </td>
+
                                                     <td colSpan="3" className="px-6 py-4">
                                                         <div className="space-y-2 whitespace-nowrap">
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOR:</h2>
-                                                                <p>2023-07-23, 10:03:13</p>
+                                                                <p> {moment(report?.createdAt).format('llll')} </p>
                                                             </div>
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">DOU:</h2>
-                                                                <p>2023-07-28, 12:06:23</p>
+                                                                <p> {moment(report?.updatedAt).format('llll')} </p>
                                                             </div>
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
-                                                                <h2 className="font-semibold">DOS:</h2>
-                                                                <p>0000-00-00, 00:00:00</p>
+                                                                <h2 className="font-semibold">Site:</h2>
+                                                                <p> {report?.site} </p>
                                                             </div>
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
-                                                                <h2 className="font-semibold">DOF:</h2>
-                                                                <p>0000-00-00, 00:00:00</p>
+                                                                <h2 className="font-semibold"> Access Code :</h2>
+                                                                <p> {report?.access_code} </p>
                                                             </div>
-                                                            <div className="flex items-start gap-x-1 text-[12px] text-danger">
+                                                            {/* <div className="flex items-start gap-x-1 text-[12px] text-danger">
                                                                 <h2 className="font-semibold">RTA:</h2>
                                                                 <p> 2023-07-29, 12:06:23</p>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </td>
-                                                    <td colSpan="8" className="px-6 py-4 w-full">
-                                                        <div className="flex items-start gap-x-3">
-                                                            <h2 className="text-xs font-semibold">Summary:</h2>
+
+                                                    <td colSpan="8" className="px-6 py-4 w-full space-y-5">
+
+                                                        <div className="flex items-center gap-x-3">
+                                                            <h2 className="text-xs font-semibold">Clinical Info:</h2>
                                                             <p className="text-[12px] text-textColor leading-5">
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                                {report?.clinical_info}
                                                             </p>
                                                         </div>
+
+                                                        <div className="flex items-center gap-x-3">
+                                                            <h2 className="text-xs font-semibold">Description:</h2>
+                                                            <p className="text-[12px] text-textColor leading-5">
+                                                                {report?.description}
+                                                            </p>
+                                                        </div>
+
                                                     </td>
+
                                                 </tr>
+
                                             )}
+
                                         </>
                                     )} />
                                 </tbody>
