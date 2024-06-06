@@ -16,10 +16,14 @@ import SettingsIcon from '@/components/icons/SettingsIcon';
 import SupportIcon from '@/components/icons/SupportIcon';
 import LogoutIcon from '@/components/icons/LogoutIcon';
 import UserCircleIcon from '@/components/icons/UserCircleIcon';
+import Avatar from '@/components/Avatar';
+import { OrganizationLogout } from '@/redux/features/slices/organization/OrganizationAuthSlice';
+import { useDispatch } from 'react-redux';
 
-const SideBar = ({ open, setOpen }) => {
+const SideBar = ({ open, setOpen, user }) => {
 
     const pathname = usePathname()
+    const dispatch = useDispatch()
 
     const links = [
         {
@@ -168,16 +172,17 @@ const SideBar = ({ open, setOpen }) => {
 
                 <div className="flex items-center gap-x-3 px-4 pt-12">
 
-                    <div className="h-10 w-10 rounded-full font-semibold p-3 text-xs bg-white flex items-center justify-center">
-                        DP
-                    </div>
+                    <Avatar name={user?.fullname} size="h-10 w-10" bgColor="bg-white" textColor="text-dark" fontSize="text-base" />
 
-                    <div className="flex-1">
-                        <div className='text-white text-xs font-medium'>Dominic Praise</div>
-                        <p className='text-white text-[11px] font-light -mt-2'>dominic@gmail.com</p>
-                    </div>
+                    <Link href='/organization/dashboard/settings' className="flex-1">
+                        <span className='text-white text-xs font-medium overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                            {user?.fullname}
+                        </span>
 
-                    <div className="cursor-pointer">
+                        <p className='text-white text-[11px] font-light -mt-2'> {user?.email} </p>
+                    </Link>
+
+                    <div onClick={() => dispatch(OrganizationLogout())} className="cursor-pointer">
                         <LogoutIcon className='w-6 h-6' color='#FFF' />
                     </div>
 

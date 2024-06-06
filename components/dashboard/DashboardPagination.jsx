@@ -36,7 +36,7 @@ const DashboardPagination = ({ currentPage, totalPages, perPage, onChangePage, t
     };
 
     return (
-        <div className="flex px-5 gap-y-3 items-center justify-between flex-wrap text-xs">
+        <div className="flex px-5 gap-y-3 items-center justify-between flex-wrap text-xs mt-5">
 
             <p className='text-blue/60 text-xs font-medium'>
                 Show {startingOrder} to {endingOrder} of {totalPages}

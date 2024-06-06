@@ -8,11 +8,35 @@ import CustomSelect from '@/components/FormElements/CustomSelect'
 import { patientSchema } from '@/utils/schema'
 import { useRouter } from 'next/navigation'
 import Breadcrumb from '@/components/dashboard/organization/Breadcrumb'
+import organizationService from '@/services/organizationService'
+import useFetchData from '@/utils/useFetchData'
+import { useSelector } from 'react-redux'
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
+import CustomDateInput from '@/components/FormElements/CustomDateInput'
+import toast from 'react-hot-toast'
+import { getErrorMessage } from '@/utils/errorUtils'
 
-const page = () => {
+const page = ({ params }) => {
 
-    const [loading, setLoading] = useState(false)
+    const { mrn } = params
+    const token = useSelector(getOrganizationToken)
+
+    const fetchFunction = (mrn, token) => organizationService.getPatient(mrn, token);
+    const { data, loading, error, refetch } = useFetchData(fetchFunction,
+        [mrn, token],
+        [mrn]
+    );
+
+    const [loadingBtn, setLoading] = useState(false)
     const router = useRouter()
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
 
@@ -25,25 +49,38 @@ const page = () => {
                     <Breadcrumb title="Edit Patient Record " desc="Kindly note that an email containing login credentials and a link to the report download page will be sent to the patient " />
 
                     <Formik
+                        enableReinitialize={true}
                         initialValues={{
-                            name: "",
-                            email: "",
-                            nin: "",
-                            phone: "",
-                            dob: "",
-                            gender: "",
-                            marital: "",
-                            address: "",
-                            zip_code: ""
+                            fullname: data?.fullname || "",
+                            email: data?.email || "",
+                            nin: data?.nin || "",
+                            phone: data?.phone || "",
+                            dob: data?.dob || "",
+                            gender: data?.gender || "",
+                            marital_status: data?.maritalStatus || "",
+                            address: data?.address || "",
+                            zip_code: data?.zip_code || ""
                         }}
                         validationSchema={patientSchema}
                         onSubmit={async (values, actions) => {
 
                             setLoading(true);
 
-                            setTimeout(() => {
-                                router.push(`/organization/dashboard/patient`)
-                            }, 1000);
+                            try {
+
+                                const response = await organizationService.updatePatient(mrn, values, token)
+
+                                toast.success(response.message);
+                                router.push('/organization/dashboard/patient')
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message, { duration: 5000 });
+
+                            } finally {
+                                setLoading(false);
+                            }
 
                         }}
                     >
@@ -54,7 +91,7 @@ const page = () => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                                    <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
+                                    <CustomInput label="Full Name" name="fullname" type="text" placeholder="Dominic Praise" />
 
                                     <CustomInput label="Email address" name="email" type="email" placeholder="dominic@mail.com" />
 
@@ -70,24 +107,25 @@ const page = () => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                                    <CustomInput label="Date of Birth" name="dob" type="date" placeholder="Choose Date" />
+                                    <CustomDateInput label="Date of Birth" name="dob" placeholder="Choose Date" />
 
                                     <CustomSelect label="Gender" name="gender">
-                                        <option value="" selected disabled> Select Gender </option>
-                                        <option value="male"> Male </option>
-                                        <option value="female"> Female </option>
-                                        <option value="other"> Other </option>
+                                        <option value="" disabled>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </CustomSelect>
 
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                                    <CustomSelect label="Marital Status" name="marital">
-                                        <option value="" selected disabled> Select Marital Status </option>
-                                        <option value="single"> Single </option>
-                                        <option value="married"> Married </option>
-                                        <option value="divorce"> Divorce </option>
+                                    <CustomSelect label="Marital Status" name="marital_status">
+                                        <option value="" disabled>Select Marital Status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                        <option value="Separated">Separated</option>
                                     </CustomSelect>
 
                                     <CustomInput label="Zip Code" name="zip_code" type="text" placeholder="11001" />
@@ -105,14 +143,14 @@ const page = () => {
                                         color="text-success font-medium"
                                         className=" py-3 w-full order-2 sm:order-1"
                                     >
-                                        Cancel Report
+                                        Cancel
                                     </Button>
 
                                     <Button
                                         type="submit"
                                         color="btn-success"
                                         className=" py-3 w-full order-1 sm:order-2"
-                                        loading={loading}
+                                        loading={loadingBtn}
                                     >
                                         Save
                                     </Button>

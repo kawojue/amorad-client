@@ -1,9 +1,24 @@
+'use client'
+import Counter from '@/components/Counter'
 import FacilityIcon from '@/components/icons/FacilityIcon'
 import PeopleIcon from '@/components/icons/PeopleIcon'
 import ReportIcon from '@/components/icons/ReportIcon'
-import React from 'react'
+import { getAnalyticsData } from '@/redux/features/slices/organization/organizationAnalyticsSlice'
+import { fetchAnalyticsData } from '@/redux/features/thunks/organization/analyticsThunks'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Overview = () => {
+
+    const response = useSelector(getAnalyticsData)
+    const { patientCounts, totalDicomCounts, totalStaffs } = response || {};
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchAnalyticsData());
+    }, [dispatch]);
+
     return (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-5 mt-6">
 
@@ -18,7 +33,7 @@ const Overview = () => {
                     <h2 className="text-textColor">Dicoms</h2>
                 </div>
 
-                <h2 className='text-2xl font-medium pb-1'>330,340.00</h2>
+                <h2 className='text-2xl font-medium pb-1'><Counter value={totalDicomCounts} /></h2>
 
             </div>
 
@@ -33,7 +48,7 @@ const Overview = () => {
                     <h2 className="text-textColor">Patients</h2>
                 </div>
 
-                <h2 className='text-2xl font-medium pb-1'>8,000</h2>
+                <h2 className='text-2xl font-medium pb-1'><Counter value={patientCounts} /></h2>
 
             </div>
 
@@ -45,10 +60,10 @@ const Overview = () => {
                         <PeopleIcon className='w-4 h-4' color='#1D2329' />
                     </div>
 
-                    <h2 className="text-textColor">Patient Studies</h2>
+                    <h2 className="text-textColor">Staffs</h2>
                 </div>
 
-                <h2 className='text-2xl font-medium pb-1'>23,000</h2>
+                <h2 className='text-2xl font-medium pb-1'> <Counter value={totalStaffs} /> </h2>
 
             </div>
 

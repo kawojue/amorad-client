@@ -4,8 +4,8 @@ import { RecordsData, RecordsOptions } from '@/utils/charts'
 import { ArrowUpRightIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import BarChart from '@/components/charts/BarChart'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchChartData } from '@/redux/features/thunks/admin/analyticsThunks'
-import { getChartData } from '@/redux/features/slices/admin/analyticsSlice'
+import { fetchChartData } from '@/redux/features/thunks/organization/analyticsThunks'
+import { getChartData } from '@/redux/features/slices/organization/organizationAnalyticsSlice'
 
 const RecordChart = () => {
 

@@ -4,7 +4,7 @@ import Button from '@/components/ui/buttons/Button'
 import { useRouter } from 'next/navigation'
 import Breadcrumb from '../../Breadcrumb'
 
-const ReportModal = ({ open, setOpen, onNextStep }) => {
+const ReportModal = ({ open, setOpen, studyID }) => {
 
     const closeDialog = () => {
         setOpen(false)
@@ -22,7 +22,7 @@ const ReportModal = ({ open, setOpen, onNextStep }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-8">
 
                     <Button
-                        onClick={() => router.push('/organization/dashboard/patient')}
+                        onClick={() => router.push('/organization/dashboard/report')}
                         type="button"
                         color="text-success font-medium"
                         className=" py-3 w-full order-2 sm:order-1"
@@ -34,7 +34,7 @@ const ReportModal = ({ open, setOpen, onNextStep }) => {
                         type="button"
                         color="btn-success"
                         className=" py-3 w-full order-1 sm:order-2"
-                        onClick={onNextStep}
+                        onClick={() => router.push(`study/${studyID}/assign`)}
                     >
                         Assign To Doctor
                     </Button>

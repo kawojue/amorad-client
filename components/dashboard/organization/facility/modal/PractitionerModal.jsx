@@ -7,8 +7,12 @@ import CustomInput from '@/components/FormElements/CustomInput'
 import CustomPhoneInput from '@/components/FormElements/CustomPhoneInput'
 import CustomSelect from '@/components/FormElements/CustomSelect'
 import { addPractitioner } from '@/utils/schema'
+import CustomPassword from '@/components/FormElements/CustomPassword'
+import organizationService from '@/services/organizationService'
+import toast from 'react-hot-toast'
+import { getErrorMessage } from '@/utils/errorUtils'
 
-const PractitionerModal = ({ open, setOpen }) => {
+const PractitionerModal = ({ open, setOpen, profession, token }) => {
 
     const closeDialog = () => {
         setOpen(false)
@@ -27,26 +31,37 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                     <Formik
                         initialValues={{
-                            name: '',
+                            fullname: '',
                             phone: '',
-                            profession: '',
-                            practice_number: '',
+                            profession: profession ? profession : '',
+                            practiceNumber: '',
                             email: '',
                             address: '',
                             country: '',
                             state: '',
                             city: '',
-                            zip_code: ''
+                            zip_code: '',
+                            password: ''
                         }}
                         validationSchema={addPractitioner}
                         onSubmit={async (values, actions) => {
 
                             setLoading(true);
 
-                            setTimeout(() => {
-                                setLoading(false)
+                            try {
+
+                                const response = await organizationService.addPractitioner(values, token)
+                                toast.success(response.message);
                                 setOpen(false)
-                            }, 1000);
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message, { duration: 5000 });
+
+                            } finally {
+                                setLoading(false);
+                            }
 
                         }}
                     >
@@ -57,7 +72,7 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                                    <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
+                                    <CustomInput label="Full Name" name="fullname" type="text" placeholder="Dominic Praise" />
 
                                     <CustomPhoneInput label="Phone Number" name="phone" type="text" placeholder="+234 123 4567 890" />
 
@@ -71,7 +86,7 @@ const PractitionerModal = ({ open, setOpen }) => {
                                         <option value="radiologist"> Radiologist </option>
                                     </CustomSelect>
 
-                                    <CustomInput label="Practice Number" name="practice_number" type="text" placeholder="What’s your practice number" />
+                                    <CustomInput label="Practice Number" name="practiceNumber" type="text" placeholder="What’s your practice number" />
 
                                 </div>
 
@@ -95,6 +110,8 @@ const PractitionerModal = ({ open, setOpen }) => {
 
                                 </div>
 
+                                <CustomPassword label="Password" name="password" placeholder="Enter Password" />
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-5">
 
                                     <Button
@@ -103,9 +120,9 @@ const PractitionerModal = ({ open, setOpen }) => {
                                         color="text-success font-medium"
                                         className=" py-3 w-full order-2 sm:order-1"
                                     >
-                                        Cancel Record
+                                        Cancel
                                     </Button>
- 
+
                                     <Button
                                         type="submit"
                                         color="btn-success"

@@ -11,7 +11,9 @@ const page = ({ params }) => {
         <>
 
             <div className="bg-white px-2 py-3 rounded-lg">
+                
                 <ReportTable hideName={true} />
+
             </div>
 
         </>

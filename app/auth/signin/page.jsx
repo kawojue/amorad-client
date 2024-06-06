@@ -3,11 +3,17 @@ import CustomInput from '@/components/FormElements/CustomInput';
 import CustomPassword from '@/components/FormElements/CustomPassword';
 import AuthHeader from '@/components/auth/AuthHeader';
 import Button from '@/components/ui/buttons/Button';
+import { setOrganization, setToken } from '@/redux/features/slices/organization/OrganizationAuthSlice';
+import authService from '@/services/authService';
+import { getExpirationTimestamp } from '@/utils/Expires';
+import { getErrorMessage } from '@/utils/errorUtils';
 import { LoginSchema } from '@/utils/schema';
 import { Form, Formik } from 'formik';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 const page = () => {
@@ -15,14 +21,6 @@ const page = () => {
     const [loading, setLoading] = useState(false)
     const router = useRouter();
     const dispatch = useDispatch()
-
-    // const { isAuthenticated } = useAuthMiddleware();
-
-    // useEffect(() => {
-    //     if (isAuthenticated()) {
-    //         router.replace('/admin/dashboard');
-    //     }
-    // }, [isAuthenticated, router]);
 
     return (
         <>
@@ -58,25 +56,27 @@ const page = () => {
 
                                 try {
 
-                                    const response = await authService.adminLogin(values);
+                                    const response = await authService.Login(values);
+
                                     const { access_token, ...data } = response;
                                     const profile = data.data
 
                                     // // SEND TOKEN AND DATA TO REDUX TOOLKIT
-                                    const expirationSeconds = 1 * 24 * 60 * 60;
-                                    const expire = Math.floor(Date.now() / 1000) + expirationSeconds;
+                                    const expire = getExpirationTimestamp(1)
 
-                                    Cookies.set('admin_token', access_token, { secure: true, sameSite: 'lax' });
-                                    Cookies.set('admin_token_exp', expire);
-                                    Cookies.set('admin_profile', JSON.stringify(profile));
+                                    if (profile?.role == 'centerAdmin') {
+                                        Cookies.set('organization_token', access_token, { secure: true, sameSite: 'lax' });
+                                        Cookies.set('organization_token_exp', expire);
+                                        Cookies.set('organization_profile', JSON.stringify(profile));
 
-                                    dispatch(setToken(access_token));
-                                    dispatch(setUser(profile));
+                                        dispatch(setToken(access_token));
+                                        dispatch(setOrganization(profile));
+                                        router.replace('/organization/dashboard')
+                                        toast.success('User logged in successfully!');
 
-                                    // Navigate
-                                    router.replace('/organization/dashboard')
-
-                                    toast.success('User logged in successfully!');
+                                    } else {
+                                        alert("Come back later")
+                                    }
 
                                 } catch (error) {
 

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import Button from '../../../ui/buttons/Button';
+import Button from '../../ui/buttons/Button';
+import adminService from '@/services/adminService';
 import toast from 'react-hot-toast';
 import { getErrorMessage } from '@/utils/errorUtils';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
+import { setUser } from '@/redux/features/slices/adminAuthSlice';
 import { useDispatch } from 'react-redux';
 import Avatar from '@/components/Avatar';
+import { setOrganization } from '@/redux/features/slices/organization/OrganizationAuthSlice';
 
-const ProfileImage = () => {
+const ProfileImage = ({ profile, token }) => {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -14,7 +18,7 @@ const ProfileImage = () => {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [loading, setLoading] = useState(false)
 
-    const avatar = null
+    const avatar = profile?.avatar
 
     const dispatch = useDispatch()
 
@@ -57,36 +61,54 @@ const ProfileImage = () => {
 
         setLoading(true);
 
-        // try {
+        try {
 
-        //     const response = await adminService.uploadProfileImage(formData, token);
+            const response = await adminService.uploadProfileImage(formData, token);
 
-        //     const profileCookie = Cookies.get('admin_profile');
-        //     const profile = profileCookie ? JSON.parse(profileCookie) : {};
+            // ADMIN USER FROM COOKIES
+            const AdminprofileCookie = Cookies.get('admin_profile');
+            const Adminprofile = AdminprofileCookie ? JSON.parse(AdminprofileCookie) : {};
 
-        //     // Update the avatar URL in the profile object
-        //     if (!profile.avatar || !profile.avatar.url) {
-        //         profile.avatar = {
-        //             url: response?.data?.url
-        //         };
-        //     } else {
-        //         profile.avatar.url = response?.data?.url;
-        //     }
+            // ORGANIZATION USER FROM COOKIES
+            const OrganizationprofileCookie = Cookies.get('organization_profile');
+            const Organizationprofile = OrganizationprofileCookie ? JSON.parse(OrganizationprofileCookie) : {};
 
-        //     // Store updated profile data in the cookie
-        //     Cookies.set('admin_profile', JSON.stringify(profile));
-        //     dispatch(setUser(profile));
+            if (profile.role == 'admin') {
 
-        //     toast.success("Profile image uplaod!");
+                if (!Adminprofile.avatar || !Adminprofile.avatar.url) {
+                    Adminprofile.avatar = {
+                        url: response?.data?.url
+                    };
+                } else {
+                    Adminprofile.avatar.url = response?.data?.url;
+                }
+                Cookies.set('admin_profile', JSON.stringify(Adminprofile));
+                dispatch(setUser(Adminprofile));
 
-        // } catch (error) {
+            } else if (profile.role == 'centerAdmin') {
 
-        //     const message = getErrorMessage(error);
-        //     toast.error(message);
+                if (!Organizationprofile.avatar || !Organizationprofile.avatar.url) {
+                    Organizationprofile.avatar = {
+                        url: response?.data?.url
+                    };
+                } else {
+                    Organizationprofile.avatar.url = response?.data?.url;
+                }
+                Cookies.set('organization_profile', JSON.stringify(Organizationprofile));
+                dispatch(setOrganization(Organizationprofile));
 
-        // } finally {
-        //     setLoading(false);
-        // }
+            }
+
+            toast.success("Profile image uplaod!");
+
+        } catch (error) {
+
+            const message = getErrorMessage(error);
+            toast.error(message);
+
+        } finally {
+            setLoading(false);
+        }
 
     };
 
@@ -107,7 +129,7 @@ const ProfileImage = () => {
                                 alt="Profile Image"
                             />
                         ) : (
-                            <Avatar name="Adeoye Solomon" size="h-24 w-24" bgColor="bg-primary" textColor="text-white" fontSize="text-2xl" />
+                            <Avatar name={profile?.fullname} size="h-24 w-24" bgColor="bg-primary" textColor="text-white" fontSize="text-2xl" />
                         )
                     )}
 

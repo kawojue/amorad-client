@@ -1,19 +1,21 @@
-// import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
-import staffs from '@/json/staff'
+import React from "react";
 import { EachElement } from "@/utils/Each";
-import Button from "@/components/ui/buttons/Button";
-// import FacilityAction from "./FacilityAction";
+import FacilityAction from "./FacilityAction";
+import moment from "moment";
 
 const getStatusStyles = (status) => {
     let textColor, bgColor;
 
     switch (status) {
-        case "active":
+        case "ACTIVE":
             textColor = "text-[#35C332]";
             bgColor = "bg-[#F4FFF3]";
             break;
-        case "suspended":
+        case "PENDING":
+            textColor = "text-[#6667FA]";
+            bgColor = "bg-[#F4F7FE]";
+            break;
+        case "SUSPENDED":
             textColor = "text-danger";
             bgColor = "bg-[#FEEAEA]";
             break;
@@ -22,18 +24,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const FacilityTable = () => {
-
-    // ACTIONS
-    // const [open, setOpen] = useState(null);
-
-    // const toggleDropdown = (index) => {
-    //     if (open == index) {
-    //         setOpen(null);
-    //     } else {
-    //         setOpen(index);
-    //     }
-    // };
+const FacilityTable = ({ token, staffs, fetchData }) => {
 
     return (
         <>
@@ -88,6 +79,17 @@ const FacilityTable = () => {
                                             <div className="flex items-center gap-x-2">
                                                 <span className="text-xs tracking-tight font-semibold ">
                                                     Phone
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th
+                                            scope="col"
+                                            className="px-6 py-3 text-left whitespace-nowrap"
+                                        >
+                                            <div className="flex items-center gap-x-2">
+                                                <span className="text-xs tracking-tight font-semibold ">
+                                                    Role
                                                 </span>
                                             </div>
                                         </th>
@@ -161,7 +163,7 @@ const FacilityTable = () => {
 
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <span className="block text-xs pb-0 mb-0 text-dark ">
-                                                        {staff.name}
+                                                        {staff.fullname}
                                                     </span>
                                                 </td>
 
@@ -197,6 +199,14 @@ const FacilityTable = () => {
                                                     </div>
                                                 </td>
 
+                                                <td className="px-6 py-3 whitespace-nowrap">
+                                                    <div className="">
+                                                        <span className="block capitalize text-xs text-textColor ">
+                                                            {staff.role}
+                                                        </span>
+                                                    </div>
+                                                </td>
+
                                                 {/* <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
@@ -216,7 +226,7 @@ const FacilityTable = () => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {staff.reg_date}
+                                                            { moment(staff.createdAt).format('llll') }
                                                         </span>
                                                     </div>
                                                 </td>
@@ -235,24 +245,7 @@ const FacilityTable = () => {
 
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    {staff?.status == 'active' ? (
-                                                        <Button title="Suspend Facility" className="text-danger bg-[#FEEAEA]">
-                                                            Suspend
-                                                        </Button>
-                                                    ) : (
-                                                        <Button title="Activate Facility" className="text-[#35C332] bg-[#F4FFF3]">
-                                                            Activate
-                                                        </Button>
-                                                    )}
-
-                                                    {/* <div className="flex items-center gap-x-2 text-textColor cursor-pointer">
-                                                        <span className="block text-xs font-medium">
-                                                            Expand
-                                                        </span>
-                                                        <ChevronDownIcon className="w-3 h-3" />
-                                                    </div> */}
-
-                                                    {/* <FacilityAction index={index} open={open} setOpen={setOpen} /> */}
+                                                    <FacilityAction fetchData={fetchData} token={token} index={index} data={staff} />
 
                                                 </td>
 

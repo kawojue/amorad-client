@@ -47,7 +47,7 @@ const SortByDropdown = ({ onSortChange }) => {
                     {/* <button onClick={() => handleSortOptionClick('date')} className="px-3 btn rounded-lg bg-[#FFFAED] text-[#97741A] w-full py-2 text-[11px] text-left">Date</button> */}
                     <button onClick={() => handleSortOptionClick('name')} className="px-3 btn rounded-lg bg-[#EDFCFF] text-[#093A44] w-full py-2 text-[11px] text-left">Alphabetical (Name)</button>
                     
-                    <button onClick={() => handleSortOptionClick('date')} className="px-3 btn rounded-lg bg-[#FFEDED] text-danger w-full py-2 text-[11px] text-left">Oldest</button>
+                    <button onClick={() => handleSortOptionClick('date')} className="px-3 btn rounded-lg bg-[#FFEDED] text-danger w-full py-2 text-[11px] text-left">Latest</button>
 
                 </div>
 

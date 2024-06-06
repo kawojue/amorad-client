@@ -1,13 +1,16 @@
+'use client'
 import React, { useState } from 'react'
 import { Form, Formik } from 'formik'
 import CustomSelect from '@/components/FormElements/CustomSelect'
 import Button from '@/components/ui/buttons/Button'
 import { referralSchema } from '@/utils/schema'
 import Breadcrumb from '../../Breadcrumb'
+import { useRouter } from 'next/navigation'
 
-const ReferralStep = ({ onPrevStep }) => {
+const ReferralStep = () => {
 
     const [ loading, setLoading ] = useState(false)
+    const router = useRouter()
 
     return (
         <>
@@ -42,12 +45,12 @@ const ReferralStep = ({ onPrevStep }) => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-8">
 
                             <Button
-                                onClick={onPrevStep}
+                                onClick={() => router.push('/organization/dashboard/report')}
                                 type="button"
                                 color="text-success font-medium"
                                 className=" py-3 w-full order-2 sm:order-1"
                             >
-                                Back to Previous
+                                Cancel
                             </Button>
 
                             <Button
@@ -56,7 +59,7 @@ const ReferralStep = ({ onPrevStep }) => {
                                 className=" py-3 w-full order-1 sm:order-2"
                                 loading={loading}
                             >
-                                Submit Record
+                                Submit
                             </Button>
 
                         </div>

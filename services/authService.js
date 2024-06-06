@@ -6,6 +6,11 @@ const adminLogin = async (payload) => {
     return response.data;
 };
 
+const Login = async (payload) => {
+    const response = await axios.post("/auth/login", payload);
+    return response.data;
+};
+
 // REGISTER ORGANIZATION
 const registerOrganization = async (payload) => {
     const response = await axios.post("/auth/register/organization", payload);
@@ -25,6 +30,7 @@ const forgottenPassword = async (payload) => {
 };
 
   const authService = {
+    Login,
     adminLogin,
     registerPractitioner,
     registerOrganization,

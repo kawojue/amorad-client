@@ -1,4 +1,5 @@
 'use client'
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 import FacilitySearch from '@/components/dashboard/organization/facility/FacilitySearch'
 import FacilityTable from '@/components/dashboard/organization/facility/FacilityTable'
 import AdminModal from '@/components/dashboard/organization/facility/modal/AdminModal'
@@ -6,26 +7,45 @@ import PractitionerModal from '@/components/dashboard/organization/facility/moda
 import HealthIcon from '@/components/icons/HealthIcon'
 import Profileicon from '@/components/icons/Profileicon'
 import UserCircleIcon from '@/components/icons/UserCircleIcon'
+import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
+import organizationService from '@/services/organizationService'
+import { removeEmptyFields } from '@/utils/EmptyFields'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const page = () => {
 
+    const token = useSelector(getOrganizationToken)
+    const [loading, setLoading] = useState(false)
+    const [staffs, setStaffs] = useState([])
+    const [total, setTotal] = useState(0)
+
     const initialFormData = {
+        page: 1,
+        limit: 2,
         sortBy: '',
-        search: ''
+        search: '',
+        role: 'centerAdmin'
     };
 
     const [search, setSearch] = useState(initialFormData);
+    const query = removeEmptyFields(search);
 
     const datas = [
+        { name: 'Center Admin', value: 'centerAdmin', icon: <UserCircleIcon className='w-4 h-4' /> },
         { name: 'Doctors', value: 'doctor', icon: <HealthIcon className='w-4 h-4' /> },
-        { name: 'Radiologists', value: 'radiologists', icon: <Profileicon className='w-4 h-4' /> },
-        { name: 'Center Admin', value: 'center-admin', icon: <UserCircleIcon className='w-4 h-4' /> }
+        { name: 'Radiologists', value: 'radiologist', icon: <Profileicon className='w-4 h-4' /> }
     ];
+
     const [activeTab, setActiveTab] = useState(datas[0].value);
 
     const handleTabClick = (status) => {
+        setSearch((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            role: status,
+        }));
         setActiveTab(status);
     };
 
@@ -33,7 +53,7 @@ const page = () => {
     const [adminOpen, setAdminOpen] = useState(false)
 
     const handleOpen = () => {
-        if (activeTab === 'doctor' || activeTab === 'radiologists') {
+        if (activeTab === 'doctor' || activeTab === 'radiologist') {
             setPractitionerOpen(true);
             setAdminOpen(false);
         } else {
@@ -41,6 +61,31 @@ const page = () => {
             setPractitionerOpen(false);
         }
     }
+
+    // HANLDE PAGINATION PAGE CHANGE
+    const handlePageChange = (newPage) => {
+        setSearch((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            page: newPage,
+        }));
+    };
+
+    // FETCH DATA
+    const fetchData = async () => {
+        try {
+            const response = await organizationService.getStaffs(token, query)
+            setStaffs(response?.data);
+            setTotal(response?.metadata?.total)
+        } catch (error) {
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData();
+    }, [search])
 
     return (
         <>
@@ -77,14 +122,35 @@ const page = () => {
             <FacilitySearch data={activeTab} setSearch={setSearch} handleOpen={handleOpen} />
 
             <div className="bg-white px-2 py-3 rounded-lg">
-                <FacilityTable />
+
+                {loading ? (
+
+                    <TableSkeletonLoader count={12} height={40} />
+
+                ) : (
+
+                    <FacilityTable staffs={staffs} token={token} fetchData={fetchData} />
+
+                )}
+
             </div>
 
+            {/* PAGINATION */}
+            {!loading && datas.length > 0 && (
+                <DashboardPagination
+                    currentPage={search?.page}
+                    totalPages={total}
+                    perPage={search?.limit}
+                    onChangePage={handlePageChange}
+                    title="Patients"
+                />
+            )}
+
             {/* ADMIN */}
-            <AdminModal open={adminOpen} setOpen={setAdminOpen} />
+            <AdminModal token={token} open={adminOpen} setOpen={setAdminOpen} />
 
             {/* PRATICES */}
-            <PractitionerModal open={practitionerOpen} setOpen={setPractitionerOpen} />
+            <PractitionerModal token={token} profession={activeTab} open={practitionerOpen} setOpen={setPractitionerOpen} />
 
         </>
     )

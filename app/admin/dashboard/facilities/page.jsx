@@ -19,7 +19,7 @@ const page = () => {
     const initialFormData = {
         page: 1,
         limit: 15,
-        sortBy: 'name',
+        sortBy: 'date',
         search: '',
         status: '',
         startDate: '',
@@ -41,8 +41,8 @@ const page = () => {
     const fetchData = async () => {
         try {
             const response = await adminService.getFacilities(token, query)
-            setDatas(response?.data?.facilities);
-            setTotal(response?.data?.total)
+            setDatas(response?.data);
+            setTotal(response?.metadata?.total)
         } catch (error) {
         } finally {
             setLoading(false);

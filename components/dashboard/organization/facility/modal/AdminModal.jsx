@@ -6,8 +6,12 @@ import Button from '@/components/ui/buttons/Button'
 import CustomInput from '@/components/FormElements/CustomInput'
 import CustomPhoneInput from '@/components/FormElements/CustomPhoneInput'
 import { addCenterAdmin } from '@/utils/schema'
+import CustomPassword from '@/components/FormElements/CustomPassword'
+import organizationService from '@/services/organizationService'
+import { getErrorMessage } from '@/utils/errorUtils'
+import toast from 'react-hot-toast'
 
-const AdminModal = ({ open, setOpen }) => {
+const AdminModal = ({ open, setOpen, token, }) => {
 
     const closeDialog = () => {
         setOpen(false)
@@ -26,19 +30,30 @@ const AdminModal = ({ open, setOpen }) => {
 
                     <Formik
                         initialValues={{
-                            name: '',
+                            fullname: '',
                             phone: '',
                             email: '',
+                            password: '',
                         }}
                         validationSchema={addCenterAdmin}
                         onSubmit={async (values, actions) => {
 
-                            setLoading(true);
+                            setLoading(true)
 
-                            setTimeout(() => {
-                                setLoading(false)
+                            try {
+
+                                const response = await organizationService.addAdmin(values, token)
+                                toast.success(response.message);
                                 setOpen(false)
-                            }, 1000);
+
+                            } catch (error) {
+
+                                const message = getErrorMessage(error);
+                                toast.error(message, { duration: 5000 });
+
+                            } finally {
+                                setLoading(false);
+                            }
 
                         }}
                     >
@@ -49,13 +64,15 @@ const AdminModal = ({ open, setOpen }) => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-4">
 
-                                    <CustomInput label="Full Name" name="name" type="text" placeholder="Dominic Praise" />
+                                    <CustomInput label="Full Name" name="fullname" type="text" placeholder="Dominic Praise" />
 
                                     <CustomPhoneInput label="Phone Number" name="phone" type="text" placeholder="+234 123 4567 890" />
 
                                 </div>
 
                                 <CustomInput label="Email Address" name="email" type="email" placeholder="Enter email address" />
+
+                                <CustomPassword label="Password" name="password" placeholder="Enter Password" />
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-7">
 

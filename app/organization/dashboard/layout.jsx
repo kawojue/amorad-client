@@ -21,7 +21,7 @@ const DashboardLayout = ({ children }) => {
     useEffect(() => {
         const redirectToLogin = async () => {
             if (!isAuthenticated() || !checkAuthorization()) {
-                await router.replace('/auth/signup');
+                await router.replace('/auth/signin');
             }
         };
 

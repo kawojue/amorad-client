@@ -1,18 +1,29 @@
 'use client'
+import DashboardPagination from '@/components/dashboard/DashboardPagination'
 import DashboardFilter from '@/components/dashboard/admin/DashboardFilter'
 import PatientStatus from '@/components/dashboard/organization/patient/PatientStatus'
 import PatientTable from '@/components/dashboard/organization/patient/PatientTable'
+import TableSkeletonLoader from '@/components/skeleton/TableSkeletonLoader'
 import Button from '@/components/ui/buttons/Button'
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
+import organizationService from '@/services/organizationService'
+import { removeEmptyFields } from '@/utils/EmptyFields'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const page = () => {
 
+    const token = useSelector(getOrganizationToken)
+    const [loading, setLoading] = useState(false)
+    const [datas, setDatas] = useState([])
+    const [total, setTotal] = useState(0)
+
     const initialFormData = {
         page: 1,
-        limit: 15,
-        sortBy: 'name',
+        limit: 20,
+        sortBy: 'date',
         search: '',
         status: '',
         startDate: '',
@@ -20,13 +31,38 @@ const page = () => {
     };
 
     const [filter, setFilter] = useState(initialFormData);
+    const query = removeEmptyFields(filter);
 
-    console.log(filter);
+    // HANLDE PAGINATION PAGE CHANGE
+    const handlePageChange = (newPage) => {
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            page: newPage,
+        }));
+    };
+
+    // FETCH DATA
+    const fetchData = async () => {
+        try {
+            const response = await organizationService.getPatients(token, query)
+            setDatas(response?.data);
+            setTotal(response?.metadata?.totalCount)
+        } catch (error) {
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData();
+    }, [filter])
+
 
     const statuses = [
-        { name: 'All', value: 'all' },
-        { name: 'New', value: 'new' },
-        { name: 'Archived', value: 'archived' }
+        { name: 'All', value: '' },
+        { name: 'New', value: 'New' },
+        { name: 'Archived', value: 'Archived' }
     ];
 
     const status = [
@@ -38,11 +74,14 @@ const page = () => {
         }
     ]
 
-
-    const [activeTab, setActiveTab] = useState(statuses[0].value);
+    const [activeTab, setActiveTab] = useState(statuses[0].value)
 
     const handleTabClick = (status) => {
-        setActiveTab(status);
+        setActiveTab(status)
+        setFilter((prevSearchCriteria) => ({
+            ...prevSearchCriteria,
+            status: status,
+        }));
     };
 
     return (
@@ -86,8 +125,30 @@ const page = () => {
             </div>
 
             <div className="bg-white px-2 py-3 rounded-lg">
-                <PatientTable selectedStatus={activeTab} />
+
+                {loading ? (
+
+                    <TableSkeletonLoader count={12} height={40} />
+
+                ) : (
+
+                    <PatientTable token={token} patients={datas} fetchData={fetchData} />
+
+                )}
+
             </div>
+
+            {/* PAGINATION */}
+            {!loading && datas.length > 0 && (
+                <DashboardPagination
+                    currentPage={filter?.page}
+                    totalPages={total}
+                    perPage={filter?.limit}
+                    onChangePage={handlePageChange}
+                    title="Patients"
+                />
+            )}
+
 
         </>
     )

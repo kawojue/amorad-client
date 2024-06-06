@@ -14,7 +14,7 @@ const organizationAuthSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         },
-        setUser: (state, action) => {
+        setOrganization: (state, action) => {
             state.profile = action.payload;
         },
         OrganizationLogout: (state) => {
@@ -27,7 +27,7 @@ const organizationAuthSlice = createSlice({
     },
 });
 
-export const { setToken, setUser, OrganizationLogout } = organizationAuthSlice.actions;
+export const { setToken, setOrganization, OrganizationLogout } = organizationAuthSlice.actions;
 export const getOrganizationProfile = (state) => state.organization.organization_auth.profile;
 export const getOrganizationToken = (state) => state.organization.organization_auth.token;
 

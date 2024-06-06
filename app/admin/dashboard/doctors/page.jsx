@@ -31,7 +31,7 @@ const page = () => {
     const initialFormData = {
         page: 1,
         limit: 15,
-        sortBy: 'name',
+        sortBy: 'date',
         role: 'doctor',
         search: '',
         status: '',

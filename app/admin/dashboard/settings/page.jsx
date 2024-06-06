@@ -1,9 +1,9 @@
 'use client'
 
-import Account from '@/components/dashboard/admin/settings/Account';
+import Account from '@/components/dashboard/settings/Account';
 import Preferences from '@/components/dashboard/admin/settings/preferences/Preferences';
 import Role from '@/components/dashboard/admin/settings/roles/Role';
-import Security from '@/components/dashboard/admin/settings/security/Security';
+import Security from '@/components/dashboard/security/Security';
 import { getProfile, getToken } from '@/redux/features/slices/adminAuthSlice';
 import { EachElement } from '@/utils/Each';
 import React, { useState } from 'react'

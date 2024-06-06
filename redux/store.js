@@ -3,6 +3,7 @@ import adminAuthSlice from './features/slices/adminAuthSlice';
 import analyticsSlice from './features/slices/admin/analyticsSlice';
 import stepSlice from './features/slices/stepSlice';
 import OrganizationAuthSlice from './features/slices/organization/OrganizationAuthSlice';
+import OrgAnalyticsSlice from './features/slices/organization/organizationAnalyticsSlice';
 
 const rootReducer = combineReducers({
     admin: combineReducers({
@@ -11,7 +12,7 @@ const rootReducer = combineReducers({
     }),
     organization: combineReducers({
         organization_auth: OrganizationAuthSlice,
-        analytics: null,
+        analytics: OrgAnalyticsSlice,
     }),
     auth_step: stepSlice
 });

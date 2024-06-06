@@ -1,11 +1,13 @@
 'use client'
 
-import Account from '@/components/dashboard/organization/settings/Account';
 import Preferences from '@/components/dashboard/organization/settings/preferences/Preferences';
-import Security from '@/components/dashboard/organization/settings/security/Security';
 import Transaction from '@/components/dashboard/organization/settings/transactions/Transaction';
+import Security from '@/components/dashboard/security/Security';
+import Account from '@/components/dashboard/settings/Account';
+import { getOrganizationProfile, getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice';
 import { EachElement } from '@/utils/Each';
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const page = () => {
 
@@ -22,6 +24,9 @@ const page = () => {
     setActiveTab(status);
   };
 
+
+  const token = useSelector(getOrganizationToken)
+  const profile = useSelector(getOrganizationProfile)
 
   return (
     <>
@@ -49,13 +54,13 @@ const page = () => {
         <div className="w-full lg:w-[80%] p-5 bg-white rounded-s-2xl">
 
           {/* Account */}
-          {activeTab === 'account' && <Account />}
+          {activeTab === 'account' && <Account profile={profile} token={token} />}
 
           {/* Transactions */}
           {activeTab === 'transactions' && <Transaction />}
 
           {/* Security */}
-          {activeTab === 'security' && <Security />}
+          {activeTab === 'security' && <Security token={token} />}
 
           {/* Preferences */}
           {activeTab === 'preferences' && <Preferences />}

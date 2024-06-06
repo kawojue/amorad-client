@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import CustomInput from '@/components/FormElements/CustomInput'
 import { Form, Formik } from 'formik'
@@ -9,12 +10,20 @@ import ReportModal from './ReportModal'
 import Breadcrumb from '../../Breadcrumb'
 import FileUpload from '@/components/dashboard/FileUpload'
 import { useRouter } from 'next/navigation'
+import organizationService from '@/services/organizationService'
+import { useSelector } from 'react-redux'
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
+import toast from 'react-hot-toast'
+import { getErrorMessage } from '@/utils/errorUtils'
 
-const StudyStep = ({ onNextStep }) => {
+const StudyStep = ({ mrn }) => {
 
+    const token = useSelector(getOrganizationToken)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
     const router = useRouter()
+
+    const [studyID, setStudyId] = useState(null)
 
     return (
 
@@ -39,12 +48,39 @@ const StudyStep = ({ onNextStep }) => {
                 onSubmit={async (values, actions) => {
 
                     setLoading(true);
-                    console.log(values);
 
-                    setTimeout(() => {
-                        setLoading(false)
+                    try {
+
+                        const formData = new FormData();
+                        formData.append('body_part', values.body_part);
+                        formData.append('priority', values.priority);
+                        formData.append('cpt_code', values.cpt_code);
+                        formData.append('modality', values.modality);
+                        formData.append('description', values.description);
+                        formData.append('clinical_info', values.clinical_info);
+                        formData.append('site', values.site);
+                        formData.append('access_code', values.access_code);
+                        formData.append('reporting_status', values.reporting_status);
+
+                        if (values.paperworks) {
+                            Array.from(values.paperworks).forEach((file) => {
+                                formData.append('paperworks', file);
+                            });
+                        }
+
+                        const response = await organizationService.uploadPatientStudy(mrn, formData, token);
+                        setStudyId(response.data.studyId);
+                        toast.success(response.message);
                         setOpen(true)
-                    }, 1000);
+
+                    } catch (error) {
+
+                        const message = getErrorMessage(error);
+                        toast.error(message, { duration: 5000 });
+
+                    } finally {
+                        setLoading(false);
+                    }
 
                 }}
             >
@@ -98,14 +134,14 @@ const StudyStep = ({ onNextStep }) => {
 
                         <CustomSelect label="Reporting Status" name="reporting_status">
                             <option value="" selected disabled> Select status </option>
-                            <option value="Unread"> Unread </option>
-                            <option value="Closed/Opened"> Closed/Opened </option>
+                            <option value="Closed"> Closed </option>
+                            <option value="Opened"> Opened </option>
                         </CustomSelect>
 
                         <div className="mt-4">
                             <FileUpload name="paperworks" title="Paper Work Attachment(s)" label="Paper Work Attachment(s)
                                 Drop files here (PDF, doc, docx, PNG, JPG, JPEG, GIF)" btnColor="btn-success" className="border border-dashed border-[#D0D5DD]" multiple={true}
-                                accept="image/jpeg,image/png,application/pdf"
+                                accept="image/jpeg,image/png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/rtf"
                                 error={touched.paperworks && errors.paperworks} />
 
                             {touched.paperworks && errors.paperworks && (
@@ -141,7 +177,7 @@ const StudyStep = ({ onNextStep }) => {
 
             </Formik>
 
-            <ReportModal open={open} setOpen={setOpen} onNextStep={onNextStep} />
+            <ReportModal open={open} setOpen={setOpen} studyID={studyID} />
 
         </>
 
