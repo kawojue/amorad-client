@@ -48,8 +48,20 @@ const updatePatient = async (id, payload, token) => {
 // PATIENT STUDIES
 const uploadPatientStudy = async (id, payload, token) => {
     const response = await axios.post(`/center/patient/${id}/study`, payload, {
-        headers: { Authorization: `Bearer ${token}` },
-        'Content-Type': 'multipart/form-data'
+        headers: { 
+            Authorization: `Bearer ${token}` ,
+            'Content-Type': 'multipart/form-data'
+        },
+    });
+    return response.data;
+};
+
+const uploadDicom = async (studyId, payload, token) => {
+    const response = await axios.post(`/center/dicoms/${studyId}`, payload, {
+        headers: { 
+            Authorization: `Bearer ${token}` ,
+            'Content-Type': 'multipart/form-data'
+        },
     });
     return response.data;
 };
@@ -87,7 +99,7 @@ const updatePatientStudy = async (mrn, studyId, payload, token) => {
 // };
 
 const designateStudy = async (mrn, studyId, practitionerId, status, token) => {
-    const response = await axios.patch(`/center/patient/${mrn}/study/${studyId}/${practitionerId}/designate?=${status}`, {}, {
+    const response = await axios.patch(`/center/patient/${mrn}/study/${studyId}/${practitionerId}/designate?action=${status}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
@@ -104,6 +116,13 @@ const getPatientStudy = async (mrn, studyId, token) => {
 const getReports = async (token, query) => {
     const response = await axios.get('/center/reports', {
         params: query,
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+};
+
+const getPatientReports = async (token, mrn) => {
+    const response = await axios.get(`/center/patient/${mrn}/study`, {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
@@ -153,6 +172,17 @@ const addAdmin = async (payload, token) => {
     return response.data;
 };
 
+// DOWNLOAD FILE
+const downloadFiles = async (path, token) => {
+    const response = await axios.get(`/auth/download?path=${path}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob'
+    });
+    return response;
+};
+
 const organizationService = {
     getAnalytics,
     getChart,
@@ -171,12 +201,16 @@ const organizationService = {
     getReports,
     getReport,
     getReportAnalytics,
+    getPatientReports,
 
     // STAFFS
     getStaffs,
     toggleStaff,
     addPractitioner,
-    addAdmin
+    addAdmin,
+
+    downloadFiles,
+    uploadDicom
 
 };
 

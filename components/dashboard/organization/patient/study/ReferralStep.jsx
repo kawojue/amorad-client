@@ -6,10 +6,19 @@ import Button from '@/components/ui/buttons/Button'
 import { referralSchema } from '@/utils/schema'
 import Breadcrumb from '../../Breadcrumb'
 import { useRouter } from 'next/navigation'
+import { EachElement } from '@/utils/Each'
+import { getErrorMessage } from '@/utils/errorUtils'
+import toast from 'react-hot-toast'
+import organizationService from '@/services/organizationService'
+import { useSelector } from 'react-redux'
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice'
 
-const ReferralStep = () => {
+const ReferralStep = ({ doctors, params }) => {
 
-    const [ loading, setLoading ] = useState(false)
+    const token = useSelector(getOrganizationToken)
+    const { mrn, studyId } = params
+
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     return (
@@ -26,9 +35,20 @@ const ReferralStep = () => {
 
                     setLoading(true);
 
-                    setTimeout(() => {
-                        setLoading(false)
-                    }, 1000);
+                    try {
+
+                        const response = await organizationService.designateStudy(mrn, studyId, values?.doctor, 'Assigned', token)
+                        toast.success(response.message);
+                        router.push('/organization/dashboard/report')
+
+                    } catch (error) {
+
+                        const message = getErrorMessage(error);
+                        toast.error(message, { duration: 5000 });
+
+                    } finally {
+                        setLoading(false);
+                    }
 
                 }}
             >
@@ -39,7 +59,9 @@ const ReferralStep = () => {
 
                         <CustomSelect label="Choose Doctor" name="doctor">
                             <option value="" selected disabled> Choose Doctor </option>
-                            <option value="dominic"> Donimic </option>
+                            <EachElement of={doctors} render={(item) => (
+                                <option value={item?.id}> {item.fullname} </option>
+                            )} />
                         </CustomSelect>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-8">

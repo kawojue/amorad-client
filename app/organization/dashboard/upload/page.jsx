@@ -2,13 +2,34 @@
 
 import FileUpload from '@/components/dashboard/FileUpload';
 import Button from '@/components/ui/buttons/Button';
+import { getOrganizationToken } from '@/redux/features/slices/organization/OrganizationAuthSlice';
+import organizationService from '@/services/organizationService';
+import { getErrorMessage } from '@/utils/errorUtils';
 import { uploadDicom } from '@/utils/schema';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+
+const debounce = (func, delay) => {
+    let debounceTimer;
+    return function (...args) {
+        const context = this;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    };
+};
 
 const page = () => {
 
+    const token = useSelector(getOrganizationToken)
     const [loading, setLoading] = useState(false)
+    const [studyId, setStudyId] = useState('');
+
+    // Use debounce for handling input changes
+    const handleInputChange = useCallback(debounce((value) => {
+        setStudyId(value);
+    }, 500), []);
 
     return (
         <>
@@ -21,7 +42,8 @@ const page = () => {
 
                     <input
                         type="text"
-                        name="patientName"
+                        name="studyId"
+                        onChange={(e) => handleInputChange(e.target.value)}
                         className="py-2.5 px-4 text-xs  tracking-tight block flex-shrink w-full sm:min-w-[250px] lg:min-w-[350px] border-border_color rounded-s-lg relative focus:z-10"
                         placeholder='Enter Study ID to associate upload(s) with'
                     />
@@ -58,11 +80,38 @@ const page = () => {
                     validationSchema={uploadDicom}
                     onSubmit={async (values, actions) => {
 
+                        if (!studyId) {
+                            toast.error('Study ID is required');
+                            return;
+                        }
+
                         setLoading(true);
 
-                        setTimeout(() => {
-                            setLoading(false)
-                        }, 1000);
+                        try {
+
+                            const formData = new FormData();
+
+                            if (values.file) {
+                                for (let i = 0; i < values.file.length; i++) {
+                                    formData.append('dicoms', values.file[i], values.file[i].name)
+                                }
+                            }
+
+                            const response = await organizationService.uploadDicom(studyId, formData, token);
+                            console.log(response);
+
+                            setStudyId('');
+                            actions.resetForm();
+                            // toast.success(response.message);
+
+                        } catch (error) {
+
+                            const message = getErrorMessage(error);
+                            toast.error(message, { duration: 5000 });
+
+                        } finally {
+                            setLoading(false);
+                        }
 
                     }}
                 >
@@ -71,8 +120,8 @@ const page = () => {
 
                         <Form autoComplete='off'>
 
-                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 50MB max." btnColor="btn-primary" className="py-4" multiple={true} 
-                                // accept=".dcm, .dicom, application/dicom"
+                            <FileUpload name="file" title="Tap to Upload" label="DICOM File .dcm | 50MB max." btnColor="btn-primary" className="py-4" multiple={true}
+                                accept=".dcm, .dicom, application/dicom"
                                 error={touched.file && errors.file} />
 
                             {touched.file && errors.file && (

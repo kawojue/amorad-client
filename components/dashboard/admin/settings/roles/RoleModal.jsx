@@ -1,4 +1,5 @@
 import CustomInput from '@/components/FormElements/CustomInput'
+import CustomPassword from '@/components/FormElements/CustomPassword'
 import CustomSelect from '@/components/FormElements/CustomSelect'
 import Button from '@/components/ui/buttons/Button'
 import DialogContainer from '@/components/ui/modals/Dialog'
@@ -40,6 +41,7 @@ const RoleModal = ({ fetchData, open, setOpen, token }) => {
                             fullname: '',
                             email: '',
                             role: '',
+                            password: '',
                         }}
                         validationSchema={addUserRole}
                         onSubmit={async (values, actions) => {
@@ -83,6 +85,8 @@ const RoleModal = ({ fetchData, open, setOpen, token }) => {
                                             <option value="admin"> Admin </option>
                                             <option value="specialist"> Specialist </option>
                                         </CustomSelect>
+
+                                        <CustomPassword label="Password" name="password" placeholder="*********" />
 
                                         <Button loading={loading} type='submit' className='btn-primary py-3.5 w-full mt-5'>
                                             <span>Add User</span>

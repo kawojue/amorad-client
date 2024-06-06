@@ -31,7 +31,7 @@ const getStatusStyles = (status) => {
     return { textColor, bgColor };
 };
 
-const ReportTable = ({ hideName, reports }) => {
+const ReportTable = ({ hideName, reports, token, fetchData }) => {
 
     const [expandedRow, setExpandedRow] = useState(null);
     const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ const ReportTable = ({ hideName, reports }) => {
     };
 
     const handleViewPaperWork = (report) => {
-        setPaper(report.paper_work);
+        setPaper(report.paperwork);
         setOpen(true);
     };
 
@@ -291,14 +291,14 @@ const ReportTable = ({ hideName, reports }) => {
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {moment(report.createdAt).format('lll')}
+                                                            {moment(report.createdAt).format('llll')}
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-3 whitespace-nowrap">
                                                     <div className="">
                                                         <span className="block text-xs text-textColor ">
-                                                            {moment(report.updatedAt).format('lll')}
+                                                            {moment(report.updatedAt).format('llll')}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -315,7 +315,7 @@ const ReportTable = ({ hideName, reports }) => {
                                                 </td>
                                                 <td className="relative px-6 py-3 whitespace-nowrap">
 
-                                                    <ReportAction token={token} data={report} index={index} toggleRow={toggleRow} />
+                                                    <ReportAction fetchData={fetchData} token={token} data={report} index={index} toggleRow={toggleRow} />
 
                                                 </td>
                                             </tr>
@@ -339,7 +339,7 @@ const ReportTable = ({ hideName, reports }) => {
 
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
                                                                 <h2 className="font-semibold">SEX:</h2>
-                                                                <p>F</p>
+                                                                <p> { report?.patient?.gender } </p>
                                                             </div>
 
                                                             <div className="flex items-start gap-x-1 text-[12px] text-black">
@@ -382,14 +382,14 @@ const ReportTable = ({ hideName, reports }) => {
 
                                                     <td colSpan="8" className="px-6 py-4 w-full space-y-5">
 
-                                                        <div className="flex items-center gap-x-3">
-                                                            <h2 className="text-xs font-semibold">Clinical Info:</h2>
+                                                        <div className="flex items-start gap-x-3">
+                                                            <h2 className="text-xs font-semibold whitespace-nowrap">Clinical Info:</h2>
                                                             <p className="text-[12px] text-textColor leading-5">
                                                                 {report?.clinical_info}
                                                             </p>
                                                         </div>
 
-                                                        <div className="flex items-center gap-x-3">
+                                                        <div className="flex items-start gap-x-3">
                                                             <h2 className="text-xs font-semibold">Description:</h2>
                                                             <p className="text-[12px] text-textColor leading-5">
                                                                 {report?.description}

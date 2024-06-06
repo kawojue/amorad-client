@@ -23,6 +23,7 @@ const PatientAction = ({ data }) => {
             >
                 {({ onClose }) => (
                     <div className="py-1">
+
                         <Link href={`patient/${data.mrn}`} passHref>
                             <div
                                 className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
@@ -32,6 +33,17 @@ const PatientAction = ({ data }) => {
                                 <span>View Details</span>
                             </div>
                         </Link>
+
+                        <Link href={`patient/${data.mrn}/report`} passHref>
+                            <div
+                                className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                onClick={handleLinkClick(onClose)}
+                            >
+                                <ForwardIcon className='w-4 h-4' />
+                                <span>View Studies</span>
+                            </div>
+                        </Link>
+
                         <Link href={`patient/${data.mrn}/edit`} passHref>
                             <div
                                 className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
@@ -41,7 +53,8 @@ const PatientAction = ({ data }) => {
                                 <span>Edit Patient</span>
                             </div>
                         </Link>
-                        <Link href={`patient/${data.mrn}/study`}  passHref>
+
+                        <Link href={`patient/${data.mrn}/study`} passHref>
                             <div
                                 className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer"
                                 onClick={handleLinkClick(onClose)}

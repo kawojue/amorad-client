@@ -14,19 +14,19 @@ const ReportAction = ({ index, data, token, fetchData, toggleRow }) => {
 
     const [loading, setLoading] = useState(false);
 
-    const toggleStatusChange = async (status, onClose) => {
+    const toggleStatusChange = async (payload, onClose) => {
 
         setLoading(true);
 
         const params = {
-            mrn: data?.mrn,
-            studyId: data?.studyId,
+            mrn: data?.patient?.mrn,
+            studyId: data?.study_id,
             practitionerId: data?.practitionerId
         }
 
         try {
 
-            const response = await organizationService.designateStudy(params?.mrn, params?.studyId, params?.practitionerId, status, token)
+            const response = await organizationService.designateStudy(params?.mrn, params?.studyId, params?.practitionerId, payload, token)
             toast.success(response.message);
             fetchData()
 
@@ -63,16 +63,16 @@ const ReportAction = ({ index, data, token, fetchData, toggleRow }) => {
                         </div>
                     </Link> */}
 
-                    <Link href={`patient/${data?.patient?.mrn}/study/${data?.study_id}/edit`} passHref>
+                    <Link href={`/organization/dashboard/patient/${data?.patient?.mrn}/study/${data?.study_id}/edit`} passHref>
                         <div className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer">
                             <EditIcon className='w-4 h-4' />
                             <span>Edit Report</span>
                         </div>
                     </Link>
 
-                    { !status == 'Unassigned' ? (
+                    { status == 'Unassigned' ? (
 
-                        <Link href={`patient/${data?.patient?.mrn}/study/${data?.study_id}/assign`} passHref>
+                        <Link href={`/organization/dashboard/patient/${data?.patient?.mrn}/study/${data?.study_id}/assign`} passHref>
                             <div className="flex items-center gap-x-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 cursor-pointer">
                                 <EditIcon className='w-4 h-4' />
                                 <span>Assign Record</span>

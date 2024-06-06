@@ -88,7 +88,7 @@ const page = () => {
 
                 ) : (
 
-                    <ReportTable token={token} reports={datas} />
+                    <ReportTable token={token} reports={datas} fetchData={fetchData} />
 
                 )}
 

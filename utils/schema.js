@@ -74,7 +74,10 @@ export const PasswordChangeSchema = Yup.object({
 export const addUserRole = Yup.object({
   fullname: Yup.string().required('Name is required'),
   role: Yup.string().required('Role is required'),
-  email: Yup.string().email('Invalid email address').required('Email is required')
+  email: Yup.string().email('Invalid email address').required('Email is required'),
+  password: Yup.string()
+  .required('Password is required')
+  .min(6, 'Password must be at least 6 characters'),
 });
 
 
