@@ -139,7 +139,7 @@ const page = () => {
             </div>
 
             {/* PAGINATION */}
-            {!loading && datas.length > 0 && (
+            {!loading && datas?.length > 0 && (
                 <DashboardPagination
                     currentPage={filter?.page}
                     totalPages={total}

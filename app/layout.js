@@ -11,24 +11,26 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
       <head>
+
         <link rel="icon" href="/images/logo.svg" sizes="any" />
         <link rel="apple-touch-icon" href="/images/logo.svg" sizes="any" />
+
       </head>
 
       <body className={`debug-screens`} >
+
         <Providers>
 
           {children}
 
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-          />
+          <Toaster position="top-center" reverseOrder={false} />
 
         </Providers>
+
       </body>
-      
+
     </html>
   );
 }

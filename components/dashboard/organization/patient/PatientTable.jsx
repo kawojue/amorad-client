@@ -28,7 +28,7 @@ const PatientTable = ({ patients }) => {
                 <div className="-m-1.5 overflow-x-auto scrollbar-thin">
                     <div className="p-1.5 min-w-full inline-block align-middle">
                         
-                        {patients.length === 0 ? (
+                        {patients?.length === 0 ? (
                             <div className="text-center py-5">
                                 <span className="text-lg font-semibold text-gray-600">
                                     No patients found

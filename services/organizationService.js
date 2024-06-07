@@ -48,20 +48,33 @@ const updatePatient = async (id, payload, token) => {
 // PATIENT STUDIES
 const uploadPatientStudy = async (id, payload, token) => {
     const response = await axios.post(`/center/patient/${id}/study`, payload, {
-        headers: { 
-            Authorization: `Bearer ${token}` ,
+        headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         },
     });
     return response.data;
 };
 
-const uploadDicom = async (studyId, payload, token) => {
+// service file upload
+// const uploadDicom = async (studyId, payload, token, onUploadProgress) => {
+//     const response = await axios.post(`/center/dicoms/${studyId}`, payload, {
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//             'Content-Type': 'multipart/form-data'
+//         },
+//         onUploadProgress
+//     });
+//     return response.data;
+// };
+
+const uploadDicom = async (studyId, payload, token, onUploadProgress) => {
     const response = await axios.post(`/center/dicoms/${studyId}`, payload, {
-        headers: { 
-            Authorization: `Bearer ${token}` ,
+        headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         },
+        onUploadProgress
     });
     return response.data;
 };

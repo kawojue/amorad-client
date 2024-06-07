@@ -30,5 +30,6 @@ const organizationAuthSlice = createSlice({
 export const { setToken, setOrganization, OrganizationLogout } = organizationAuthSlice.actions;
 export const getOrganizationProfile = (state) => state.organization.organization_auth.profile;
 export const getOrganizationToken = (state) => state.organization.organization_auth.token;
+export const getRole = (state) => state.organization.organization_auth.profile.role;
 
 export default organizationAuthSlice.reducer;
