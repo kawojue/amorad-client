@@ -13,7 +13,7 @@ const DicomNavBar = ({ open, setOpen }) => {
     const [openLen, setOpenLen] = useState(false);
 
     return (
-        <header className="flex sm:justify-start h-16 w-full bg-blue text-xs">
+        <header className="flex sm:justify-start h-16 w-full bg-blue text-xs fixed">
             <nav className="flex items-center w-full mx-auto px-3 md:px-6">
                 <div className="w-full flex items-center ml-auto justify-between sm:gap-x-3 sm:order-3">
                     {/* LOGO */}

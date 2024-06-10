@@ -9,7 +9,7 @@ const DicomSideBar = ({ open, setOpen }) => {
     return (
         <>
 
-            <aside className={`fixed inset-y-0 left-0 flex-wrap items-center justify-between scrollbar-none overflow-x-hidden block p-0  pb-10 transition-all duration-200 -translate-x-full bg-black border-0 z-10 ${open && 'translate-x-0'} max-w-64 md:translate-x-0 w-[250px] z-50 mt-16`}>
+            <aside className={`fixed inset-y-0 left-0 flex-wrap items-center justify-between scrollbar-none overflow-x-hidden block p-0  pb-10 transition-all duration-200 -translate-x-full bg-black border-0 z-10 ${open && 'translate-x-0'} max-w-64 md:translate-x-0 w-[250px] z-50 mt-16 border-r-2 border-primary`}>
 
                 <div className="bg-primary p-3 text-center">
                     <h2 className="text-sm text-white font-medium">Studies</h2>
