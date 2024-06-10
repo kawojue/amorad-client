@@ -1,33 +1,34 @@
 'use client'
 
 import Image from 'next/image';
-import { ArrowsPointingOutIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { Cog8ToothIcon, HandRaisedIcon, MagnifyingGlassIcon, MagnifyingGlassPlusIcon } from '@heroicons/react/24/outline';
 import { LuLayoutGrid } from "react-icons/lu";
 import Link from 'next/link';
+import { GrPowerReset } from "react-icons/gr";
+import { TfiRulerAlt } from "react-icons/tfi";
+import { useState } from 'react';
 
 const DicomNavBar = ({ open, setOpen }) => {
+    const [openLen, setOpenLen] = useState(false);
 
     return (
-        <header className="flex  sm:justify-start z-50 h-16 w-full bg-primary text-xs">
-
-            <nav className="flex basis-full items-center w-full mx-auto px-3 md:px-6">
-
+        <header className="flex sm:justify-start h-16 w-full bg-blue text-xs">
+            <nav className="flex items-center w-full mx-auto px-3 md:px-6">
                 <div className="w-full flex items-center ml-auto justify-between sm:gap-x-3 sm:order-3">
-
                     {/* LOGO */}
                     <div className="mr-5 md:mr-8 hidden md:block">
                         <Image
                             src='/images/logo.svg'
                             width={28} height={28}
                             alt="Logo"
-                            className="h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-10 "
+                            className="h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-10"
                         />
                     </div>
 
                     {/* MENU BAR ICON */}
                     <div onClick={() => setOpen(!open)} className="md:hidden">
-                        <button type="button" className="inline-flex flex-shrink-0 justify-center items-center pr-4 gap-2 rounded-full font-mediu text-white align-middle transition-all text-xs">
+                        <button type="button" className="inline-flex flex-shrink-0 justify-center items-center pr-4 gap-2 rounded-full text-white align-middle transition-all text-xs">
                             {open ? (
                                 <XMarkIcon className="w-5 h-5" />
                             ) : (
@@ -38,49 +39,56 @@ const DicomNavBar = ({ open, setOpen }) => {
                         </button>
                     </div>
 
-                    <div className="ml-3 flex items-center gap-x-1.5 md:gap-x-4 text-white text-[10px] md:text-[12px] overflow-x-scroll scrollbar-none">
+                    <div className="ml-3 flex items-center gap-x-1 text-white text-[10px] md:text-[12px] overflow-x-scroll scrollbar-none">
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
-                            <ArrowsPointingOutIcon className='w-5 h-5' />
-                            <p className="truncate max-w-[50px]">Move</p>
+                        <div className="relative">
+                            <div className="flex items-center cursor-pointer">
+                                <div className="flex items-center bg-primary p-2.5 rounded-s-lg">
+                                    <TfiRulerAlt className="w-6 h-6" />
+                                </div>
+                                <div onClick={() => setOpenLen(!openLen)} className="h-full flex items-center bg-red-500 py-4 rounded-e-lg px-0.5">
+                                    <ChevronDownIcon className="w-3 h-3" />
+                                </div>
+                            </div>
+                            <div className={`${openLen ? 'flex' : 'hidden'} absolute z-10 shadow rounded-md bg-red-500 py-5 w-48`}>
+                                <div className="p-3">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus exercitationem labore eos ipsum, reprehenderit veniam dolore doloremque eius ratione numquam dolores iure mollitia molestiae quibusdam voluptatum excepturi, consectetur minima nesciunt modi perferendis et hic earum velit? Iure possimus exercitationem adipisci!
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
-                            <HandRaisedIcon className='w-5 h-5' />
-                            <p className="truncate max-w-[50px]">Pan</p>
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                            <HandRaisedIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
-                            <MagnifyingGlassPlusIcon className='w-5 h-5' />
-                            <p className="truncate max-w-[50px]">Zoom</p>
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                            <MagnifyingGlassPlusIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
-                            <MagnifyingGlassIcon className='w-5 h-5' />
-                            <p className="truncate max-w-[50px]">Magnifier</p>
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                            <MagnifyingGlassIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
-                            <LuLayoutGrid className='w-5 h-5' />
-                            <p className="truncate max-w-[50px]">Magnifier</p>
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                            <LuLayoutGrid className='w-6 h-6' />
                         </div>
 
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                            <GrPowerReset className='w-6 h-6' />
+                        </div>
                     </div>
 
                     {/* SETTINGS LINK */}
                     <Link href="javascript:void(0)" className="hidden md:flex flex-row items-center justify-end gap-x-1 text-white">
-                        <h2 className='text-xs uppercase text-white/70 tracking-wider '>Settings</h2>
+                        <h2 className='text-xs uppercase text-white/70 tracking-wider'>Settings</h2>
                         <div className="relative">
                             <Cog8ToothIcon className='w-6 h-6' />
                         </div>
-
                     </Link>
-
                 </div>
-
             </nav>
         </header>
-    )
-}
+    );
+};
 
-export default DicomNavBar
+export default DicomNavBar;
