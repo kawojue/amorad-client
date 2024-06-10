@@ -40,27 +40,27 @@ const DicomNavBar = ({ open, setOpen }) => {
 
                     <div className="ml-5 flex items-center gap-x-4 md:gap-x-7 text-white text-[10px] md:text-[12px] overflow-x-scroll scrollbar-none">
 
-                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center bg-blue p-3">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center bg-blue p-3">
                             <ArrowsPointingOutIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Move</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
                             <HandRaisedIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Pan</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
                             <MagnifyingGlassPlusIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Zoom</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
                             <MagnifyingGlassIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
                             <LuLayoutGrid className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
