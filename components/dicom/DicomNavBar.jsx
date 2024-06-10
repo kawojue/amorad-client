@@ -38,7 +38,7 @@ const DicomNavBar = ({ open, setOpen }) => {
                         </button>
                     </div>
 
-                    <div className="flex items-center gap-x-5 lg:gap-x-10 text-white text-[12px] overflow-x-scroll scrollbar-none">
+                    <div className="ml-5 flex items-center gap-x-5 lg:gap-x-10 text-white text-[12px] overflow-x-scroll scrollbar-none">
 
                         <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
                             <ArrowsPointingOutIcon className='w-5 h-5' />
