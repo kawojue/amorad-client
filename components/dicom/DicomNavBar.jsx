@@ -38,29 +38,29 @@ const DicomNavBar = ({ open, setOpen }) => {
                         </button>
                     </div>
 
-                    <div className="ml-5 flex items-center gap-x-4 md:gap-x-7 text-white text-[10px] md:text-[12px] overflow-x-scroll scrollbar-none">
+                    <div className="ml-3 flex items-center gap-x-4 md:gap-x-7 text-white text-[10px] md:text-[12px] overflow-x-scroll scrollbar-none">
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center bg-blue p-3">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
                             <ArrowsPointingOutIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Move</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
                             <HandRaisedIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Pan</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
                             <MagnifyingGlassPlusIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Zoom</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
                             <MagnifyingGlassIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-blue p-3">
                             <LuLayoutGrid className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
