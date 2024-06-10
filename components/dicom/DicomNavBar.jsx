@@ -41,40 +41,35 @@ const DicomNavBar = ({ open, setOpen }) => {
                     <div className="flex items-center gap-x-5 lg:gap-x-10 text-white text-[12px] overflow-x-scroll scrollbar-none">
 
                         <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
-                            <ArrowsPointingOutIcon className='w-6 h-6' />
+                            <ArrowsPointingOutIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Move</p>
                         </div>
 
                         <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
-                            <HandRaisedIcon className='w-6 h-6' />
+                            <HandRaisedIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Pan</p>
                         </div>
 
                         <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
-                            <MagnifyingGlassPlusIcon className='w-6 h-6' />
+                            <MagnifyingGlassPlusIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Zoom</p>
                         </div>
 
                         <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
-                            <MagnifyingGlassIcon className='w-6 h-6' />
+                            <MagnifyingGlassIcon className='w-5 h-5' />
                             <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
 
-                        <div className="flex">
-                            <div className="bg-blue p-3 rounded-s-lg">
-                                <LuLayoutGrid className='w-6 h-6' />
-                            </div>
-                            <div className="bg-red-500 flex items-center rounded-e-lg">
-                                <ChevronDownIcon className='w-4 h-4' />
-                            </div>
+                        <div className="flex flex-col gap-y-0.5 cursor-pointer items-center">
+                            <LuLayoutGrid className='w-5 h-5' />
+                            <p className="truncate max-w-[50px]">Magnifier</p>
                         </div>
-
 
                     </div>
 
                     {/* SETTINGS LINK */}
-                    <Link href="javascript:void(0)" className="flex flex-row items-center justify-end gap-x-1 text-white">
-                        <h2 className='text-xs uppercase text-white/70 tracking-wider hidden md:block'>Settings</h2>
+                    <Link href="javascript:void(0)" className="hidden md:flex flex-row items-center justify-end gap-x-1 text-white">
+                        <h2 className='text-xs uppercase text-white/70 tracking-wider '>Settings</h2>
                         <div className="relative">
                             <Cog8ToothIcon className='w-6 h-6' />
                         </div>
