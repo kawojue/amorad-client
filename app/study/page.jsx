@@ -1,27 +1,40 @@
 'use client'
-import DicomNavBar from '@/components/dicom/DicomNavBar'
-import DicomSideBar from '@/components/dicom/DicomSideBar'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import DicomNavBar from '@/components/dicom/DicomNavBar';
+import DicomSideBar from '@/components/dicom/DicomSideBar';
+import DicomViewer from '@/components/dicom/DiconViewer';
 
-const page = () => {
+const Page = () => {
+    const [open, setOpen] = useState(false);
+    const [selectedTool, setSelectedTool] = useState(null);
 
-    const [open, setOpen] = useState(false)
+    const handleToolSelect = (tool) => {
+        setSelectedTool(tool);
+    };
+
+    const handleReset = () => {
+        // Implement reset functionality here
+    };
+
+    const imageUrl = 'wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000001.dcm';
 
     return (
         <div className='overflow-y-auto bg-black max-h-screen'>
 
-            <DicomNavBar open={open} setOpen={setOpen} />
+            <DicomNavBar open={open} setOpen={setOpen} onToolSelect={handleToolSelect} onReset={handleReset} />
 
             <DicomSideBar open={open} setOpen={setOpen} />
 
             <div className="md:ml-[250px] text-xs p-2">
 
-                <div className="border-2 border-primary rounded-lg p-5 text-white mt-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid cupiditate nemo consectetur enim tempore. Porro, enim laborum? Molestias fuga beatae incidunt cumque sequi inventore vero sed laboriosam culpa facilis, quibusdam dolores necessitatibus magni architecto distinctio natus recusandae delectus excepturi sint molestiae minima perspiciatis, quas placeat ex. Id dolores enim dolorem? In nam odit rerum, veritatis numquam at veniam fuga quia sapiente culpa tempore eius, consequuntur beatae quos quam eligendi minima. Reiciendis tempora quasi incidunt sapiente numquam iure, sit eaque libero qui aperiam omnis, sed excepturi nulla cumque voluptatum deserunt, eos tenetur deleniti optio totam expedita nemo unde. Accusamus iure reprehenderit odio nam eligendi laborum in, voluptatem, molestiae optio vitae quae esse maiores ducimus aperiam eius minima accusantium odit amet eos necessitatibus sapiente? Inventore, pariatur quia quod doloremque magni cum consequatur repellat nesciunt repellendus mollitia. Nobis dolore recusandae maxime itaque rerum iure, eaque nesciunt esse aliquam reprehenderit dignissimos officia error vitae ut sunt odit facilis consequuntur eligendi quas. Molestias saepe at pariatur aut accusamus, illo reprehenderit maxime quibusdam porro consequatur consectetur ad nostrum facere ipsa aliquam perferendis accusantium animi quos vero minus minima non ratione est. Debitis facere ipsa alias nesciunt explicabo fuga odio architecto excepturi illo voluptatum doloribus, fugit totam nostrum dolores nam, voluptas blanditiis soluta. Labore sit nobis dolor voluptas aperiam, quisquam accusantium ut mollitia sed maxime aspernatur, expedita culpa, impedit consequatur ea optio hic assumenda delectus molestiae animi enim modi odit repellendus. Doloribus accusamus quasi quae corrupti repudiandae dolor assumenda distinctio sequi natus corporis itaque, aperiam nemo eos ea deserunt facere. Inventore ex dolore possimus rerum veniam minima, ad doloribus quod asperiores laboriosam. Repudiandae necessitatibus quisquam eligendi, laudantium esse voluptas corrupti cumque recusandae maiores consectetur? Magni voluptas tempora aperiam officiis in maiores perferendis doloribus laboriosam voluptatum nisi libero, eaque sit facilis maxime sed. Quibusdam omnis, minus sunt esse tenetur soluta itaque officia aliquid aut reprehenderit culpa magnam molestiae? Inventore dolorem consectetur, non, tempora perferendis fuga quibusdam expedita dicta, et illum ratione iste? Aut placeat ea, veritatis architecto voluptates, doloremque ab assumenda id, iste fugiat ducimus! Natus officia dolor minima reprehenderit, eaque autem ex minus cumque ab ullam vero molestias. Pariatur recusandae ea suscipit voluptatibus deleniti vitae nisi amet totam consectetur autem quam, iure quis? Animi debitis vel ducimus fugiat esse nemo repellat! Quos itaque accusamus et inventore deserunt facere distinctio cumque vero voluptatum ipsam cupiditate illum dolore, perferendis, nam ipsum quaerat delectus ducimus ipsa consequatur cum? Provident hic nesciunt fugit quisquam consectetur dolor totam quia delectus dignissimos earum. Sint perferendis recusandae, laborum fugiat hic tempore. Commodi unde at, magnam consequuntur, corrupti voluptates mollitia saepe, quos nulla ex minus velit culpa iure ea voluptate itaque id cupiditate quia nemo in. Maiores, fugit. Dolores, iste perferendis quis consequatur vitae provident dolore tempore ipsa asperiores eveniet eos placeat at numquam repellat, quam perspiciatis, quod eaque molestiae? Saepe, illum. Assumenda ullam ipsa tempora. Ea vero, quis debitis exercitationem illo dolore autem repudiandae veniam quaerat est corrupti alias sequi repellat? Culpa harum quis dicta vel recusandae sit sunt fuga amet facilis esse ullam ipsa pariatur, incidunt porro repellendus veniam distinctio impedit, veritatis error soluta odit aperiam quas. Quos porro laboriosam, saepe explicabo minima alias itaque dolores cumque amet numquam sequi dicta eius quisquam in voluptas, accusamus aut voluptatem! Voluptatem nesciunt provident consectetur veritatis, vel maxime voluptatum in eum atque esse vero earum autem natus aliquam cumque non voluptate mollitia a consequuntur facilis porro at. Molestiae nemo explicabo reiciendis ab blanditiis neque dolores quis ex soluta error, at commodi amet ad vel, quia officiis magni expedita corrupti possimus quos eum aliquid accusamus quae. Natus iure consectetur dolorum autem ut, molestias, amet eos necessitatibus nulla repellat officiis eius. Atque nesciunt dolor ad maiores molestias doloremque eligendi, ratione iste similique a ipsum voluptate consequatur, id dolore at pariatur voluptatem repellendus inventore? Atque voluptate alias similique quas, tempore illo dolores quos optio vero minima? Fuga, quaerat nulla? Impedit sequi soluta animi reprehenderit id tempora, alias, esse accusamus inventore provident et deleniti. Quaerat assumenda nesciunt provident culpa officia alias sint voluptatem, id modi corrupti amet dolore dolorem? Laborum minus illum magnam nulla. Adipisci, debitis voluptatem consequatur blanditiis culpa corrupti vitae itaque ullam reprehenderit a dignissimos ipsam quo sint necessitatibus libero quod earum! Culpa saepe accusantium tempore, aut tenetur deserunt, sint praesentium vel facere laborum repellendus nisi non velit, est fugit a laudantium! Ea dolorem vel placeat facere eos mollitia praesentium iure corrupti neque beatae laborum non ullam voluptatem, ipsam, tempore soluta nisi dolor sunt. Ad excepturi, quo doloribus, modi nobis eligendi maiores, deserunt facilis unde totam sequi illo? Unde voluptatem ullam autem fugiat tempore nulla, temporibus quae molestias ratione tempora molestiae expedita vitae quo sapiente. Nam consequatur voluptas deserunt pariatur sunt qui magnam iste minima quis nihil omnis non harum, in placeat excepturi dignissimos assumenda officia necessitatibus eligendi facilis quia consequuntur error. Culpa dicta commodi aliquam, dolorum aut quis dolore sequi, illo minus possimus, cupiditate asperiores error. Eos quasi id corrupti blanditiis tempora error laudantium accusamus officia, asperiores, quos dolorum fugit impedit dolor ex natus illum velit praesentium sequi optio aliquam ducimus neque delectus quis voluptatum. Adipisci ad quam accusamus molestias eaque doloremque distinctio dolor consequuntur ratione, nisi vero porro corporis delectus consectetur tempore magnam voluptates. Itaque accusamus, numquam sint eveniet incidunt eaque ut animi, perspiciatis sequi, corporis maiores quae placeat! Non libero odio est enim debitis soluta, animi id quidem recusandae iste pariatur esse suscipit corporis accusamus illum saepe ex eius, distinctio modi. Magni aperiam modi voluptates adipisci incidunt, possimus corporis qui temporibus, ipsam minima quos dolorem ullam a cum omnis soluta necessitatibus! Hic autem architecto temporibus, aut ipsam quaerat fuga facere! Laboriosam laudantium quae doloremque, voluptas deserunt ab ut, aliquam quas atque excepturi magnam ad, et velit adipisci harum reprehenderit quis qui aperiam ipsam esse aut. Modi cupiditate repellat consequatur accusamus in quibusdam excepturi voluptas nihil veniam officia! Numquam unde suscipit quibusdam earum doloribus quia excepturi libero architecto a id! Quia non illum minus fugit velit illo quod cumque corporis aliquam ad sequi totam fuga, in voluptate deserunt eveniet ab suscipit. Officia hic repudiandae non. Provident?</div>
+                <div className="border-2 border-primary rounded-lg p-5 text-white mt-16">
+                    <DicomViewer tool={selectedTool} imageUrl={imageUrl} />
+                </div>
 
             </div>
 
         </div>
-    )
-}
+    );
+};
 
-export default page
+export default Page;
