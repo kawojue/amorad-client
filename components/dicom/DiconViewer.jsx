@@ -4,7 +4,7 @@ import InsightViewer, { useImage, useInteraction } from '@lunit/insight-viewer';
 import { useViewport } from '@lunit/insight-viewer/viewport';
 
 const MOCK_IMAGE = [
-    'wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000002.dcm',
+    'wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000001.dcm',
     'wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000002.dcm',
     'wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000002.dcm'
 ];
@@ -47,7 +47,7 @@ const DiconViewer = () => {
                 Adjust
             </button>
             <button onClick={controllers.reset}>Reset</button>
-            <div ref={viewerRef} style={{ width: '100%', height: '600px' }}>
+            <div ref={viewerRef} style={{ width: '100%', height: '500px' }}>
                 <InsightViewer {...viewerProps} />
             </div>
         </>
