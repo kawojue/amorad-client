@@ -1,16 +1,18 @@
-'use client'
-
 import Image from 'next/image';
+import { useState } from 'react';
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { Cog8ToothIcon, HandRaisedIcon, MagnifyingGlassIcon, MagnifyingGlassPlusIcon } from '@heroicons/react/24/outline';
-import { LuLayoutGrid } from "react-icons/lu";
+import { LuLayoutGrid } from 'react-icons/lu';
 import Link from 'next/link';
-import { GrPowerReset } from "react-icons/gr";
-import { TfiRulerAlt } from "react-icons/tfi";
-import { useState } from 'react';
+import { GrPowerReset } from 'react-icons/gr';
+import { TfiRulerAlt } from 'react-icons/tfi';
 
-const DicomNavBar = ({ open, setOpen }) => {
+const DicomNavBar = ({ open, setOpen, onToolSelect }) => {
     const [openLen, setOpenLen] = useState(false);
+
+    const handleToolSelect = (tool) => {
+        onToolSelect(tool);
+    };
 
     return (
         <header className="flex sm:justify-start h-16 w-full bg-blue text-xs fixed">
@@ -57,23 +59,24 @@ const DicomNavBar = ({ open, setOpen }) => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                        {/* Tool icons */}
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg" onClick={() => handleToolSelect('hand')}>
                             <HandRaisedIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg" onClick={() => handleToolSelect('magnify-plus')}>
                             <MagnifyingGlassPlusIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg" onClick={() => handleToolSelect('magnify')}>
                             <MagnifyingGlassIcon className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg" onClick={() => handleToolSelect('grid')}>
                             <LuLayoutGrid className='w-6 h-6' />
                         </div>
 
-                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg">
+                        <div className="flex flex-col gap-y-1 cursor-pointer items-center hover:bg-primary p-2.5 rounded-lg" onClick={() => handleToolSelect('reset')}>
                             <GrPowerReset className='w-6 h-6' />
                         </div>
                     </div>
