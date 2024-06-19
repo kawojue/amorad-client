@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preinstall": "npx npm-force-resolutions -y"
+    "preinstall": "npx npm-force-resolutions"
   },
   "resolutions": {
     "react": "18.3.1"
