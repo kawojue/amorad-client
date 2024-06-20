@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef } from 'react';
-import InsightViewer, { useImage, useInteraction } from '@lunit/insight-viewer';
 import { useViewport } from '@lunit/insight-viewer/viewport';
+import InsightViewer, { useImage, useInteraction } from '@lunit/insight-viewer';
 
 
 const DiconViewer = ({ imageUrl }) => {
